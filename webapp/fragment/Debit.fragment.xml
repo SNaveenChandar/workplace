@@ -1,0 +1,191 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.f"
+    xmlns:sfb="sap.ui.comp.smartfilterbar"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    xmlns:mc="sap.suite.ui.microchart"
+    xmlns:table="sap.ui.table"
+    xmlns:smartVariantManagement="sap.ui.comp.smartvariants"
+>
+    <f:DynamicPage
+        id="idDebitDynamicPage"
+        fitContent="true"
+        toggleHeaderOnTitleClick="true"
+        headerPinned="true"
+    >  
+        <f:header>
+            <f:DynamicPageHeader>
+
+                <sfb:SmartFilterBar
+                    id="idDebitSmartFilterBar"
+                    entitySet="WorkplaceDebitView"
+                    persistencyKey="SmartFilterPKey"
+                    initialized="onFilterInitialized"
+                >
+                    <sfb:controlConfiguration>
+                        <sfb:ControlConfiguration
+                            mandatory="mandatory"
+                            key="regulationType"
+                            label="{i18n>regulationType}"
+                        />
+                        <sfb:ControlConfiguration
+                            id="idObjectCategory"
+                            mandatory="mandatory"
+                            key="objectCategory"
+                            label="{i18n>objectCategory}"
+                        />
+                        <sfb:ControlConfiguration
+                            key="documentDate"
+                            label="{i18n>documentDate}"
+                            controlType="date"
+                        >
+                            <sfb:customControl>
+                                <DateRangeSelection
+                                    id="idDebitDocumentRangeSelection"
+                                    displayFormat="MM/dd/yyyy"
+                                />
+                            </sfb:customControl>
+                        </sfb:ControlConfiguration>
+                        <sfb:ControlConfiguration
+                            key="subObjectScenario"
+                            label="{i18n>renewableObject}"
+                        >
+                            <sfb:customControl>
+                                <ComboBox
+                                    id="idDebitSubObjectScenerio"
+                                    selectedKey="RFS2_RVO"
+                                    items="{
+                                                            path: '/GetRegulationSubscenario',
+                                                            filters: [{
+                                                                path: 'regulationType_regulationType',
+                                                                operator: 'EQ',
+                                                                value1: 'RFS2' 
+                                                            },{
+                                                                path: 'objectCategory_category',
+                                                                operator: 'EQ',
+                                                                value1: 'D' 
+                                                            }]
+                                                        }"
+                                    showSecondaryValues="true"
+                                    change="onSubObjectSecenerioChange"
+                                >
+                                    <core:ListItem
+                                        key="{regulationSubScenario_category}"
+                                        text="{description}"
+                                    />
+                                </ComboBox>
+                            </sfb:customControl>
+                        </sfb:ControlConfiguration>
+                    </sfb:controlConfiguration>
+                </sfb:SmartFilterBar>
+                <FlexBox
+                    id="idDebitVisualFilter"
+                    width="20rem"
+                    height="10rem"
+                    alignItems="Stretch"
+                    justifyContent="SpaceBetween"
+                    visible="false"
+                >
+                    <items>
+                        <!-- Obligation:Plant -->
+                        <Label
+                            text="{i18n>byPlant}"
+                            design="Bold"
+                        />
+                        <mc:InteractiveDonutChart
+                            selectionChanged="onDebitSelectionChanged($event,'fuelLogisticsPlant')"
+                            visible="{visibilityControl>/Obligation}"
+                            displayedSegments="4"
+                            segments="{/MaintainWorkplaceAggregationByPlantView}"
+                        >
+                            <mc:segments>
+                                <mc:InteractiveDonutChartSegment
+                                    label="{fuelLogisticsPlant}"
+                                    value="{= parseFloat(${TotalRegQuantityByPlant}) }"
+                                    displayedValue="{= parseFloat(${TotalRegQuantityByPlant}) }"
+                                />
+                            </mc:segments>
+                        </mc:InteractiveDonutChart>
+                       <Label
+                            class="sapUiMediumMarginBegin"
+                            text="{i18n>byCategory}"
+                            design="Bold"
+                            visible="{visibilityControl>/Obligation}"
+                        />
+                        <mc:InteractiveDonutChart
+                            selectionChanged="onDebitSelectionChanged($event,'rfs2ObligationType')"
+                            visible="{visibilityControl>/Obligation}"
+                            displayedSegments="4"
+                            segments="{/MaintainWorkplaceAggregationByCategoryView}"
+                        >
+                            <mc:segments>
+                                <mc:InteractiveDonutChartSegment
+                                    label="{rfs2ObligationTypeDesc}"
+                                    value="{= parseFloat(${TotalRegQuantityByCategory}) }"
+                                    displayedValue="{TotalRegQuantityByCategory}"
+                                />
+                            </mc:segments>
+                        </mc:InteractiveDonutChart>
+                    </items>
+                </FlexBox>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <smartTable:SmartTable
+                id="idDebitSmartTable"
+                entitySet="WorkplaceDebitView"
+                smartFilterId="idDebitSmartFilterBar"
+                tableType="Table"
+                enableAutoColumnWidth="true"
+                useTablePersonalisation="true"
+                showRowCount="true"
+                header="{i18n>regulationVolumeObligation}"
+                beforeRebindTable="onDebitBeforeRebindTable"
+                requestAtLeastFields="fuelOnwardMaterialalDocumentNumber,fuelReversalMaterialalDocumentNumber,fuelReversalMaterialentItemNumber,fuelReversalMaterialialDocumentYear"
+                enableAutoBinding="true"
+            >
+                <smartTable:customToolbar>
+                    <OverflowToolbar>
+                        <ToolbarSpacer />
+                        <ToolbarSeparator />
+                        <Button
+                            id="idPostInventory"
+                            text="{i18n>postInventory}"
+                            type="Emphasized"
+                            press="onPostInventory"
+                        />
+                        <Button
+                            id="idReverse"
+                            text="{i18n>reverse}"
+                            type="Emphasized"
+                            press="onReverseInventory"
+                        />
+                        <Button
+                            id="idDisplayLogs"
+                            text="{i18n>displayLogs}"
+                            type="Emphasized"
+                            press="onDisplayLogs('idDebitTable')"
+                        />
+                        <Button
+                            id="idCopyManualAdj"
+                            text="{i18n>copyManualAdj}"
+                            type="Emphasized"
+                        />
+                    </OverflowToolbar>
+                </smartTable:customToolbar>
+
+                <table:Table
+                    id="idDebitTable"
+                    selectionMode="Single"
+                    selectionBehavior="Row"
+                    alternateRowColors="true"
+                    cellClick="onNavigateToObjectPage"
+                    rowSelectionChange="onRowSelectionChange"
+                    enableSelectAll="false"
+                />
+            </smartTable:SmartTable>
+        </f:content>
+    </f:DynamicPage>
+</core:FragmentDefinition>

@@ -1,0 +1,67 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+>
+    <TableSelectDialog
+        noDataText="{i18n>noLogs}"
+        title="{i18n>displayLogs}"
+        titleAlignment="Center"
+        contentWidth="1500px"
+        contentHeight="600px"
+        draggable="true"
+        resizable="true"
+		items="{/GetLogs}"
+		growing="true"
+		growingThreshold="50"
+		cancel="onDisplayLogsDialogClose"
+        class="sapUiResponsivePadding--header sapUiResponsivePadding--subHeader sapUiResponsivePadding--content sapUiResponsivePadding--footer"
+    >
+        <columns>
+         <Column width="10%"> 
+                <header>
+                    <Label design="Bold" text="{i18n>status}" />
+                </header>
+            </Column>
+			 <Column width="60%"> 
+                <header>
+                    <Label design="Bold" text="{i18n>messageText}" />
+                </header>
+            </Column>
+              <Column width="20%">
+                <header>
+                    <Text text="{i18n>user}" />
+                </header>
+            </Column>
+            
+            <Column width="20%">
+                <header>
+                    <Label design="Bold" text="{i18n>timestamp}" />
+                </header>
+            </Column>
+        </columns>
+        <ColumnListItem vAlign="Middle">
+            	<cells>
+                <ObjectStatus text= "{= ${messageType} === 'S' ? ${i18n>success} :
+                     ${messageType} === 'E' ? ${i18n>error} :
+                     ${messageType} === 'W' ? ${i18n>warning} :
+                     ${messageType} === 'I' ? ${i18n>information} :
+                     ${messageType} }"
+                    state="{= ${messageType} === 'S' ? ${i18n>success} :
+                     ${messageType} === 'E' ? ${i18n>error} :
+                     ${messageType} === 'W' ? ${i18n>warning} :
+                     ${messageType} === 'I' ? ${i18n>information} :
+                     ${messageType} }"/>  
+				<Text text="{message}" /> 
+                <Text text="{createdBy}"/>    
+                <Text text="{
+				path: 'createdAt',
+				type: 'sap.ui.model.type.DateTime',
+				formatOptions: {
+					pattern: 'MM-dd-yyyy HH:mm:ss a',
+					UTC: true
+				}
+			}" wrapping="true" />		
+			</cells>
+        </ColumnListItem>
+    </TableSelectDialog>
+</core:FragmentDefinition>

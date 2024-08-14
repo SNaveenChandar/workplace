@@ -1,0 +1,184 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.f"
+    xmlns:sfb="sap.ui.comp.smartfilterbar"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    xmlns:mc="sap.suite.ui.microchart"
+    xmlns:table="sap.ui.table"
+    xmlns:smartVariantManagement="sap.ui.comp.smartvariants"
+    xmlns:sf="sap.ui.comp.smartfield"
+>
+    <f:DynamicPage
+        id="idEMTSDynamicPage"
+        fitContent="true"
+        toggleHeaderOnTitleClick="true"
+        headerPinned="true"
+    >
+        <f:header>
+            <f:DynamicPageHeader>
+
+                <sfb:SmartFilterBar
+                    id="idEMTSSmartFilterBar"
+                    entitySet="WorkplaceCreditEMTSView"
+                    persistencyKey="EMTSSmartFilterPKey"
+                    initialized="onFilterInitialized"
+                >
+                    <sfb:controlConfiguration>
+                    <sfb:ControlConfiguration
+                            key="regulationLogisticsPlant"
+                            label="{i18n>plant}"
+                            
+                        />
+                          <sfb:ControlConfiguration
+                            key="transferDate"
+                            controlType="date"
+                        >
+                            <sfb:customControl>
+                                <DateRangeSelection
+                                    id="idEMTSTransferDateRangeSelection"
+                                    displayFormat="MM/dd/yyyy"
+                                />
+                            </sfb:customControl>
+                        </sfb:ControlConfiguration>
+                        <sfb:ControlConfiguration
+                            key="submissionDate"
+                            controlType="date"
+                        >
+                            <sfb:customControl>
+                                <DateRangeSelection
+                                    id="idEMTSsubmissionDateRangeSelection"
+                                    displayFormat="MM/dd/yyyy"
+                                />
+                            </sfb:customControl>
+                        </sfb:ControlConfiguration>
+                           <sfb:ControlConfiguration
+                            key="vintageYear"
+                        >
+                            <sfb:customControl>
+                                <DateRangeSelection
+                                    id="idEMTSVintageYear"
+                                    displayFormat="yyyy"
+                                />
+                            </sfb:customControl>
+                        </sfb:ControlConfiguration>
+                        
+                      
+                    </sfb:controlConfiguration>
+                </sfb:SmartFilterBar>
+                <FlexBox
+                    id="idEMTSVisualFilter"
+                    width="20rem"
+                    height="10rem"
+                    alignItems="Stretch"
+                    justifyContent="SpaceBetween"
+                    visible="false"
+                >
+                    <items>
+                     <!-- <Label
+                            text="{i18n>byObjectType}"
+                            design="Bold"
+                            visible="{visibilityControl>/Credit}"
+                        />
+                        <mc:InteractiveDonutChart
+                            selectionChanged="onEMTSSelectionChanged($event,'objectType')"
+                            visible="{visibilityControl>/Credit}"
+                            displayedSegments="4"
+                            segments="{/MaintainWorkplaceAggregationByObjectTypeView}"
+                        >
+                            <mc:segments>
+                                <mc:InteractiveDonutChartSegment
+                                    label="{objectType}"
+                                    value="{= parseFloat(${TotalRegQuantityByObjectType}) }"
+                                    displayedValue="{TotalRegQuantityByObjectType}"
+                                />
+                            </mc:segments>
+                        </mc:InteractiveDonutChart> -->
+                        <!-- Credit:D-code -->
+                        <Label
+                            text="{i18n>byDcode}"
+                            design="Bold"
+                            visible="{visibilityControl>/Credit}"
+                            class="sapUiMediumMarginBegin"
+                        />
+                        <mc:InteractiveDonutChart
+                            selectionChanged="onEMTSSelectionChanged($event,'dcode')"
+                            visible="{visibilityControl>/Credit}"
+                            displayedSegments="4"
+                            segments="{/MaintainWorkplaceAggregationByDcodeView}"
+                        >
+                            <mc:segments>
+                                <mc:InteractiveDonutChartSegment
+                                    label="{dcodeDesc}"
+                                    value="{= parseFloat(${TotalRegQuantityByDcode}) }"
+                                    displayedValue="{TotalRegQuantityByDcode}"
+                                />
+                            </mc:segments>
+                        </mc:InteractiveDonutChart>
+                        <!-- Credit: Status ( posted vs pending) -->
+                        <Label
+                            text="{i18n>byStatus}"
+                            design="Bold"
+                            class="sapUiMediumMarginBegin"
+                        />
+                        <mc:InteractiveDonutChart
+                            selectionChanged="onEMTSSelectionChanged($event,'processingStatus')"
+                            displayedSegments="4"
+                            segments="{/MaintainWorkplaceAggregationByStatusView}"
+                        >
+                            <mc:segments>
+                                <mc:InteractiveDonutChartSegment
+                                    label="{objectStatusDesc}"
+                                    value="{= parseFloat(${TotalRegQuantityByStatus}) }"
+                                    displayedValue="{TotalRegQuantityByStatus}"
+                                />
+                            </mc:segments>
+                        </mc:InteractiveDonutChart>
+                    </items>
+                </FlexBox>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <smartTable:SmartTable
+                id="idEMTSSmartTable"
+                entitySet="WorkplaceCreditEMTSView"
+                smartFilterId="idEMTSSmartFilterBar"
+                tableType="Table"
+                enableAutoColumnWidth="true"
+                useTablePersonalisation="true"
+                showRowCount="true"
+                header="{i18n>renewableCredit}"
+                beforeRebindTable="onEMTSBeforeRebindTable"
+                enableAutoBinding="true"
+            >
+                <smartTable:customToolbar>
+                    <OverflowToolbar>
+                        <ToolbarSpacer />
+                        <ToolbarSeparator />
+                      
+                        <Button
+                            id="idEMTSDisplayLogs"
+                            text="{i18n>displayLogs}"
+                            type="Emphasized"
+                            press="onDisplayLogs('idEMTSTable')"
+                        />
+                        <Button
+                            text="{i18n>copyManualAdj}"
+                            type="Emphasized"
+                        />
+                    </OverflowToolbar>
+                </smartTable:customToolbar>
+
+                <table:Table
+                    id="idEMTSTable"
+                    selectionMode="Single"
+                    selectionBehavior="Row"
+                    alternateRowColors="true"
+                    rowSelectionChange="onRowSelectionChange"
+                    enableSelectAll="false"
+                />
+            </smartTable:SmartTable>
+        </f:content>
+    </f:DynamicPage>
+</core:FragmentDefinition>

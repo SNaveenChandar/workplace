@@ -1,0 +1,1120 @@
+<edmx:Edmx xmlns:edmx="http://docs.oasis-open.org/odata/ns/edmx" Version="4.0">
+    <edmx:Reference Uri="https://sap.github.io/odata-vocabularies/vocabularies/HTML5.xml">
+        <edmx:Include Namespace="com.sap.vocabularies.HTML5.v1" Alias="HTML5" />
+    </edmx:Reference>
+    <edmx:Reference Uri="https://oasis-tcs.github.io/odata-vocabularies/vocabularies/Org.OData.Measures.V1.xml">
+        <edmx:Include Namespace="Org.OData.Measures.V1" Alias="Measures" />
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMON',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Common.v1" Alias="Common" />
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_UI',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.UI.v1" Alias="UI" />
+    </edmx:Reference>
+    <edmx:Reference Uri="/sap/opu/odata/IWFND/CATALOGSERVICE;v=2/Vocabularies(TechnicalName='%2FIWBEP%2FVOC_COMMUNICATION',Version='0001',SAP__Origin='LOCAL')/$value">
+        <edmx:Include Namespace="com.sap.vocabularies.Communication.v1" Alias="Communication" />
+    </edmx:Reference>
+    <edmx:Reference Uri="/odata/v2/regulation-compliance-transaction/$metadata">
+        <edmx:Include Namespace="RegulationComplianceTransactionService" Alias="SAP" />
+    </edmx:Reference>
+    <edmx:DataServices>
+        <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="local1">
+<!-- Start of WorkplaceCreditOTCView -->
+            <!-- WorkplaceCreditOTCView - Filters-->
+            <Annotations Target="SAP.WorkplaceCreditOTCView">
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>subObjectScenario</PropertyPath>
+                        <PropertyPath>sourceOrgPlant</PropertyPath>
+                        <PropertyPath>movementType</PropertyPath>
+                        <PropertyPath>documentDate</PropertyPath>
+                        <PropertyPath>contractDocumentNo</PropertyPath>
+                        <PropertyPath>transactionPartnerOrgId</PropertyPath>
+                        <PropertyPath>dcode</PropertyPath>
+                        <PropertyPath>vintageYear</PropertyPath>
+                        <PropertyPath>objectId</PropertyPath>
+                        <PropertyPath>regulationGoodsMovementDocumentNumber</PropertyPath>
+                        <PropertyPath>renewablesDocumentComplianceYear</PropertyPath>
+                        <PropertyPath>processingStatus</PropertyPath>
+                        <PropertyPath>transactionType</PropertyPath>
+                        <PropertyPath>impact</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP.WorkplaceCreditOTCView/subObjectScenario">
+                <Annotation Term="Common.FilterDefaultValue" String="RFS2_RIN_OTC" />
+            </Annotations>
+              <Annotations Target="SAP.WorkplaceCreditOTCView/subObjectScenario">
+                <Annotation Term="UI.HiddenFilter" >
+                </Annotation>
+            </Annotations>
+            <!-- WorkplaceCreditOTCView - Table -->
+            <Annotations Target="SAP.WorkplaceCreditOTCView">
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="objectId" />
+                            <Annotation Term="HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="9rem" />
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="subObjectScenario" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="regulationType" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="objectType" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="processingStatus" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="transactionType" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="dealNumber" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="movementType" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="regulationQuantity" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="dcode" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="vintageYear" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="rinMultiplier" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="qapCertified" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="businessPartnerNumber" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="organizationId" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="transactionPartnerOrgId" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="billofLading" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="reconcilliationGroupID" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="ptdNumber" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="invoice" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="documentDate" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="postingDate" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="contractDocumentNo" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="contractItemNo" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="regulationLogisticsPlant" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="regulationLogisticsStorageLocation" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="regulationLogisticsMaterialNumber" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="reversalPostingDate" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="fuelCategory" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="transactionCategory" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="regulationGoodsMovementDocumentNumber" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="regulationReversalGoodsMovementDocumentNumber" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="submissionDate" />
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+
+            <!-- WorkplaceCreditOTCView - Text Arrangements -->
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditOTCView/subObjectScenario">
+                <Annotation Term="Common.Text" Path="subObjectScenarioDesc" />
+                <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextLast" />
+            </Annotations>
+
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditOTCView/regulationType">
+                <Annotation Term="Common.Text" Path="regulationTypeDesc" />
+                <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextLast" />
+            </Annotations>
+
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditOTCView/objectType">
+                <Annotation Term="Common.Text" Path="objectTypeDesc" />
+                <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextLast" />
+            </Annotations>
+
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditOTCView/processingStatus">
+                <Annotation Term="Common.Text" Path="objectStatusDesc" />
+                <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextLast" />
+            </Annotations>
+
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditOTCView/transactionType">
+                <Annotation Term="Common.Text" Path="transactionTypeDesc" />
+                <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextLast" />
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditOTCView/dcode">
+                <Annotation Term="Common.Text" Path="dcodeDesc" />
+                <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextLast" />
+            </Annotations>
+
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditOTCView/qapCertified">
+                <Annotation Term="Common.Text" Path="qapCertifiedDesc" />
+                <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextLast" />
+            </Annotations>
+
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditOTCView/businessPartnerNumber">
+                <Annotation Term="Common.Text" Path="businessPartnerDesc" />
+                <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextLast" />
+            </Annotations>
+
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditOTCView/regulationLogisticsMaterialNumber">
+                <Annotation Term="Common.Text" Path="regulationLogisticsMaterialNumberDesc" />
+                <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextLast" />
+            </Annotations>
+
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditOTCView/fuelCategory">
+                <Annotation Term="Common.Text" Path="fuelCategoryDesc" />
+                <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextLast" />
+            </Annotations>
+
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditOTCView/regulationQuantity">
+                <Annotation Term="Measures.Unit">
+                    <Path>regulationUnitOfMeasurement</Path>
+                </Annotation>
+            </Annotations>
+            <!-- WorkplaceCreditOTCView -Source Plant  -->
+            <Annotations Target="SAP.WorkplaceCreditOTCView/sourceOrgPlant">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" />
+                        <PropertyValue Property="CollectionPath" String="GetPlant" />
+                        <PropertyValue Bool="true" Property="SearchSupported" />
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="sourceOrgPlant" />
+                                    <PropertyValue Property="ValueListProperty" String="plant" />
+                                </Record>
+                                <Record Type="Common.ValueListParameterIn">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="sourceOrgPlant" />
+                                    <PropertyValue Property="ValueListProperty" String="plant" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+
+            <!-- WorkplaceCreditOTCView -Movement Type -->
+            <Annotations Target="SAP.WorkplaceCreditOTCView/movementType">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" />
+                        <PropertyValue Property="CollectionPath" String="GetMovementType" />
+                        <PropertyValue Bool="true" Property="SearchSupported" />
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="movementType" />
+                                    <PropertyValue Property="ValueListProperty" String="movementType_movementType" />
+                                </Record>
+                                <Record Type="Common.ValueListParameterIn">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="movementType" />
+                                    <PropertyValue Property="ValueListProperty" String="movementType_movementType" />
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="movementType_movementType" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+
+            <!-- WorkplaceCreditOTCView - Fuel Code(Dcode) -->
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.GetFuelCode/category">
+                <Annotation Term="Common.Text" Path="description" />
+                <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextFirst" />
+            </Annotations>
+
+            <Annotations Target="SAP.WorkplaceCreditOTCView/dcode">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" />
+                        <PropertyValue Property="CollectionPath" String="GetFuelCode" />
+                        <PropertyValue Bool="true" Property="SearchSupported" />
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="dcode" />
+                                    <PropertyValue Property="ValueListProperty" String="category" />
+                                </Record>
+                                <Record Type="Common.ValueListParameterIn">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="dcode" />
+                                    <PropertyValue Property="ValueListProperty" String="category" />
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="description" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <!-- WorkplaceCreditOTCView - Contract No -->
+            <Annotations Target="SAP.WorkplaceCreditOTCView/contractDocumentNo">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" />
+                        <PropertyValue Property="CollectionPath" String="GetRegulationContractNo" />
+                        <PropertyValue Bool="true" Property="SearchSupported" />
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="contractDocumentNo" />
+                                    <PropertyValue Property="ValueListProperty" String="contractDocumentNo" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <!-- WorkplaceCreditOTCView - Partner Identifier -->
+            <Annotations Target="SAP.WorkplaceCreditOTCView/transactionPartnerOrgId">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" />
+                        <PropertyValue Property="CollectionPath" String="GetTradingPartnerNo" />
+                        <PropertyValue Bool="true" Property="SearchSupported" />
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="transactionPartnerOrgId" />
+                                    <PropertyValue Property="ValueListProperty" String="transactionPartnerOrgId" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+
+            <!-- WorkplaceCreditOTCView - Object ID -->
+            <Annotations Target="SAP.WorkplaceCreditOTCView/objectId">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" />
+                        <PropertyValue Property="CollectionPath" String="GetObjectNo" />
+                        <PropertyValue Bool="true" Property="SearchSupported" />
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="objectId" />
+                                    <PropertyValue Property="ValueListProperty" String="objectId" />
+                                </Record>
+                                <Record Type="Common.ValueListParameterIn">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="objectId" />
+                                    <PropertyValue Property="ValueListProperty" String="objectId" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <!-- WorkplaceCreditOTCView - Reg GM Doc No -->
+            <Annotations Target="SAP.WorkplaceCreditOTCView/regulationGoodsMovementDocumentNumber">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" />
+                        <PropertyValue Property="CollectionPath" String="GetRegulationMaterialDoc" />
+                        <PropertyValue Bool="true" Property="SearchSupported" />
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="regulationGoodsMovementDocumentNumber" />
+                                    <PropertyValue Property="ValueListProperty" String="regulationGoodsMovementDocumentNumber" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <!-- WorkplaceCreditOTCView - Status -->
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.GetProcessingStatus/category">
+                <Annotation Term="Common.Text" Path="description" />
+                <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextFirst" />
+            </Annotations>
+
+            <Annotations Target="SAP.WorkplaceCreditOTCView/processingStatus">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" />
+                        <PropertyValue Property="CollectionPath" String="GetProcessingStatus" />
+                        <PropertyValue Bool="false" Property="SearchSupported" />
+
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="processingStatus" />
+                                    <PropertyValue Property="ValueListProperty" String="category" />
+                                </Record>
+                                <Record Type="Common.ValueListParameterIn">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="processingStatus" />
+                                    <PropertyValue Property="ValueListProperty" String="category" />
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="description" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <!--  WorkplaceCreditOTCView - TransactionType-->
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.GetTransactionType/transactionType">
+                <Annotation Term="Common.Text" Path="description" />
+                <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextFirst" />
+            </Annotations>
+
+            <Annotations Target="SAP.WorkplaceCreditOTCView/transactionType">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" />
+                        <PropertyValue Property="CollectionPath" String="GetTransactionType" />
+                        <PropertyValue Bool="false" Property="SearchSupported" />
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="transactionType" />
+                                    <PropertyValue Property="ValueListProperty" String="transactionType" />
+                                </Record>
+                                <Record Type="Common.ValueListParameterIn">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="transactionType" />
+                                    <PropertyValue Property="ValueListProperty" String="transactionType" />
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="description" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <!-- WorkplaceCreditOTCView - Impact -->
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.GetImpact/category">
+                <Annotation Term="Common.Text" Path="description" />
+                <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextFirst" />
+            </Annotations>
+
+            <Annotations Target="SAP.WorkplaceCreditOTCView/impact">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" />
+                        <PropertyValue Property="CollectionPath" String="GetImpact" />
+                        <PropertyValue Bool="false" Property="SearchSupported" />
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="impact" />
+                                    <PropertyValue Property="ValueListProperty" String="category" />
+                                </Record>
+                                <Record Type="Common.ValueListParameterIn">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="impact" />
+                                    <PropertyValue Property="ValueListProperty" String="category" />
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="description" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+<!-- End of WorkplaceCreditEMTSView -->
+
+<!-- Start of WorkplaceCreditEMTSView -->
+            <!-- WorkplaceCreditEMTSView - Filters-->
+            <Annotations Target="SAP.WorkplaceCreditEMTSView">
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>subObjectScenario</PropertyPath>
+                        <PropertyPath>objectId</PropertyPath>
+                        <PropertyPath>transferDate</PropertyPath>
+                        <PropertyPath>vintageYear</PropertyPath>
+                        <PropertyPath>ptdNumber</PropertyPath>
+                        <PropertyPath>invoice</PropertyPath>
+                        <PropertyPath>emtsTransactionTypeCode</PropertyPath>
+                        <PropertyPath>processingStatus</PropertyPath>
+                        <PropertyPath>emtsFuelCategoryCode</PropertyPath>
+                        <PropertyPath>submissionDate</PropertyPath>
+                        <PropertyPath>emtsQapServiceTypeCode</PropertyPath>
+                        <PropertyPath>emtsTradingPartnerBillOfLading</PropertyPath>
+                        <PropertyPath>emtsRinStatusCode</PropertyPath>
+                        <PropertyPath>emtsAssignmentCode</PropertyPath>
+                        <PropertyPath>emtsBuyOrSellReasonCode</PropertyPath>
+                        <PropertyPath>externalObjectGUID</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+
+            <Annotations Target="SAP.WorkplaceCreditEMTSView/subObjectScenario">
+                <Annotation Term="Common.FilterDefaultValue" String="RFS2_EMTS" />
+            </Annotations>
+
+              <Annotations Target="SAP.WorkplaceCreditEMTSView/subObjectScenario">
+                <Annotation Term="UI.HiddenFilter" >
+                </Annotation>
+            </Annotations>
+            <!-- WorkplaceCreditEMTSView - Table -->
+            <Annotations Target="SAP.WorkplaceCreditEMTSView">
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="objectId" />
+                            <Annotation Term="HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="9rem" />
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="subObjectScenario" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="regulationType" />
+                        </Record>
+                         <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="processingStatus" />
+                        </Record>
+                         <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="emtsTradingPartnerBillOfLading" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="ptdNumber"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="invoice"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="qapCertified"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="dcode"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="organizationId"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="generateOrganizationId"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="generateFacilityId"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="rinPriceAmount"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="gallonPriceAmount"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="vintageYear"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="fuelQuantity"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="transferDate"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="submissionDate"/>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="emtsQapServiceTypeCode"/>
+                        </Record>
+
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="emtsBatchNumberText"/>
+                        </Record>
+                         <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="emtsFuelCategoryCode"/>
+                        </Record>
+                         <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="emtsTransactionTypeCode"/>
+                        </Record>
+                         <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="emtsRinStatusCode"/>
+                        </Record>
+                         <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="emtsAssignmentCode"/>
+                        </Record>
+                         <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="emtsBusinessActivityCode"/>
+                        </Record>
+                         <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="emtsBuyOrSellReasonCode"/>
+                        </Record>
+                         <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="emtsComplianceLevelCode"/>
+                        </Record>
+                         <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="extTransactionNumber"/>
+                        </Record>
+                         <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="externalObjectGUID"/>
+                        </Record>
+
+
+                    </Collection>
+                </Annotation>
+            </Annotations>
+           
+    <!-- WorkplaceCreditEMTSView - Text Arrangements -->
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditEMTSView/subObjectScenario">
+                <Annotation Term="Common.Text" Path="subObjectScenarioDesc" />
+                <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextLast" />
+            </Annotations>
+              <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditEMTSView/regulationType">
+                <Annotation Term="Common.Text" Path="regulationTypeDesc" />
+                <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextLast" />
+            </Annotations>
+             <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditEMTSView/processingStatus">
+                <Annotation Term="Common.Text" Path="objectStatusDesc" />
+                <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextLast" />
+            </Annotations>
+
+                   <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditEMTSView/rinPriceAmount">
+                <Annotation Term="Measures.Unit">
+                    <Path>rinPriceCurrency</Path>
+                </Annotation>
+            </Annotations>
+
+                 <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditEMTSView/qapCertified">
+                <Annotation Term="Common.Text" Path="qapCertifiedDesc" />
+                <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextLast" />
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditEMTSView/dcode">
+                <Annotation Term="Common.Text" Path="dcodeDesc" />
+                <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextLast" />
+            </Annotations>
+                 <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditEMTSView/emtsQapServiceTypeCode">
+                <Annotation Term="Common.Text" Path="emtsQapServiceTypeCodeDesc" />
+                <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextLast" />
+            </Annotations>
+                 <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditEMTSView/emtsFuelCategoryCode">
+                <Annotation Term="Common.Text" Path="emtsQapServiceTypeCodeDesc" />
+                <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextLast" />
+            </Annotations>
+                 <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditEMTSView/emtsTransactionTypeCode">
+                <Annotation Term="Common.Text" Path="emtsTransactionTypeCodeDesc" />
+                <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextLast" />
+            </Annotations>
+                 <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditEMTSView/processingStatus">
+                <Annotation Term="Common.Text" Path="objectStatusDesc" />
+                <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextLast" />
+            </Annotations>
+        <!-- WorkplaceCreditEMTSView - Object No -->
+             <Annotations Target="SAP.WorkplaceCreditEMTSView/objectId">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" />
+                        <PropertyValue Property="CollectionPath" String="GetObjectNo" />
+                        <PropertyValue Bool="true" Property="SearchSupported" />
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="objectId" />
+                                    <PropertyValue Property="ValueListProperty" String="objectId" />
+                                </Record>
+                                <Record Type="Common.ValueListParameterIn">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="objectId" />
+                                    <PropertyValue Property="ValueListProperty" String="objectId" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP.WorkplaceCreditEMTSView/processingStatus">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" />
+                        <PropertyValue Property="CollectionPath" String="GetProcessingStatus" />
+                        <PropertyValue Bool="false" Property="SearchSupported" />
+
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="processingStatus" />
+                                    <PropertyValue Property="ValueListProperty" String="category" />
+                                </Record>
+                                <Record Type="Common.ValueListParameterIn">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="processingStatus" />
+                                    <PropertyValue Property="ValueListProperty" String="category" />
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="description" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <!-- WorkplaceCreditEMTSView/ptdNumber -->
+            <Annotations Target="SAP.WorkplaceCreditEMTSView/ptdNumber">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" />
+                        <PropertyValue Property="CollectionPath" String="GetPTDNo" />
+                        <PropertyValue Bool="false" Property="SearchSupported" />
+
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="ptdNumber" />
+                                    <PropertyValue Property="ValueListProperty" String="ptdNumber" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <!-- WorkplaceCreditEMTSView/invoice -->
+            <Annotations Target="SAP.WorkplaceCreditEMTSView/invoice">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" />
+                        <PropertyValue Property="CollectionPath" String="GetInvoiceNo" />
+                        <PropertyValue Bool="false" Property="SearchSupported" />
+
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="invoice" />
+                                    <PropertyValue Property="ValueListProperty" String="invoice" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+             <!-- WorkplaceCreditEMTSView/emtsTransactionTypeCode -->
+            <Annotations Target="SAP.WorkplaceCreditEMTSView/emtsTransactionTypeCode">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" />
+                        <PropertyValue Property="CollectionPath" String="GetEMTSTransactionTypeCode" />
+                        <PropertyValue Bool="false" Property="SearchSupported" />
+
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="emtsTransactionTypeCode" />
+                                    <PropertyValue Property="ValueListProperty" String="emtsTransactionTypeCode" />
+                                </Record>
+                                 <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="emtsTransactionTypeCodeDesc" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+             <!-- WorkplaceCreditEMTSView/emtsFuelCategoryCode -->
+            <Annotations Target="SAP.WorkplaceCreditEMTSView/emtsFuelCategoryCode">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" />
+                        <PropertyValue Property="CollectionPath" String="GetEMTSFuelCode" />
+                        <PropertyValue Bool="false" Property="SearchSupported" />
+
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="emtsFuelCategoryCode" />
+                                    <PropertyValue Property="ValueListProperty" String="emtsFuelCategoryCode" />
+                                </Record>
+                                 <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="emtsFuelCategoryCodeDesc" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+              <!-- WorkplaceCreditEMTSView/emtsFuelCategoryCode -->
+            <Annotations Target="SAP.WorkplaceCreditEMTSView/emtsQapServiceTypeCode">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" />
+                        <PropertyValue Property="CollectionPath" String="GetEMTSCertified" />
+                        <PropertyValue Bool="false" Property="SearchSupported" />
+
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="emtsQapServiceTypeCode" />
+                                    <PropertyValue Property="ValueListProperty" String="emtsQapServiceTypeCode" />
+                                </Record>
+                                 <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="emtsQapServiceTypeCodeDesc" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+             <!-- WorkplaceCreditEMTSView/emtsTradingPartnerBillOfLading -->
+            <Annotations Target="SAP.WorkplaceCreditEMTSView/emtsTradingPartnerBillOfLading">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" />
+                        <PropertyValue Property="CollectionPath" String="GetEMTSBillofLading" />
+                        <PropertyValue Bool="false" Property="SearchSupported" />
+
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="emtsTradingPartnerBillOfLading" />
+                                    <PropertyValue Property="ValueListProperty" String="emtsTradingPartnerBillOfLading" />
+                                </Record>
+                                 
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+
+            <!-- WorkplaceCreditEMTSView/emtsRinStatusCode -->
+            <Annotations Target="SAP.WorkplaceCreditEMTSView/emtsRinStatusCode">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" />
+                        <PropertyValue Property="CollectionPath" String="GetEMTSRINStatusCode" />
+                        <PropertyValue Bool="false" Property="SearchSupported" />
+
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="emtsRinStatusCode" />
+                                    <PropertyValue Property="ValueListProperty" String="emtsRinStatusCode" />
+                                </Record>
+                                 
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+
+             <!-- WorkplaceCreditEMTSView/emtsAssignmentCode -->
+            <Annotations Target="SAP.WorkplaceCreditEMTSView/emtsAssignmentCode">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" />
+                        <PropertyValue Property="CollectionPath" String="GetEMTSRINAssignmentCode" />
+                        <PropertyValue Bool="false" Property="SearchSupported" />
+
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="emtsAssignmentCode" />
+                                    <PropertyValue Property="ValueListProperty" String="emtsAssignmentCode" />
+                                </Record>
+                                 
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <!-- WorkplaceCreditEMTSView/emtsBuyOrSellReasonCode -->
+            <Annotations Target="SAP.WorkplaceCreditEMTSView/emtsBuyOrSellReasonCode">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" />
+                        <PropertyValue Property="CollectionPath" String="GetEMTSRINBusySellReasonCode" />
+                        <PropertyValue Bool="false" Property="SearchSupported" />
+
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="emtsBuyOrSellReasonCode" />
+                                    <PropertyValue Property="ValueListProperty" String="emtsBuyOrSellReasonCode" />
+                                </Record>
+                                 
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+             <!-- WorkplaceCreditEMTSView/emtsCDSID -->
+            <Annotations Target="SAP.WorkplaceCreditEMTSView/externalObjectGUID">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" />
+                        <PropertyValue Property="CollectionPath" String="GetEMTSRINCDSID" />
+                        <PropertyValue Bool="false" Property="SearchSupported" />
+
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="externalObjectGUID" />
+                                    <PropertyValue Property="ValueListProperty" String="externalObjectGUID" />
+                                </Record>
+                                 
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+<!-- End of WorkplaceCreditEMTSView -->
+
+<!-- Start of WorkplaceCreditMADJView -->
+    <!-- WorkplaceCreditMADJView - Filters-->
+        <Annotations Target="SAP.WorkplaceCreditMADJView">
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>subObjectScenario</PropertyPath>
+                        <PropertyPath>objectId</PropertyPath>
+                       <PropertyPath>regulationType</PropertyPath>
+                       <PropertyPath>objectType</PropertyPath>
+                        <PropertyPath>documentDate</PropertyPath>
+                        <PropertyPath>reasonCode</PropertyPath>
+                        <PropertyPath>transactionType</PropertyPath>
+                        <PropertyPath>impact</PropertyPath>
+                        <PropertyPath>regulationLogisticsPlant</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <Annotations Target="SAP.WorkplaceCreditMADJView/subObjectScenario">
+                <Annotation Term="Common.FilterDefaultValue" String="RFS2_MADJ_RIN" />
+            </Annotations>
+              <Annotations Target="SAP.WorkplaceCreditMADJView/subObjectScenario">
+                <Annotation Term="UI.HiddenFilter" >
+                </Annotation>
+            </Annotations>
+        <!-- WorkplaceCreditMADJView - Table-->
+             <Annotations Target="SAP.WorkplaceCreditMADJView">
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="objectId" />
+                            <Annotation Term="HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="9rem" />
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="subObjectScenario" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="regulationType" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="objectType" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="processingStatus" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="transactionType" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="regulationQuantity" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="dcode" />
+                        </Record>
+                      
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="qapCertified" />
+                        </Record>
+       
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="organizationId" />
+                        </Record>
+                   
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="billofLading" />
+                        </Record>
+                      
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="documentDate" />
+                        </Record>
+                       
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="regulationLogisticsPlant" />
+                        </Record>
+                      
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="regulationLogisticsMaterialNumber" />
+                        </Record>
+                      
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="fuelCategory" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="transactionCategory" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="regulationGoodsMovementDocumentNumber" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="regulationReversalGoodsMovementDocumentNumber" />
+                        </Record>
+
+                    </Collection>
+                </Annotation>
+            </Annotations>
+<!-- Start of WorkplaceDebitView -->
+    <!-- WorkplaceDebitView - Filters-->
+            <Annotations Target="SAP.WorkplaceDebitView">
+                <Annotation Term="UI.SelectionFields">
+                    <Collection>
+                        <PropertyPath>subObjectScenario</PropertyPath>
+                        <PropertyPath>objectId</PropertyPath>
+                        <PropertyPath>processingStatus</PropertyPath>
+                        <PropertyPath>documentDate</PropertyPath>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+
+            <!-- WorkplaceDebitView - Table -->
+            <Annotations Target="SAP.WorkplaceDebitView">
+                <Annotation Term="UI.LineItem">
+                    <Collection>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="objectId" />
+                            <Annotation Term="HTML5.CssDefaults">
+                                <Record>
+                                    <PropertyValue Property="width" String="9rem" />
+                                </Record>
+                            </Annotation>
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="subObjectScenario" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="regulationType" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="objectType" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="processingStatus" />
+                        </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="transactionType" />
+                        </Record>
+                    </Collection>
+                </Annotation>
+            </Annotations>
+            <!-- WorkplaceDebitView/objectId -->
+            <Annotations Target="SAP.WorkplaceDebitView/objectId">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" />
+                        <PropertyValue Property="CollectionPath" String="GetObjectNo" />
+                        <PropertyValue Bool="true" Property="SearchSupported" />
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="objectId" />
+                                    <PropertyValue Property="ValueListProperty" String="objectId" />
+                                </Record>
+                                <Record Type="Common.ValueListParameterIn">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="objectId" />
+                                    <PropertyValue Property="ValueListProperty" String="objectId" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <!-- WorkplaceDebitView/processingStatus -->
+            <Annotations Target="SAP.WorkplaceDebitView/processingStatus">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" />
+                        <PropertyValue Property="CollectionPath" String="GetProcessingStatus" />
+                        <PropertyValue Bool="false" Property="SearchSupported" />
+
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="processingStatus" />
+                                    <PropertyValue Property="ValueListProperty" String="category" />
+                                </Record>
+                                <Record Type="Common.ValueListParameterIn">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="processingStatus" />
+                                    <PropertyValue Property="ValueListProperty" String="category" />
+                                </Record>
+                                <Record Type="Common.ValueListParameterDisplayOnly">
+                                    <PropertyValue Property="ValueListProperty" String="description" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+
+             <!-- WorkplaceCreditOTCView - Text Arrangements -->
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceDebitView/subObjectScenario">
+                <Annotation Term="Common.Text" Path="subObjectScenarioDesc" />
+                <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextLast" />
+            </Annotations>
+
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceDebitView/regulationType">
+                <Annotation Term="Common.Text" Path="regulationTypeDesc" />
+                <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextLast" />
+            </Annotations>
+
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceDebitView/objectType">
+                <Annotation Term="Common.Text" Path="objectTypeDesc" />
+                <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextLast" />
+            </Annotations>
+
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceDebitView/processingStatus">
+                <Annotation Term="Common.Text" Path="objectStatusDesc" />
+                <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextLast" />
+            </Annotations>
+
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceDebitView/transactionType">
+                <Annotation Term="Common.Text" Path="transactionTypeDesc" />
+                <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextLast" />
+            </Annotations>
+<!-- End of WorkplaceDebitView -->
+        </Schema>
+    </edmx:DataServices>
+</edmx:Edmx>

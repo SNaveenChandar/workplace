@@ -1,0 +1,178 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.f"
+    xmlns:sfb="sap.ui.comp.smartfilterbar"
+    xmlns:smartTable="sap.ui.comp.smarttable"
+    xmlns:sv="sap.ui.comp.smartvariants"
+    xmlns:mc="sap.suite.ui.microchart"
+    xmlns:table="sap.ui.table"
+    xmlns:smartVariantManagement="sap.ui.comp.smartvariants"
+    xmlns:sf="sap.ui.comp.smartfield"
+>
+    <f:DynamicPage
+        id="idMADJDynamicPage"
+        fitContent="true"
+        toggleHeaderOnTitleClick="true"
+        headerPinned="true"
+    >
+        <f:header>
+            <f:DynamicPageHeader>
+
+                <sfb:SmartFilterBar
+                    id="idMADJSmartFilterBar"
+                    entitySet="WorkplaceCreditMADJView"
+                    persistencyKey="EMTSSmartFilterPKey"
+                    initialized="onFilterInitialized"
+                >
+                    <sfb:controlConfiguration>
+                        <sfb:ControlConfiguration
+                            key="subObjectScenario"
+                            label="{i18n>renewableObject}"
+                            controlType="dropDownList"
+                            displayBehaviour="idAndDescription"
+                        >
+                            <sfb:customControl>
+                                <ComboBox
+                                    id="idMADJSubObjectScenerio"
+                                    items="{
+                                            path: '/GetRegulationSubscenario',
+                                            filters: [{
+                                                        path: 'objectCategory_category',
+                                                        operator: 'EQ',
+                                                        value1: 'C' 
+                                                    }]
+                                    }"
+                                    showSecondaryValues="true"
+                                    change="onSubObjectSecenerioChange"
+                                    selectedKey="RFS2_MADJ_RIN"
+                                >
+                                    <core:ListItem
+                                        key="{regulationSubScenario_category}"
+                                        text="{description}"
+                                    />
+                                </ComboBox>
+                            </sfb:customControl>
+                        </sfb:ControlConfiguration>
+                      
+                    </sfb:controlConfiguration>
+                </sfb:SmartFilterBar>
+                <FlexBox
+                    id="idMADJVisualFilter"
+                    width="20rem"
+                    height="10rem"
+                    alignItems="Stretch"
+                    justifyContent="SpaceBetween"
+                    visible="false"
+                >
+                    <items>
+                     <Label
+                            text="{i18n>byObjectType}"
+                            design="Bold"
+                            visible="{visibilityControl>/Credit}"
+                        />
+                        <mc:InteractiveDonutChart
+                            selectionChanged="onMADJSelectionChanged($event,'objectType')"
+                            visible="{visibilityControl>/Credit}"
+                            displayedSegments="4"
+                            segments="{/MaintainWorkplaceAggregationByObjectTypeView}"
+                        >
+                            <mc:segments>
+                                <mc:InteractiveDonutChartSegment
+                                    label="{objectType}"
+                                    value="{= parseFloat(${TotalRegQuantityByObjectType}) }"
+                                    displayedValue="{TotalRegQuantityByObjectType}"
+                                />
+                            </mc:segments>
+                        </mc:InteractiveDonutChart>
+                        <!-- Credit:D-code -->
+                        <Label
+                            text="{i18n>byDcode}"
+                            design="Bold"
+                            visible="{visibilityControl>/Credit}"
+                            class="sapUiMediumMarginBegin"
+                        />
+                        <mc:InteractiveDonutChart
+                            selectionChanged="onMADJSelectionChanged($event,'dcode')"
+                            visible="{visibilityControl>/Credit}"
+                            displayedSegments="4"
+                            segments="{/MaintainWorkplaceAggregationByDcodeView}"
+                        >
+                            <mc:segments>
+                                <mc:InteractiveDonutChartSegment
+                                    label="{dcode}"
+                                    value="{= parseFloat(${TotalRegQuantityByDcode}) }"
+                                    displayedValue="{TotalRegQuantityByDcode}"
+                                />
+                            </mc:segments>
+                        </mc:InteractiveDonutChart>
+                        <!-- Credit: Status ( posted vs pending) -->
+                        <Label
+                            text="{i18n>byStatus}"
+                            design="Bold"
+                            visible="{visibilityControl>/Credit}"
+                            class="sapUiMediumMarginBegin"
+                        />
+                        <mc:InteractiveDonutChart
+                            selectionChanged="onMADJSelectionChanged($event,'processingStatus')"
+                            visible="{visibilityControl>/Credit}"
+                            displayedSegments="4"
+                            segments="{/MaintainWorkplaceAggregationByStatusView}"
+                        >
+                            <mc:segments>
+                                <mc:InteractiveDonutChartSegment
+                                    label="{objectStatusDesc}"
+                                    value="{= parseFloat(${TotalRegQuantityByStatus}) }"
+                                    displayedValue="{TotalRegQuantityByStatus}"
+                                />
+                            </mc:segments>
+                        </mc:InteractiveDonutChart>
+                    </items>
+                </FlexBox>
+            </f:DynamicPageHeader>
+        </f:header>
+        <f:content>
+            <smartTable:SmartTable
+                id="idMADJSmartTable"
+                entitySet="WorkplaceCreditMADJView"
+                smartFilterId="idMADJSmartFilterBar"
+                tableType="Table"
+                enableAutoColumnWidth="true"
+                useTablePersonalisation="true"
+                showRowCount="true"
+                header="{i18n>renewableMAJCredit}"
+                beforeRebindTable="onMADJBeforeRebindTable"
+                enableAutoBinding="true"
+            >
+                <smartTable:customToolbar>
+                    <OverflowToolbar>
+                        <ToolbarSpacer />
+                        <ToolbarSeparator />
+                      
+                        <Button
+                            id="idMADJDisplayLogs"
+                            text="{i18n>displayLogs}"
+                            type="Emphasized"
+                            press="onDisplayLogs('idMADJTable')"
+                        />
+                        <Button
+                            id="idMADJCopyManualAdj"
+                            text="{i18n>copyManualAdj}"
+                            type="Emphasized"
+                        />
+                    </OverflowToolbar>
+                </smartTable:customToolbar>
+
+                <table:Table
+                    id="idMADJTable"
+                    selectionMode="Single"
+                    selectionBehavior="Row"
+                    alternateRowColors="true"
+                    cellClick="onNavigateToObjectPage"
+                    rowSelectionChange="onRowSelectionChange"
+                    enableSelectAll="false"
+                />
+            </smartTable:SmartTable>
+        </f:content>
+    </f:DynamicPage>
+</core:FragmentDefinition>
