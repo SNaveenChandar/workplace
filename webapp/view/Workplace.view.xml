@@ -90,19 +90,19 @@
                     <tnt:NavigationListItem
                         text="{i18n>credit}"
                         icon="sap-icon://arrow-left"
-                        key="idMADJDynamicPage"
+                        key="idOTCDynamicPage"
                     >
-                        <tnt:NavigationListItem
+                        <!-- <tnt:NavigationListItem
                             key="idMADJDynamicPage"
                             text="{i18n>RINMADJ}"
                         /> 
                          <tnt:NavigationListItem
                             key="idRINRFDynamicPage"
                             text="{i18n>RINRF}"
-                        />
+                        /> -->
                         <tnt:NavigationListItem
                             key="idOTCDynamicPage"
-                            text="{i18n>RINOTC}"
+                            text="{i18n>rin}"
                         />
                         <tnt:NavigationListItem
                             key="idEMTSDynamicPage"

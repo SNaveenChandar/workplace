@@ -19,7 +19,13 @@ sap.ui.define([
                 const oEMTSVisualFiltersModel = new JSONModel({ filters: [] });
                 this.getView()?.setModel(oEMTSVisualFiltersModel, "EMTSVisualFiltersModel");
 
+                const oLogModel = new JSONModel();
+                this.getView()?.setModel(oLogModel, "Logs");
+
                 this.getUserInfo();
+            },
+            getI18nText:function(sProperty) {
+                return this.getOwnerComponent().getModel("i18n")?.getProperty(sProperty);
             },
             onRowSelectionChange: function (oEvent) {
 
@@ -40,19 +46,25 @@ sap.ui.define([
                             return this.oDisplayLog;
                         });
                     }
-                    this.oDisplayLog._searchField.setVisible(false);;
-                    let oLogBindings = this.oDisplayLog.getBinding("items");
-                    let aFilter = new Filter({
-                        filters: [
+                    this.oDisplayLog._searchField.setVisible(false);
+                    let oModel = this.getOwnerComponent().getModel();
+                    oModel.read("/GetLogs", {
+                        filters:[
                             new Filter("object", FilterOperator.EQ, oSelectedObjectID),
                             new Filter("messageClass", FilterOperator.EQ, '01'),
                         ],
-                        and: true
-                    });
-                    oLogBindings.filter(aFilter);
-                    this.oDisplayLog.open();
+                        success: function (oData) {
+                            this.getView().getModel("Logs").setSizeLimit(oData.results.length);      
+                            this.getView().getModel("Logs").setData(oData.results);
+                            this.oDisplayLog.setModel(this.getView().getModel("Logs"));
+                            this.oDisplayLog.open();
+                        }.bind(this),
+                        error: function () {
+                            MessageBox.error(this.getI18nText("unableFetchLogs"));
+                        }
+                    });  
                 } else {
-                    MessageToast.show("Please select atleast one row to see the logs");
+                    MessageBox.error(this.getI18nText("selectAtleastOneRow"));
                 }
             },
             onDisplayLogsDialogClose: function (oEvent) {
@@ -315,7 +327,7 @@ sap.ui.define([
             },
             onDebitBeforeRebindTable: function (oEvent) {
                 let oBindingParams = oEvent.getParameter("bindingParams")
-                let sSubObjectScenerio = this.getView()?.byId("idDebitSubObjectScenerio").getSelectedKey();
+                let sSubObjectScenerios = this.getView()?.byId("idDebitSubObjectScenerio").getSelectedKeys();
                 let oDocumentDate = this.getView()?.byId("idDebitDocumentRangeSelection").getDOMValue();
                 if (oDocumentDate && oDocumentDate.length > 0) {
                     let oValue1 = oDocumentDate.split(" - ")[0];
@@ -327,13 +339,16 @@ sap.ui.define([
                         value2: new Date(oValue2)
                     }));
                 }
-                if (sSubObjectScenerio) {
-                    oBindingParams.filters?.push(new Filter({
-                        path: "subObjectScenario",
-                        operator: FilterOperator.EQ,
-                        value1: sSubObjectScenerio
-                    }));
+                if (sSubObjectScenerios.length > 0) {
+                    sSubObjectScenerios.forEach((sSubObjectScenerio)=>{
+                        oBindingParams.filters?.push(new Filter({
+                            path: "subObjectScenario",
+                            operator: FilterOperator.EQ,
+                            value1: sSubObjectScenerio
+                        }));
+                    })  
                 }
+                
             },
             onEMTSBeforeRebindTable: function (oEvent) {
                 let oBindingParams = oEvent.getParameter("bindingParams")
@@ -383,6 +398,7 @@ sap.ui.define([
                 let oVintageYear = this.getView()?.byId("idOTCVintageYear").getDOMValue();
                 let oDocumentDate = this.getView()?.byId("idOTCDocumentRangeSelection").getDOMValue();
                 let oComplianceYear = this.getView()?.byId("idOTCComplianceYear").getDOMValue();
+                let sSubObjectScenerios =  this.getView()?.byId("idRINSubObjectScenerio").getSelectedKeys();
                 if (oVintageYear && oVintageYear.length > 0) {
                     let oValue1 = oVintageYear.split(" - ")[0];
                     let oValue2 = oVintageYear.split(" - ")[1] || oValue1;
@@ -413,6 +429,15 @@ sap.ui.define([
                         value2: new Date(oValue2)
                     }));
                 }
+                if (sSubObjectScenerios.length > 0) {
+                    sSubObjectScenerios.forEach((sSubObjectScenerio)=>{
+                        oBindingParams.filters?.push(new Filter({
+                            path: "subObjectScenario",
+                            operator: FilterOperator.EQ,
+                            value1: sSubObjectScenerio
+                        }));
+                    })  
+                }
             },
             getUniqueFilters: function (aFilters) {
                 const uniqueFiltersSet = new Set();
@@ -425,24 +450,25 @@ sap.ui.define([
             },
             getUserInfo: function () {
                 const url = this.getBaseURL() + "/user-api/attributes";
-                var oModel = new JSONModel();
-                var mock = {
-                    firstname: "FirstName",
-                    lastname: "LastName"
-                }; 
-                oModel.loadData(url);
-                oModel.dataLoaded()
+                var oUserInfoModel = new JSONModel();
+                // var mock = {
+                //     firstname: "FirstName",
+                //     lastname: "LastName"
+                // }; 
+                oUserInfoModel.loadData(url);
+                oUserInfoModel.dataLoaded()
                 .then(()=>{
-                    if (!oModel.getData().firstname || !oModel.getData().lastname) {
-                        oModel.setData(mock);
+                    this.getView().setModel(oUserInfoModel, "userInfo")
+                    // this.getView().getModel('userInfo').setData(mock);
+                    if (!oUserInfoModel.getData().firstname || !oUserInfoModel.getData().lastname) {
+                        this.getView().getModel('userInfo').setProperty("/visible",false);
+                    }else{
+                        this.getView().getModel('userInfo').setProperty("/visible",true);
                     }
-                    this.getView().setModel(oModel, "userInfo")
-                    this.getView().getModel('userInfo').setProperty("/visible",true);
                 })
                 .catch(()=>{               
-                    oModel.setData(mock);
-                    this.getView().setModel(oModel, "userInfo");
-                    this.getView().setModel(oModel, "userInfo")
+                    // oModel.setData(mock);
+                    this.getView().setModel(oUserInfoModel, "userInfo");
                     this.getView().getModel('userInfo').setProperty("/visible",false);
                 });
             },      

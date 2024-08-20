@@ -26,6 +26,33 @@
                     initialized="onFilterInitialized"
                 >
                     <sfb:controlConfiguration>
+                    <sfb:ControlConfiguration
+                            key="subObjectScenario"
+                            label="{i18n>renewableObject}"
+                            visibleInAdvancedArea="true"
+                        >
+                            <sfb:customControl>
+                                <MultiComboBox
+                                    id="idRINSubObjectScenerio"
+                                    selectedKeys="RFS2_RIN_RF"
+                                    showSecondaryValues="true"
+                                    
+                                >
+                                    <core:ListItem
+                                        key="RFS2_RIN_RF"
+                                        text="RIN RF Credit"
+                                    />
+                                     <core:ListItem
+                                        key="RFS2_MADJ_RIN"
+                                        text="Manual adjustment RF RIN"
+                                    />
+                                     <core:ListItem
+                                        key="RFS2_RIN_OTC"
+                                        text="RIN OTC Credit"
+                                    />
+                                </MultiComboBox>
+                            </sfb:customControl>
+                        </sfb:ControlConfiguration>
                         <sfb:ControlConfiguration
                             key="documentDate"
                             label="{i18n>documentDate}"

@@ -44,9 +44,9 @@
                         <Annotations Target="SAP.WorkplaceCreditOTCView/subObjectScenario">
                             <Annotation Term="Common.FilterDefaultValue" String="RFS2_RIN_OTC" />
                         </Annotations>
-                        <Annotations Target="SAP.WorkplaceCreditOTCView/subObjectScenario">
+                        <!-- <Annotations Target="SAP.WorkplaceCreditOTCView/subObjectScenario">
                             <Annotation Term="UI.HiddenFilter" />
-                        </Annotations>
+                        </Annotations> -->
                         <!-- WorkplaceCreditOTCView - Table -->
                         <Annotations Target="SAP.WorkplaceCreditOTCView">
                             <Annotation Term="UI.LineItem">
@@ -1458,9 +1458,9 @@
                         <Annotations Target="SAP.WorkplaceCreditRFRINView">
                             <Annotation Term="UI.SelectionFields">
                                 <Collection>
-                                    <PropertyPath>subObjectScenario</PropertyPath>
-                                    <PropertyPath>objectId</PropertyPath>
+                                 
                                     <PropertyPath>regulationType</PropertyPath>
+                                       <PropertyPath>fuelCategory</PropertyPath>
                                     <PropertyPath>objectType</PropertyPath>
                                     <PropertyPath>documentDate</PropertyPath>
                                     <PropertyPath>reasonCode</PropertyPath>

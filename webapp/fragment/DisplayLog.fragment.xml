@@ -6,14 +6,21 @@
         noDataText="{i18n>noLogs}"
         title="{i18n>displayLogs}"
         titleAlignment="Center"
-        contentWidth="1500px"
-        contentHeight="600px"
+        contentWidth="1400px"
+        contentHeight="500px"
         draggable="true"
         resizable="true"
-		items="{/GetLogs}"
+        items="{
+			path : 'Logs>/',
+			sorter : {
+				path : 'createdAt',
+				descending : true
+			}
+		}"
 		growing="true"
 		growingThreshold="50"
 		cancel="onDisplayLogsDialogClose"
+        
         class="sapUiResponsivePadding--header sapUiResponsivePadding--subHeader sapUiResponsivePadding--content sapUiResponsivePadding--footer"
     >
         <columns>
@@ -22,7 +29,7 @@
                     <Label design="Bold" text="{i18n>status}" />
                 </header>
             </Column>
-			 <Column width="60%"> 
+			 <Column width="50%"> 
                 <header>
                     <Label design="Bold" text="{i18n>messageText}" />
                 </header>
@@ -41,20 +48,27 @@
         </columns>
         <ColumnListItem vAlign="Middle">
             	<cells>
-                <ObjectStatus text= "{= ${messageType} === 'S' ? ${i18n>success} :
-                     ${messageType} === 'E' ? ${i18n>error} :
-                     ${messageType} === 'W' ? ${i18n>warning} :
-                     ${messageType} === 'I' ? ${i18n>information} :
-                     ${messageType} }"
-                    state="{= ${messageType} === 'S' ? ${i18n>success} :
-                     ${messageType} === 'E' ? ${i18n>error} :
-                     ${messageType} === 'W' ? ${i18n>warning} :
-                     ${messageType} === 'I' ? ${i18n>information} :
-                     ${messageType} }"/>  
-				<Text text="{message}" /> 
-                <Text text="{createdBy}"/>    
+                <ObjectStatus class="sapUiSmallMarginTopBottom" text= "{= ${Logs>messageType} === 'S' ? ${i18n>success} :
+                     ${Logs>messageType} === 'E' ? ${i18n>error} :
+                     ${Logs>messageType} === 'W' ? ${i18n>warning} :
+                     ${Logs>messageType} === 'I' ? ${i18n>information} :
+                     ${Logs>messageType} }"
+                    state="{= ${Logs>messageType} === 'S' ? ${i18n>success} :
+                     ${Logs>messageType} === 'E' ? ${i18n>error} :
+                     ${Logs>messageType} === 'W' ? ${i18n>warning} :
+                     ${Logs>messageType} === 'I' ? ${i18n>information} :
+                     ${Logs>messageType} }"
+                     icon="{= ${Logs>messageType} === 'S' ? 'sap-icon://sys-enter-2' :
+                     ${Logs>messageType} === 'E' ? 'sap-icon://error' :
+                     ${Logs>messageType} === 'W' ? 'sap-icon://alert' :
+                     ${Logs>messageType} === 'I' ? 'sap-icon://information' :
+                     ${Logs>messageType} }"
+                     inverted="true"
+					/>  
+				<Text text="{Logs>message}" /> 
+                <Text text="{Logs>createdBy}"/>    
                 <Text text="{
-				path: 'createdAt',
+				path: 'Logs>createdAt',
 				type: 'sap.ui.model.type.DateTime',
 				formatOptions: {
 					pattern: 'MM-dd-yyyy HH:mm:ss a',

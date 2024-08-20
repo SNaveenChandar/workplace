@@ -52,9 +52,9 @@
                             label="{i18n>renewableObject}"
                         >
                             <sfb:customControl>
-                                <ComboBox
+                                <MultiComboBox
                                     id="idDebitSubObjectScenerio"
-                                    selectedKey="RFS2_RVO"
+                                    selectedKeys="RFS2_RVO"
                                     items="{
                                                             path: '/GetRegulationSubscenario',
                                                             filters: [{
@@ -74,7 +74,7 @@
                                         key="{regulationSubScenario_category}"
                                         text="{description}"
                                     />
-                                </ComboBox>
+                                </MultiComboBox>
                             </sfb:customControl>
                         </sfb:ControlConfiguration>
                     </sfb:controlConfiguration>
