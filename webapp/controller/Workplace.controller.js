@@ -427,24 +427,23 @@ sap.ui.define([
                 const url = this.getBaseURL() + "/user-api/attributes";
                 var oModel = new JSONModel();
                 var mock = {
-                    firstname: "Naveen",
-                    lastname: "Chandar",
-                    email: "dummy.user@com",
-                    name: "dummy.user@com",
-                    displayName: "Dummy User (dummy.user@com)"
+                    firstname: "FirstName",
+                    lastname: "LastName"
                 }; 
-    
                 oModel.loadData(url);
                 oModel.dataLoaded()
                 .then(()=>{
                     if (!oModel.getData().firstname || !oModel.getData().lastname) {
                         oModel.setData(mock);
                     }
-                    this.getView().setModel(oModel, "userInfo");
+                    this.getView().setModel(oModel, "userInfo")
+                    this.getView().getModel('userInfo').setProperty("/visible",true);
                 })
                 .catch(()=>{               
                     oModel.setData(mock);
                     this.getView().setModel(oModel, "userInfo");
+                    this.getView().setModel(oModel, "userInfo")
+                    this.getView().getModel('userInfo').setProperty("/visible",false);
                 });
             },      
             

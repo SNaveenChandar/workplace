@@ -30,6 +30,7 @@
                     level="H3"
                     text="Welcome {userInfo>/firstname} {userInfo>/lastname}!"
                     wrapping="false"
+                    visible="{userInfo>/visible}"
                 />
                 <ToolbarSeparator />
                 <ToolbarSpacer />
