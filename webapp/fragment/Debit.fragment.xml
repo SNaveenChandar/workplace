@@ -30,16 +30,15 @@
                             key="regulationType"
                             label="{i18n>regulationType}"
                         />
-                        <sfb:ControlConfiguration
-                            id="idObjectCategory"
-                            mandatory="mandatory"
-                            key="objectCategory"
-                            label="{i18n>objectCategory}"
+                         <sfb:ControlConfiguration
+                            key="regulationGoodsMovementDocumentNumber"
+                            label="{i18n>regulationGoodsMovementDocumentNumber}"
                         />
                         <sfb:ControlConfiguration
                             key="documentDate"
                             label="{i18n>documentDate}"
                             controlType="date"
+                        visibleInAdvancedArea="true"
                         >
                             <sfb:customControl>
                                 <DateRangeSelection
@@ -96,7 +95,6 @@
                         />
                         <mc:InteractiveDonutChart
                             selectionChanged="onDebitSelectionChanged($event,'fuelLogisticsPlant')"
-                            visible="{visibilityControl>/Obligation}"
                             displayedSegments="4"
                             segments="{/MaintainWorkplaceAggregationByPlantView}"
                         >
@@ -108,15 +106,31 @@
                                 />
                             </mc:segments>
                         </mc:InteractiveDonutChart>
+                        <Label
+                            text="{i18n>byMonth}"
+                            design="Bold"
+                            class="sapUiMediumMarginBegin"
+                        />
+                        <mc:InteractiveDonutChart
+                            segments="{/MaintainWorkplaceAggregationByMonthView}"
+                            displayedSegments="4"
+                            selectionChanged="onDebitSelectionChanged($event,'renewablesDocumentMonth')"
+                        >
+                            <mc:segments>
+                                <mc:InteractiveDonutChartSegment
+                                    label="{renewablesDocumentMonthDes}"
+                                    value="{= parseFloat(${TotalRegQuantityByMonth}) }"
+                                    displayedValue="{TotalRegQuantityByMonth}"
+                                />
+                            </mc:segments>
+                        </mc:InteractiveDonutChart>
                        <Label
                             class="sapUiMediumMarginBegin"
                             text="{i18n>byCategory}"
                             design="Bold"
-                            visible="{visibilityControl>/Obligation}"
                         />
                         <mc:InteractiveDonutChart
                             selectionChanged="onDebitSelectionChanged($event,'rfs2ObligationType')"
-                            visible="{visibilityControl>/Obligation}"
                             displayedSegments="4"
                             segments="{/MaintainWorkplaceAggregationByCategoryView}"
                         >
@@ -154,7 +168,7 @@
                             id="idPostInventory"
                             text="{i18n>postInventory}"
                             type="Emphasized"
-                            press="onPostInventory"
+                            press="onDebitPostInventory"
                         />
                         <Button
                             id="idReverse"

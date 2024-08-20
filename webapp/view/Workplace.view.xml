@@ -26,8 +26,15 @@
                         <OverflowToolbarLayoutData priority="NeverOverflow" />
                     </layoutData>
                 </Button>
+                 <Title
+                    level="H3"
+                    text="Welcome {userInfo>/firstname} {userInfo>/lastname}!"
+                    wrapping="false"
+                />
+                <ToolbarSeparator />
+                <ToolbarSpacer />
                 <Image
-                    height="4.5rem"
+                    height="4rem"
                     class="sapUiMediumMarginBegin"
                     src="./logo.png"
                 />
@@ -82,16 +89,16 @@
                     <tnt:NavigationListItem
                         text="{i18n>credit}"
                         icon="sap-icon://arrow-left"
-                        key="idOTCDynamicPage"
+                        key="idMADJDynamicPage"
                     >
-                        <!-- <tnt:NavigationListItem
+                        <tnt:NavigationListItem
                             key="idMADJDynamicPage"
                             text="{i18n>RINMADJ}"
-                        /> -->
-                        <!-- <tnt:NavigationListItem
+                        /> 
+                         <tnt:NavigationListItem
                             key="idRINRFDynamicPage"
                             text="{i18n>RINRF}"
-                        /> -->
+                        />
                         <tnt:NavigationListItem
                             key="idOTCDynamicPage"
                             text="{i18n>RINOTC}"
@@ -111,22 +118,17 @@
                 initialPage="idDebitDynamicPage"
             >
                 <pages>
-                    <!-- <core:Fragment
+                    <core:Fragment
                         type="XML"
                         fragmentName="poc.fragment.Debit"
-                    /> -->
-                    <!-- 
+                    />
+                     <core:Fragment
+                        type="XML"
+                        fragmentName="poc.fragment.RINManualAdjustment"
+                    />
                     <core:Fragment
                         type="XML"
                         fragmentName="poc.fragment.RINRFCredit"
-                    /> -->
-                    <!-- <core:Fragment
-                        type="XML"
-                        fragmentName="poc.fragment.RINManualAdjustment"
-                    /> -->
-                    <core:Fragment
-                        type="XML"
-                        fragmentName="poc.fragment.Debit"
                     />
                     <core:Fragment
                         type="XML"

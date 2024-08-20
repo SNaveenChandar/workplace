@@ -21,7 +21,7 @@
 
                 <sfb:SmartFilterBar
                     id="idRINRFSmartFilterBar"
-                    entitySet="WorkplaceCreditRINRFView"
+                    entitySet="WorkplaceCreditRFRINView"
                     persistencyKey="RINRFSmartFilterPKey"
                     initialized="onFilterInitialized"
                 >
@@ -134,7 +134,7 @@
         <f:content>
             <smartTable:SmartTable
                 id="idRINRFSmartTable"
-                entitySet="WorkplaceCreditRINRFView"
+                entitySet="WorkplaceCreditRFRINView"
                 smartFilterId="idRINRFSmartFilterBar"
                 tableType="Table"
                 enableAutoColumnWidth="true"

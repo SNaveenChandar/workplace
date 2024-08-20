@@ -18,6 +18,8 @@ sap.ui.define([
 
                 const oEMTSVisualFiltersModel = new JSONModel({ filters: [] });
                 this.getView()?.setModel(oEMTSVisualFiltersModel, "EMTSVisualFiltersModel");
+
+                this.getUserInfo();
             },
             onRowSelectionChange: function (oEvent) {
 
@@ -38,7 +40,6 @@ sap.ui.define([
                             return this.oDisplayLog;
                         });
                     }
-                    //@ts-ignore
                     this.oDisplayLog._searchField.setVisible(false);;
                     let oLogBindings = this.oDisplayLog.getBinding("items");
                     let aFilter = new Filter({
@@ -62,13 +63,13 @@ sap.ui.define([
                 let sPageID = this.getView().createId(oItem.getKey());
                 this.byId("pageContainer").to(sPageID);
                 this.byId("idAdaptFilters").setSelectedKey("compact");
-                this.onToggleBetweenCompactAndVisualFilters(undefined,"compact")
+                this.onToggleBetweenCompactAndVisualFilters(undefined,"compact");
             },
 
-            onPostInventory: function () {
-                let oMainTable = this.getView()?.byId("RVO");
-                if (oMainTable.getSelectedIndices().length > 0) {
-                    let oSelectedObjectID = oMainTable.getContextByIndex(oMainTable.getSelectedIndices()[0])?.getProperty("ID");
+            onDebitPostInventory: function () {
+                let oTable = this.getView()?.byId("idDebitTable");
+                if (oTable.getSelectedIndices().length > 0) {
+                    let oSelectedObjectID = oTable.getContextByIndex(oTable.getSelectedIndices()[0])?.getProperty("ID");
                     let oDataModel = this.getView()?.getModel();
                     const that = this;
                     oDataModel.callFunction("/postToInventory", {
@@ -83,7 +84,7 @@ sap.ui.define([
                                         styleClass: "sapUiResponsivePadding--header sapUiResponsivePadding--content sapUiResponsivePadding--footer",
                                         onClose: () => {
                                             that.unSelectRowFromTable();
-                                            that.makeSmartTableRebind();
+                                            that.makeDebitSmartTableRebind();
                                         }
                                     });
                                 } else {
@@ -167,15 +168,17 @@ sap.ui.define([
                     this.byId(sId).setSelectedIndex(-1);
                 }.bind(this));
             },
-            makeSmartTableRebind: function () {
-                let oSmartTable = this.getView()?.byId("smartTable");
+            makeDebitSmartTableRebind: function () {
+                let oSmartTable = this.getView()?.byId("idDebitSmartTable");
                 oSmartTable.rebindTable(true);
             },
             onToggleBetweenCompactAndVisualFilters: function (oEvent, sKey) {
                 let oIDMapping = {
                     'idEMTSDynamicPage': ["idEMTSVisualFilter", "idEMTSSmartFilterBar"],
                     'idOTCDynamicPage': ["idOTCVisualFilter", "idOTCSmartFilterBar"],
-                    'idDebitDynamicPage':["idDebitVisualFilter","idDebitSmartFilterBar"]
+                    'idDebitDynamicPage':["idDebitVisualFilter","idDebitSmartFilterBar"],
+                    'idRINRFDynamicPage':["idRINRFVisualFilter","idRINRFSmartFilterBar"],
+                    'idMADJDynamicPage':["idMADJVisualFilter","idMADJSmartFilterBar"]
                 }
                 let oSelectedPageID = this.getView().byId("sideNavigation").getSelectedKey();
                 let sVisualFilterID = oIDMapping[oSelectedPageID][0]
@@ -274,7 +277,7 @@ sap.ui.define([
                     aTotalSelectedVisualFilters = aRemainingSelectedFilters;
                 };
                 let aTotalUniqueVisualFilters = this.getUniqueFilters(aTotalSelectedVisualFilters);
-                oFilterModel.setProperty("/filters", aTotalUniqueVisualFilters);
+                oFilterModel.setProperty("/filters", aTotalUniqueVisualFilters); 
                 oBindings.filter(aTotalUniqueVisualFilters.length === 0 ? [] : aTotalUniqueVisualFilters);
             },
 
@@ -313,10 +316,10 @@ sap.ui.define([
             onDebitBeforeRebindTable: function (oEvent) {
                 let oBindingParams = oEvent.getParameter("bindingParams")
                 let sSubObjectScenerio = this.getView()?.byId("idDebitSubObjectScenerio").getSelectedKey();
-                let oDocumentDate = this.getView()?.byId("idDebitDocumentRangeSelection");
+                let oDocumentDate = this.getView()?.byId("idDebitDocumentRangeSelection").getDOMValue();
                 if (oDocumentDate && oDocumentDate.length > 0) {
-                    let oValue1 = oDocumentDate.split(" – ")[0];
-                    let oValue2 = oVintageYear.split(" – ")[1] || oValue1;
+                    let oValue1 = oDocumentDate.split(" - ")[0];
+                    let oValue2 = oDocumentDate.split(" - ")[1] || oValue1;
                     oBindingParams.filters?.push(new Filter({
                         path: "documentDate",
                         operator: FilterOperator.BT,
@@ -334,12 +337,12 @@ sap.ui.define([
             },
             onEMTSBeforeRebindTable: function (oEvent) {
                 let oBindingParams = oEvent.getParameter("bindingParams")
-                let oTransferDate = this.getView()?.byId("idEMTSTransferDateRangeSelection");
-                let oSubmissionDate = this.getView()?.byId("idEMTSsubmissionDateRangeSelection");
+                let oTransferDate = this.getView()?.byId("idEMTSTransferDateRangeSelection").getDOMValue();
+                let oSubmissionDate = this.getView()?.byId("idEMTSsubmissionDateRangeSelection").getDOMValue();
                 let oRINYear = this.getView()?.byId("idEMTSVintageYear").getDOMValue();
                 if (oRINYear && oRINYear.length > 0) {
-                    let oValue1 = oRINYear.split(" – ")[0];
-                    let oValue2 = oRINYear.split(" – ")[1] || oValue1;
+                    let oValue1 = oRINYear.split(" - ")[0];
+                    let oValue2 = oRINYear.split(" - ")[1] || oValue1;
                     oBindingParams.filters?.push(new Filter({
                         path: "vintageYear",
                         operator: FilterOperator.BT,
@@ -348,8 +351,8 @@ sap.ui.define([
                     }));
                 }
                 if (oTransferDate && oTransferDate.length > 0) {
-                    let oValue1 = oTransferDate.split(" – ")[0];
-                    let oValue2 = oTransferDate.split(" – ")[1] || oValue1;
+                    let oValue1 = oTransferDate.split(" - ")[0];
+                    let oValue2 = oTransferDate.split(" - ")[1] || oValue1;
                     oBindingParams.filters?.push(new Filter({
                         path: "transferDate",
                         operator: FilterOperator.BT,
@@ -358,8 +361,8 @@ sap.ui.define([
                     }));
                 }
                 if (oSubmissionDate && oSubmissionDate.length > 0) {
-                    let oValue1 = oSubmissionDate.split(" – ")[0];
-                    let oValue2 = oSubmissionDate.split(" – ")[1] || oValue1;
+                    let oValue1 = oSubmissionDate.split(" - ")[0];
+                    let oValue2 = oSubmissionDate.split(" - ")[1] || oValue1;
                     oBindingParams.filters?.push(new Filter({
                         path: "submissionDate",
                         operator: FilterOperator.BT,
@@ -378,11 +381,11 @@ sap.ui.define([
             onOTCBeforeRebindTable: function (oEvent) {
                 let oBindingParams = oEvent.getParameter("bindingParams")
                 let oVintageYear = this.getView()?.byId("idOTCVintageYear").getDOMValue();
-                let oDocumentDate = this.getView()?.byId("idOTCDocumentRangeSelection");
+                let oDocumentDate = this.getView()?.byId("idOTCDocumentRangeSelection").getDOMValue();
                 let oComplianceYear = this.getView()?.byId("idOTCComplianceYear").getDOMValue();
                 if (oVintageYear && oVintageYear.length > 0) {
-                    let oValue1 = oVintageYear.split(" – ")[0];
-                    let oValue2 = oVintageYear.split(" – ")[1] || oValue1;
+                    let oValue1 = oVintageYear.split(" - ")[0];
+                    let oValue2 = oVintageYear.split(" - ")[1] || oValue1;
                     oBindingParams.filters?.push(new Filter({
                         path: "vintageYear",
                         operator: FilterOperator.BT,
@@ -391,8 +394,8 @@ sap.ui.define([
                     }));
                 }
                 if (oComplianceYear && oComplianceYear.length > 0) {
-                    let oValue1 = oComplianceYear.split(" – ")[0];
-                    let oValue2 = oComplianceYear.split(" – ")[1] || oValue1;
+                    let oValue1 = oComplianceYear.split(" - ")[0];
+                    let oValue2 = oComplianceYear.split(" - ")[1] || oValue1;
                     oBindingParams.filters?.push(new Filter({
                         path: "renewablesDocumentComplianceYear",
                         operator: FilterOperator.BT,
@@ -401,8 +404,8 @@ sap.ui.define([
                     }));
                 }
                 if (oDocumentDate && oDocumentDate.length > 0) {
-                    let oValue1 = oDocumentDate.split(" – ")[0];
-                    let oValue2 = oVintageYear.split(" – ")[1] || oValue1;
+                    let oValue1 = oDocumentDate.split(" - ")[0];
+                    let oValue2 = oVintageYear.split(" - ")[1] || oValue1;
                     oBindingParams.filters?.push(new Filter({
                         path: "documentDate",
                         operator: FilterOperator.BT,
@@ -419,6 +422,37 @@ sap.ui.define([
                 });
                 const aUniqueFiltersArray = Array.from(uniqueFiltersSet).map(filterString => JSON.parse(filterString));
                 return aUniqueFiltersArray;
+            },
+            getUserInfo: function () {
+                const url = this.getBaseURL() + "/user-api/attributes";
+                var oModel = new JSONModel();
+                var mock = {
+                    firstname: "Naveen",
+                    lastname: "Chandar",
+                    email: "dummy.user@com",
+                    name: "dummy.user@com",
+                    displayName: "Dummy User (dummy.user@com)"
+                }; 
+    
+                oModel.loadData(url);
+                oModel.dataLoaded()
+                .then(()=>{
+                    if (!oModel.getData().firstname || !oModel.getData().lastname) {
+                        oModel.setData(mock);
+                    }
+                    this.getView().setModel(oModel, "userInfo");
+                })
+                .catch(()=>{               
+                    oModel.setData(mock);
+                    this.getView().setModel(oModel, "userInfo");
+                });
+            },      
+            
+            getBaseURL: function () {
+                var appId = this.getOwnerComponent().getManifestEntry("/sap.app/id");
+                var appPath = appId.replaceAll(".", "/");
+                var appModulePath = jQuery.sap.getModulePath(appPath);
+                return appModulePath;
             }
         });
     });
