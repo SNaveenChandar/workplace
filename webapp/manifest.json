@@ -1,7 +1,7 @@
 {
   "_version": "1.59.0",
   "sap.app": {
-    "id": "poc",
+    "id": "zfsrenewwrkplc",
     "type": "application",
     "i18n": "i18n/i18n.properties",
     "applicationVersion": {
@@ -75,7 +75,7 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "poc.i18n.i18n"
+          "bundleName": "zfsrenewwrkplc.i18n.i18n"
         }
       },
       "": {
@@ -96,7 +96,7 @@
         "routerClass": "sap.m.routing.Router",
         "viewType": "XML",
         "async": true,
-        "viewPath": "poc.view",
+        "viewPath": "zfsrenewwrkplc.view",
         "controlAggregation": "pages",
         "controlId": "app",
         "clearControlAggregation": false
@@ -121,7 +121,7 @@
       }
     },
     "rootView": {
-      "viewName": "poc.view.App",
+      "viewName": "zfsrenewwrkplc.view.App",
       "type": "XML",
       "async": true,
       "id": "App"
@@ -129,6 +129,6 @@
   },
   "sap.cloud": {
     "public": true,
-    "service": "poc"
+    "service": "zfsrenewwrkplc"
   }
 }

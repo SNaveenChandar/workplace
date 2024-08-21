@@ -8,7 +8,7 @@ sap.ui.define([
     function (Controller, Filter, FilterOperator, JSONModel, MessageBox, Fragment) {
         "use strict";
 
-        return Controller.extend("poc.controller.Workplace", {
+        return Controller.extend("zfsrenewwrkplc.controller.Workplace", {
             onInit: function () {
                 const oDebitVisualFiltersModel = new JSONModel({ filters: [] });
                 this.getView()?.setModel(oDebitVisualFiltersModel, "DebitVisualFiltersModel");
@@ -38,7 +38,7 @@ sap.ui.define([
                     if (!this.oDisplayLog) {
                         this.oDisplayLog = await Fragment.load({
                             id: oView?.getId(),
-                            name: "poc.fragment.DisplayLog",
+                            name: "zfsrenewwrkplc.fragment.DisplayLog",
                             controller: this,
                         }).then((oDialog) => {
                             oView?.addDependent(oDialog);

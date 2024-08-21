@@ -5,7 +5,7 @@ sap.ui.define(
     function(BaseController) {
       "use strict";
   
-      return BaseController.extend("poc.controller.App", {
+      return BaseController.extend("zfsrenewwrkplc.controller.App", {
         onInit: function() {
         }
       });

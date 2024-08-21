@@ -5,12 +5,12 @@
 sap.ui.define([
         "sap/ui/core/UIComponent",
         "sap/ui/Device",
-        "poc/model/models"
+        "zfsrenewwrkplc/model/models"
     ],
     function (UIComponent, Device, models) {
         "use strict";
 
-        return UIComponent.extend("poc.Component", {
+        return UIComponent.extend("zfsrenewwrkplc.Component", {
             metadata: {
                 manifest: "json"
             },

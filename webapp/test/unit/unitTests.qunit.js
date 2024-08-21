@@ -5,7 +5,7 @@ sap.ui.getCore().attachInit(function () {
 	"use strict";
 
 	sap.ui.require([
-		"poc/test/unit/AllTests"
+		"zfsrenewwrkplc/test/unit/AllTests"
 	], function () {
 		QUnit.start();
 	});

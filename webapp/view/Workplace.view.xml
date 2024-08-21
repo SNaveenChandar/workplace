@@ -1,5 +1,5 @@
 <mvc:View
-    controllerName="poc.controller.Workplace"
+    controllerName="zfsrenewwrkplc.controller.Workplace"
     height="100%"
     xmlns:f="sap.f"
     xmlns="sap.m"
@@ -121,23 +121,23 @@
                 <pages>
                     <core:Fragment
                         type="XML"
-                        fragmentName="poc.fragment.Debit"
+                        fragmentName="zfsrenewwrkplc.fragment.Debit"
                     />
                      <core:Fragment
                         type="XML"
-                        fragmentName="poc.fragment.RINManualAdjustment"
+                        fragmentName="zfsrenewwrkplc.fragment.RINManualAdjustment"
                     />
                     <core:Fragment
                         type="XML"
-                        fragmentName="poc.fragment.RINRFCredit"
+                        fragmentName="zfsrenewwrkplc.fragment.RINRFCredit"
                     />
                     <core:Fragment
                         type="XML"
-                        fragmentName="poc.fragment.RINRFOTC"
+                        fragmentName="zfsrenewwrkplc.fragment.RINRFOTC"
                     />
                     <core:Fragment
                         type="XML"
-                        fragmentName="poc.fragment.EMTS"
+                        fragmentName="zfsrenewwrkplc.fragment.EMTS"
                     />
                 </pages>
             </NavContainer>

@@ -1,7 +1,7 @@
 /*global QUnit*/
 
 sap.ui.define([
-	"poc/controller/Workplace.controller"
+	"zfsrenewwrkplc/controller/Workplace.controller"
 ], function (Controller) {
 	"use strict";
 

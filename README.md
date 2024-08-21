@@ -8,7 +8,7 @@
 |**Template Used**<br>simple|
 |**Service Type**<br>SAP System (ABAP On Premise)|
 |**Service URL**<br>https://chs-inc-dev-appdev-zcom-txnsrv2-srv.cfapps.us10.hana.ondemand.com/odata/v2/regulation-compliance-transaction/|
-|**Module Name**<br>poc|
+|**Module Name**<br>zfsrenewwrkplc|
 |**Application Title**<br>App Title|
 |**Namespace**<br>|
 |**UI5 Theme**<br>sap_horizon|
@@ -17,7 +17,7 @@
 |**Enable TypeScript**<br>False|
 |**Add Eslint configuration**<br>False|
 
-## poc
+## zfsrenewwrkplc
 
 An SAP Fiori application.
 

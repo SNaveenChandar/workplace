@@ -2,7 +2,7 @@
 
 specVersion: "3.1"
 metadata:
-  name: poc
+  name: zfsrenewwrkplc
 type: application
 framework:
   name: SAPUI5
@@ -46,5 +46,5 @@ server:
     - name: fiori-tools-preview
       afterMiddleware: fiori-tools-appreload
       configuration:
-        component: poc
+        component: zfsrenewwrkplc
         ui5Theme: sap_horizon
