@@ -78,8 +78,8 @@ sap.ui.define([
                 this.onToggleBetweenCompactAndVisualFilters(undefined,"compact");
             },
 
-            onDebitPostInventory: function () {
-                let oTable = this.getView()?.byId("idDebitTable");
+            onPostInventory: function (sTableID) {
+                let oTable = this.getView()?.byId(sTableID).getTable();
                 if (oTable.getSelectedIndices().length > 0) {
                     let oSelectedObjectID = oTable.getContextByIndex(oTable.getSelectedIndices()[0])?.getProperty("ID");
                     let oDataModel = this.getView()?.getModel();
@@ -96,7 +96,7 @@ sap.ui.define([
                                         styleClass: "sapUiResponsivePadding--header sapUiResponsivePadding--content sapUiResponsivePadding--footer",
                                         onClose: () => {
                                             that.unSelectRowFromTable();
-                                            that.makeDebitSmartTableRebind();
+                                            that.makeSmartTableRebind(sTableID);
                                         }
                                     });
                                 } else {
@@ -180,9 +180,9 @@ sap.ui.define([
                     this.byId(sId).setSelectedIndex(-1);
                 }.bind(this));
             },
-            makeDebitSmartTableRebind: function () {
-                let oSmartTable = this.getView()?.byId("idDebitSmartTable");
-                oSmartTable.rebindTable(true);
+            makeSmartTableRebind: function (sID) {
+                let oSmartTable = this.getView()?.byId(sID);
+                oSmartTable.rebindTable();
             },
             onToggleBetweenCompactAndVisualFilters: function (oEvent, sKey) {
                 let oIDMapping = {

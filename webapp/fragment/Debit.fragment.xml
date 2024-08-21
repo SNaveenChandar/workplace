@@ -168,7 +168,7 @@
                             id="idPostInventory"
                             text="{i18n>postInventory}"
                             type="Emphasized"
-                            press="onDebitPostInventory"
+                            press="onPostInventory('idDebitSmartTable')"
                         />
                         <Button
                             id="idReverse"
