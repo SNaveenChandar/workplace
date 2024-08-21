@@ -295,6 +295,10 @@
                 </Annotation>
             </Annotations>
             <!-- WorkplaceCreditOTCView - Contract No -->
+              <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.GetRegulationContractNo/contractDocumentNo">
+                <Annotation Term="Common.Label" String="Contract Doc No" />
+            </Annotations>
+
             <Annotations Target="SAP.WorkplaceCreditOTCView/contractDocumentNo">
                 <Annotation Term="Common.ValueList">
                     <Record>
@@ -313,6 +317,10 @@
                 </Annotation>
             </Annotations>
             <!-- WorkplaceCreditOTCView - Partner Identifier -->
+              <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.GetTradingPartnerNo/transactionPartnerOrgId">
+                <Annotation Term="Common.Label" String="Partner Identifier" />
+            </Annotations>
+
             <Annotations Target="SAP.WorkplaceCreditOTCView/transactionPartnerOrgId">
                 <Annotation Term="Common.ValueList">
                     <Record>
@@ -439,6 +447,7 @@
             </Annotations>
 
             <Annotations Target="SAP.WorkplaceCreditOTCView/impact">
+             <Annotation Term="Common.ValueListWithFixedValues" Bool="true" />
                 <Annotation Term="Common.ValueList">
                     <Record>
                         <PropertyValue Property="Label" />
@@ -688,6 +697,10 @@
                 </Annotation>
             </Annotations>
             <!-- WorkplaceCreditEMTSView/ptdNumber -->
+              <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.GetPTDNo/ptdNumber">
+                <Annotation Term="Common.Label" String="PTD Number" />
+            </Annotations>
+
             <Annotations Target="SAP.WorkplaceCreditEMTSView/ptdNumber">
                 <Annotation Term="Common.ValueList">
                     <Record>
@@ -707,6 +720,10 @@
                 </Annotation>
             </Annotations>
             <!-- WorkplaceCreditEMTSView/invoice -->
+              <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.GetInvoiceNo/invoice">
+                <Annotation Term="Common.Label" String="Invoice Number" />
+            </Annotations>
+
             <Annotations Target="SAP.WorkplaceCreditEMTSView/invoice">
                 <Annotation Term="Common.ValueList">
                     <Record>
@@ -792,6 +809,10 @@
                 </Annotation>
             </Annotations>
             <!-- WorkplaceCreditEMTSView/emtsTradingPartnerBillOfLading -->
+              <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.GetEMTSBillofLading/emtsTradingPartnerBillOfLading">
+                <Annotation Term="Common.Label" String="Bill of Lading" />
+            </Annotations>
+
             <Annotations Target="SAP.WorkplaceCreditEMTSView/emtsTradingPartnerBillOfLading">
                 <Annotation Term="Common.ValueList">
                     <Record>
@@ -870,6 +891,11 @@
                 </Annotation>
             </Annotations>
             <!-- WorkplaceCreditEMTSView/emtsCDSID -->
+
+              <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.GetEMTSRINCDSID/externalObjectGUID">
+                <Annotation Term="Common.Label" String="EMTS CDS ID" />
+            </Annotations>
+
             <Annotations Target="SAP.WorkplaceCreditEMTSView/externalObjectGUID">
                 <Annotation Term="Common.ValueList">
                     <Record>
