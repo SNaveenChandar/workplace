@@ -79,12 +79,37 @@
                         <sfb:ControlConfiguration
                             key="renewablesDocumentComplianceYear"
                             label="{i18n>complianceYear}"
+                            
                         >
                             <sfb:customControl>
                                 <DateRangeSelection
                                     id="idOTCComplianceYear"
                                     displayFormat="yyyy"
                                 />
+                            </sfb:customControl>
+                        </sfb:ControlConfiguration>
+                         <sfb:ControlConfiguration
+                            key="reconcilliationGroupID"
+                            label="{i18n>matchStatus}"
+                            visibleInAdvancedArea="true"
+                        >
+                            <sfb:customControl>
+                                <ComboBox
+                                    id="idMatchUnMatch">
+                                    <core:ListItem
+                                        key=""
+                                        text="{i18n>all}"
+                                    />
+                                     <core:ListItem
+                                        key="NE_and"
+                                        text="{i18n>matched}"
+                                    />
+                                     <core:ListItem
+                                        key="EQ_or"
+                                        text="{i18n>unmatched}"
+                                    />
+                                
+                                </ComboBox>
                             </sfb:customControl>
                         </sfb:ControlConfiguration>
                     </sfb:controlConfiguration>

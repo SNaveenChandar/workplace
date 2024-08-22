@@ -14,10 +14,9 @@
         fitContent="true"
         toggleHeaderOnTitleClick="true"
         headerPinned="true"
-    >  
+    >
         <f:header>
             <f:DynamicPageHeader>
-
                 <sfb:SmartFilterBar
                     id="idDebitSmartFilterBar"
                     entitySet="WorkplaceDebitView"
@@ -30,7 +29,7 @@
                             key="regulationType"
                             label="{i18n>regulationType}"
                         />
-                         <sfb:ControlConfiguration
+                        <sfb:ControlConfiguration
                             key="regulationGoodsMovementDocumentNumber"
                             label="{i18n>regulationGoodsMovementDocumentNumber}"
                         />
@@ -38,7 +37,7 @@
                             key="documentDate"
                             label="{i18n>documentDate}"
                             controlType="date"
-                        visibleInAdvancedArea="true"
+                            visibleInAdvancedArea="true"
                         >
                             <sfb:customControl>
                                 <DateRangeSelection
@@ -124,7 +123,7 @@
                                 />
                             </mc:segments>
                         </mc:InteractiveDonutChart>
-                       <Label
+                        <Label
                             class="sapUiMediumMarginBegin"
                             text="{i18n>byCategory}"
                             design="Bold"
@@ -161,7 +160,7 @@
                 enableAutoBinding="true"
             >
                 <smartTable:customToolbar>
-                    <OverflowToolbar>
+                    <OverflowToolbar>       
                         <ToolbarSpacer />
                         <ToolbarSeparator />
                         <Button
