@@ -24,7 +24,7 @@ sap.ui.define([
 
                 this.getUserInfo();
             },
-            getI18nText:function(sProperty) {
+            getI18nText: function (sProperty) {
                 return this.getOwnerComponent().getModel("i18n")?.getProperty(sProperty);
             },
             onRowSelectionChange: function (oEvent) {
@@ -49,12 +49,12 @@ sap.ui.define([
                     this.oDisplayLog._searchField.setVisible(false);
                     let oModel = this.getOwnerComponent().getModel();
                     oModel.read("/GetLogs", {
-                        filters:[
+                        filters: [
                             new Filter("object", FilterOperator.EQ, oSelectedObjectID),
                             new Filter("messageClass", FilterOperator.EQ, '01'),
                         ],
                         success: function (oData) {
-                            this.getView().getModel("Logs").setSizeLimit(oData.results.length);      
+                            this.getView().getModel("Logs").setSizeLimit(oData.results.length);
                             this.getView().getModel("Logs").setData(oData.results);
                             this.oDisplayLog.setModel(this.getView().getModel("Logs"));
                             this.oDisplayLog.open();
@@ -62,7 +62,7 @@ sap.ui.define([
                         error: function () {
                             MessageBox.error(this.getI18nText("unableFetchLogs"));
                         }
-                    });  
+                    });
                 } else {
                     MessageBox.error(this.getI18nText("selectAtleastOneRow"));
                 }
@@ -75,7 +75,7 @@ sap.ui.define([
                 let sPageID = this.getView().createId(oItem.getKey());
                 this.byId("pageContainer").to(sPageID);
                 this.byId("idAdaptFilters").setSelectedKey("compact");
-                this.onToggleBetweenCompactAndVisualFilters(undefined,"compact");
+                this.onToggleBetweenCompactAndVisualFilters(undefined, "compact");
             },
 
             onPostInventory: function (sTableID) {
@@ -110,8 +110,8 @@ sap.ui.define([
                             }
                         },
                         error: function (oErrorReceived) {
-                            if (oErrorReceived.postToInventory.message) {
-                                MessageBox.error(oErrorReceived.postToInventory.message, {
+                            if (oErrorReceived.statusCode || oErrorReceived.responseText) {
+                                MessageBox.error(oErrorReceived.statusCode + " - " + oErrorReceived.responseText, {
                                     styleClass: "sapUiResponsivePadding--header sapUiResponsivePadding--content sapUiResponsivePadding--footer"
                                 });
                             }
@@ -120,63 +120,62 @@ sap.ui.define([
 
                 } else {
                     // const sWarningText = this.oResourceBundle.getText("warningText") || "Please select atleast one row to see the logs";
-                    MessageBox.error("Please select atleast one row to post inventory");
+                    MessageBox.error(this.getI18nText("noRow"));
                 }
             },
-            onReverseInventory: function () {
-                let oMainTable = this.getView().byId("RVO");
-                if (oMainTable.getSelectedIndices().length > 0) {
-                    const oSelectedContext = oMainTable.getContextByIndex(oMainTable.getSelectedIndices()[0]);
+            onReverseInventory: function (sTableID) {
+                let oDebitTable = this.getView().byId(sTableID).getTable();
+                if (oDebitTable.getSelectedIndices().length > 0) {
+                    const oSelectedContext = oDebitTable.getContextByIndex(oDebitTable.getSelectedIndices()[0]);
                     let oParams = {
                         "objectKey": oSelectedContext.getProperty("ID"),
-                        "reverseData": {
-                            "MaterialDoc": oSelectedContext.getProperty("fuelOnwardMaterialalDocumentNumber"),
-                            "ReverseMaterialDoc": oSelectedContext.getProperty("fuelReversalMaterialalDocumentNumber"),
-                            "ReverseMaterialDocItem": oSelectedContext.getProperty("fuelReversalMaterialentItemNumber"),
-                            "ReverseMaterialDocYear": oSelectedContext.getProperty("fuelReversalMaterialialDocumentYear")
-                        }
+                        "MaterialDoc": oSelectedContext.getProperty("fuelOnwardMaterialalDocumentNumber"),
+                        "ReverseMaterialDoc": oSelectedContext.getProperty("fuelReversalMaterialalDocumentNumber"),
+                        "ReverseMaterialDocItem": oSelectedContext.getProperty("fuelReversalMaterialentItemNumber"),
+                        "ReverseMaterialDocYear": oSelectedContext.getProperty("fuelReversalMaterialialDocumentYear")
                     };
+
                     let oDataModel = this.getView()?.getModel();
                     const that = this;
-                    // oDataModel.callFunction("/processReverseInvPost", {
-                    //     method: "POST",
-                    //     urlParameters: oParams,
-                    //     success: function (oDataReceived) {
-                    //         if (oDataReceived.postToInventory.messageType && oDataReceived.postToInventory.message) {
-                    //             if (oDataReceived.postToInventory.messageType === 'S') {
-                    //                 MessageBox.success(oDataReceived.postToInventory.message, {
-                    //                     styleClass: "sapUiResponsivePadding--header sapUiResponsivePadding--content sapUiResponsivePadding--footer",
-                    //                     onClose: () => {
-                    //                         that.unSelectRowFromTable();
-                    //                         that.makeSmartTableRebind();
-                    //                     }
-                    //                 });
-                    //             } else {
-                    //                 MessageBox.error(oDataReceived.postToInventory.message, {
-                    //                     styleClass: "sapUiResponsivePadding--header sapUiResponsivePadding--content sapUiResponsivePadding--footer",
-                    //                     onClose: () => {
-                    //                         that.unSelectRowFromTable();
-                    //                     }
-                    //                 });
-                    //             }
-                    //         }
-                    //     },
-                    //     error: function (oErrorReceived) {
-                    //         if (oErrorReceived.postToInventory.message) {
-                    //             MessageBox.error(oErrorReceived.postToInventory.message, {
-                    //                 styleClass: "sapUiResponsivePadding--header sapUiResponsivePadding--content sapUiResponsivePadding--footer"
-                    //             });
-                    //         }
-                    //     }
-                    // });
+                    oDataModel.callFunction("/processReverseInvPost", {
+                        method: "POST",
+                        urlParameters: oParams,
+                        success: function (oDataReceived) {
+                            if (oDataReceived.processReverseInvPost.messageType && oDataReceived.processReverseInvPost.message) {
+                                if (oDataReceived.processReverseInvPost.messageType === 'S') {
+                                    MessageBox.success(oDataReceived.processReverseInvPost.message, {
+                                        styleClass: "sapUiResponsivePadding--header sapUiResponsivePadding--content sapUiResponsivePadding--footer",
+                                        onClose: () => {
+                                            that.unSelectRowFromTable();
+                                            that.makeSmartTableRebind(sTableID);
+                                        }
+                                    });
+                                } else {
+                                    MessageBox.error(oDataReceived.processReverseInvPost.message, {
+                                        styleClass: "sapUiResponsivePadding--header sapUiResponsivePadding--content sapUiResponsivePadding--footer",
+                                        onClose: () => {
+                                            that.unSelectRowFromTable();
+                                        }
+                                    });
+                                }
+                            }
+                        },
+                        error: function (oErrorReceived) {
+                            if (oErrorReceived.statusCode || oErrorReceived.responseText) {
+                                MessageBox.error(oErrorReceived.statusCode + " - " + oErrorReceived.responseText, {
+                                    styleClass: "sapUiResponsivePadding--header sapUiResponsivePadding--content sapUiResponsivePadding--footer"
+                                });
+                            }
+                        }
+                    });
 
                 } else {
                     // const sWarningText = this.oResourceBundle.getText("warningText") || "Please select atleast one row to see the logs";
-                    MessageBox.error("Please select atleast one row to reverse inventory");
+                    MessageBox.error(this.getI18nText("noRow"));
                 }
             },
             unSelectRowFromTable: function () {
-                ["idDebitTable","idEMTSTable","idOTCTable"].forEach(function(sId){
+                ["idDebitTable", "idEMTSTable", "idOTCTable"].forEach(function (sId) {
                     this.byId(sId).setSelectedIndex(-1);
                 }.bind(this));
             },
@@ -188,9 +187,9 @@ sap.ui.define([
                 let oIDMapping = {
                     'idEMTSDynamicPage': ["idEMTSVisualFilter", "idEMTSSmartFilterBar"],
                     'idOTCDynamicPage': ["idOTCVisualFilter", "idOTCSmartFilterBar"],
-                    'idDebitDynamicPage':["idDebitVisualFilter","idDebitSmartFilterBar"],
-                    'idRINRFDynamicPage':["idRINRFVisualFilter","idRINRFSmartFilterBar"],
-                    'idMADJDynamicPage':["idMADJVisualFilter","idMADJSmartFilterBar"]
+                    'idDebitDynamicPage': ["idDebitVisualFilter", "idDebitSmartFilterBar"],
+                    'idRINRFDynamicPage': ["idRINRFVisualFilter", "idRINRFSmartFilterBar"],
+                    'idMADJDynamicPage': ["idMADJVisualFilter", "idMADJSmartFilterBar"]
                 }
                 let oSelectedPageID = this.getView().byId("sideNavigation").getSelectedKey();
                 let sVisualFilterID = oIDMapping[oSelectedPageID][0]
@@ -289,7 +288,7 @@ sap.ui.define([
                     aTotalSelectedVisualFilters = aRemainingSelectedFilters;
                 };
                 let aTotalUniqueVisualFilters = this.getUniqueFilters(aTotalSelectedVisualFilters);
-                oFilterModel.setProperty("/filters", aTotalUniqueVisualFilters); 
+                oFilterModel.setProperty("/filters", aTotalUniqueVisualFilters);
                 oBindings.filter(aTotalUniqueVisualFilters.length === 0 ? [] : aTotalUniqueVisualFilters);
             },
 
@@ -340,15 +339,15 @@ sap.ui.define([
                     }));
                 }
                 if (sSubObjectScenerios.length > 0) {
-                    sSubObjectScenerios.forEach((sSubObjectScenerio)=>{
+                    sSubObjectScenerios.forEach((sSubObjectScenerio) => {
                         oBindingParams.filters?.push(new Filter({
                             path: "subObjectScenario",
                             operator: FilterOperator.EQ,
                             value1: sSubObjectScenerio
                         }));
-                    })  
+                    })
                 }
-                
+
             },
             onEMTSBeforeRebindTable: function (oEvent) {
                 let oBindingParams = oEvent.getParameter("bindingParams")
@@ -388,7 +387,7 @@ sap.ui.define([
             },
             onMADJBeforeRebindTable: function (oEvent) {
                 let oBindingParams = oEvent.getParameter("bindingParams")
-                
+
             },
             onRINRFBeforeRebindTable: function (oEvent) {
                 let oBindingParams = oEvent.getParameter("bindingParams")
@@ -398,7 +397,7 @@ sap.ui.define([
                 let oVintageYear = this.getView()?.byId("idOTCVintageYear").getDOMValue();
                 let oDocumentDate = this.getView()?.byId("idOTCDocumentRangeSelection").getDOMValue();
                 let oComplianceYear = this.getView()?.byId("idOTCComplianceYear").getDOMValue();
-                let sSubObjectScenerios =  this.getView()?.byId("idRINSubObjectScenerio").getSelectedKeys();
+                let sSubObjectScenerios = this.getView()?.byId("idRINSubObjectScenerio").getSelectedKeys();
                 if (oVintageYear && oVintageYear.length > 0) {
                     let oValue1 = oVintageYear.split(" - ")[0];
                     let oValue2 = oVintageYear.split(" - ")[1] || oValue1;
@@ -430,13 +429,13 @@ sap.ui.define([
                     }));
                 }
                 if (sSubObjectScenerios.length > 0) {
-                    sSubObjectScenerios.forEach((sSubObjectScenerio)=>{
+                    sSubObjectScenerios.forEach((sSubObjectScenerio) => {
                         oBindingParams.filters?.push(new Filter({
                             path: "subObjectScenario",
                             operator: FilterOperator.EQ,
                             value1: sSubObjectScenerio
                         }));
-                    })  
+                    })
                 }
             },
             getUniqueFilters: function (aFilters) {
@@ -457,22 +456,22 @@ sap.ui.define([
                 // }; 
                 oUserInfoModel.loadData(url);
                 oUserInfoModel.dataLoaded()
-                .then(()=>{
-                    this.getView().setModel(oUserInfoModel, "userInfo")
-                    // this.getView().getModel('userInfo').setData(mock);
-                    if (!oUserInfoModel.getData().firstname || !oUserInfoModel.getData().lastname) {
-                        this.getView().getModel('userInfo').setProperty("/visible",false);
-                    }else{
-                        this.getView().getModel('userInfo').setProperty("/visible",true);
-                    }
-                })
-                .catch(()=>{               
-                    // oModel.setData(mock);
-                    this.getView().setModel(oUserInfoModel, "userInfo");
-                    this.getView().getModel('userInfo').setProperty("/visible",false);
-                });
-            },      
-            
+                    .then(() => {
+                        this.getView().setModel(oUserInfoModel, "userInfo")
+                        // this.getView().getModel('userInfo').setData(mock);
+                        if (!oUserInfoModel.getData().firstname || !oUserInfoModel.getData().lastname) {
+                            this.getView().getModel('userInfo').setProperty("/visible", false);
+                        } else {
+                            this.getView().getModel('userInfo').setProperty("/visible", true);
+                        }
+                    })
+                    .catch(() => {
+                        // oModel.setData(mock);
+                        this.getView().setModel(oUserInfoModel, "userInfo");
+                        this.getView().getModel('userInfo').setProperty("/visible", false);
+                    });
+            },
+
             getBaseURL: function () {
                 var appId = this.getOwnerComponent().getManifestEntry("/sap.app/id");
                 var appPath = appId.replaceAll(".", "/");

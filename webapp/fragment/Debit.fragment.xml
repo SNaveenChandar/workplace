@@ -174,7 +174,7 @@
                             id="idReverse"
                             text="{i18n>reverse}"
                             type="Emphasized"
-                            press="onReverseInventory"
+                            press="onReverseInventory('idDebitSmartTable')"
                         />
                         <Button
                             id="idDisplayLogs"
