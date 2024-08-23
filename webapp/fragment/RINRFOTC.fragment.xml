@@ -191,7 +191,7 @@
                 enableAutoColumnWidth="true"
                 useTablePersonalisation="true"
                 showRowCount="true"
-                header="{i18n>renewableOTCredit}"
+                header="{i18n>renewableCredit}"
                 beforeRebindTable="onOTCBeforeRebindTable"
                 enableAutoBinding="true"
             >
