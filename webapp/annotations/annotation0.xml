@@ -255,9 +255,7 @@
                                     <PropertyValue Property="LocalDataProperty" PropertyPath="movementType" />
                                     <PropertyValue Property="ValueListProperty" String="movementType_movementType" />
                                 </Record>
-                                <Record Type="Common.ValueListParameterDisplayOnly">
-                                    <PropertyValue Property="ValueListProperty" String="movementType_movementType" />
-                                </Record>
+                               
                             </Collection>
                         </PropertyValue>
                     </Record>
@@ -1340,9 +1338,7 @@
                                     <PropertyValue Property="LocalDataProperty" PropertyPath="movementType" />
                                     <PropertyValue Property="ValueListProperty" String="movementType_movementType" />
                                 </Record>
-                                <Record Type="Common.ValueListParameterDisplayOnly">
-                                    <PropertyValue Property="ValueListProperty" String="movementType_movementType" />
-                                </Record>
+                               
                             </Collection>
                         </PropertyValue>
                     </Record>
