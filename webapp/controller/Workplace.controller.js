@@ -127,14 +127,15 @@ sap.ui.define([
                 let oDebitTable = this.getView().byId(sTableID).getTable();
                 if (oDebitTable.getSelectedIndices().length > 0) {
                     const oSelectedContext = oDebitTable.getContextByIndex(oDebitTable.getSelectedIndices()[0]);
-                    let oParams = {
-                        "objectKey": oSelectedContext.getProperty("ID"),
+                    let oReverseData = {          
                         "MaterialDoc": oSelectedContext.getProperty("fuelOnwardMaterialalDocumentNumber"),
                         "ReverseMaterialDoc": oSelectedContext.getProperty("fuelReversalMaterialalDocumentNumber"),
                         "ReverseMaterialDocItem": oSelectedContext.getProperty("fuelReversalMaterialentItemNumber"),
                         "ReverseMaterialDocYear": oSelectedContext.getProperty("fuelReversalMaterialialDocumentYear")
                     };
-
+                    let oParams ={};
+                    oParams.objectKey=oSelectedContext.getProperty("ID");
+                    oParams.reverseData=encodeURIComponent(JSON.stringify(oReverseData));
                     let oDataModel = this.getView()?.getModel();
                     const that = this;
                     oDataModel.callFunction("/processReverseInvPost", {
