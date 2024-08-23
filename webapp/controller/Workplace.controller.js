@@ -135,7 +135,7 @@ sap.ui.define([
                     };
                     let oParams ={};
                     oParams.objectKey=oSelectedContext.getProperty("ID");
-                    oParams.reverseData=encodeURIComponent(JSON.stringify(oReverseData));
+                    oParams.reverse=encodeURIComponent(JSON.stringify(oReverseData));
                     let oDataModel = this.getView()?.getModel();
                     const that = this;
                     oDataModel.callFunction("/processReverseInvPost", {
