@@ -194,6 +194,8 @@
                 header="{i18n>renewableCredit}"
                 beforeRebindTable="onOTCBeforeRebindTable"
                 enableAutoBinding="true"
+                ignoreFromPersonalisation="subObjectScenarioDesc,regulationTypeDesc,objectTypeDesc,TransmissionStatusDesc,objectStatusDesc,transactionTypeDesc,dcodeDesc
+                ,reasonCodeDesc,regulationCategoryDesc,objectCategoryDesc,fuelCategoryDesc,businessPartnerDesc,qapCertifiedDesc,destinationOrgMaterialNumberDes,sourceOrgMaterialNumberDesc,regulationLogisticsMaterialNumberDesc"
             >
                 <smartTable:customToolbar>
                     <OverflowToolbar>

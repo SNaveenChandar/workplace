@@ -158,6 +158,8 @@
                 beforeRebindTable="onDebitBeforeRebindTable"
                 requestAtLeastFields="fuelOnwardMaterialalDocumentNumber,fuelReversalMaterialalDocumentNumber,fuelReversalMaterialentItemNumber,fuelReversalMaterialialDocumentYear"
                 enableAutoBinding="true"
+                ignoreFromPersonalisation="subObjectScenarioDesc,regulationTypeDesc,objectTypeDesc,objectStatusDesc,transactionTypeDesc,dcodeDesc
+                ,reasonCodeDesc,regulationCategoryDesc,objectCategoryDesc,fuelCategoryDesc,regulationLogisticsMaterialNumberDesc,fuelLogisticsMaterialNumberDesc,rfs2ObligationTypeDesc"
             >
                 <smartTable:customToolbar>
                     <OverflowToolbar>       

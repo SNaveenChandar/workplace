@@ -156,6 +156,9 @@
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="submissionDate" />
                         </Record>
+                        <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="emtsTransmissionStatus" />
+                        </Record>
                     </Collection>
                 </Annotation>
             </Annotations>
@@ -207,6 +210,11 @@
 
             <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditOTCView/fuelCategory">
                 <Annotation Term="Common.Text" Path="fuelCategoryDesc" />
+                <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextLast" />
+            </Annotations>
+
+              <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditOTCView/emtsTransmissionStatus">
+                <Annotation Term="Common.Text" Path="TransmissionStatusDesc" />
                 <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextLast" />
             </Annotations>
 
@@ -599,6 +607,9 @@
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="externalObjectGUID" />
                         </Record>
+                         <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="emtsTransmissionStatus" />
+                        </Record>
                     </Collection>
                 </Annotation>
             </Annotations>
@@ -645,6 +656,11 @@
             </Annotations>
             <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditEMTSView/processingStatus">
                 <Annotation Term="Common.Text" Path="objectStatusDesc" />
+                <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextLast" />
+            </Annotations>
+
+              <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditOTCView/emtsTransmissionStatus">
+                <Annotation Term="Common.Text" Path="TransmissionStatusDesc" />
                 <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextLast" />
             </Annotations>
             <!-- WorkplaceCreditEMTSView - Object No -->

@@ -151,6 +151,8 @@
                 header="{i18n>renewableCredit}"
                 beforeRebindTable="onEMTSBeforeRebindTable"
                 enableAutoBinding="true"
+                ignoreFromPersonalisation="subObjectScenarioDesc,regulationTypeDesc,objectTypeDesc,TransmissionStatusDesc,objectStatusDesc,transactionTypeDesc,dcodeDesc
+                ,qapCertifiedDesc,emtsFuelCategoryCodeDesc,emtsQapServiceTypeCodeDesc,emtsTransactionTypeCodeDesc,reasonCodeDesc,regulationCategoryDesc,objectCategoryDesc,fuelCategoryDesc,businessPartnerDesc,regulationLogisticsMaterialNumberDesc"
             >
                 <smartTable:customToolbar>
                     <OverflowToolbar>
