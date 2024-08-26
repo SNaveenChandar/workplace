@@ -195,6 +195,7 @@
                 header="{i18n>renewableCredit}"
                 beforeRebindTable="onOTCBeforeRebindTable"
                 enableAutoBinding="true"
+                requestAtLeastFields="TransmissionStatusDesc"
                 ignoreFromPersonalisation="subObjectScenarioDesc,regulationTypeDesc,objectTypeDesc,TransmissionStatusDesc,objectStatusDesc,transactionTypeDesc,dcodeDesc
                 ,reasonCodeDesc,regulationCategoryDesc,objectCategoryDesc,fuelCategoryDesc,businessPartnerDesc,qapCertifiedDesc,destinationOrgMaterialNumberDes,sourceOrgMaterialNumberDesc,regulationLogisticsMaterialNumberDesc"
             >
