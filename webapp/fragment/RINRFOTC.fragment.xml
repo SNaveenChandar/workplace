@@ -95,9 +95,10 @@
                         >
                             <sfb:customControl>
                                 <ComboBox
-                                    id="idMatchUnMatch">
+                                    id="idMatchUnMatch"
+                                    selectedKey="All">
                                     <core:ListItem
-                                        key=""
+                                        key="All"
                                         text="{i18n>all}"
                                     />
                                      <core:ListItem

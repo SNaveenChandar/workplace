@@ -63,7 +63,31 @@
                                 />
                             </sfb:customControl>
                         </sfb:ControlConfiguration>
-                        
+                        <sfb:ControlConfiguration
+                            key="reconcilliationGroupID"
+                            label="{i18n>matchStatus}"
+                            visibleInAdvancedArea="true"
+                        >
+                            <sfb:customControl>
+                                <ComboBox
+                                    id="idEMTSMatchUnMatch"
+                                    selectedKey="All">
+                                    <core:ListItem
+                                        key="All"
+                                        text="{i18n>all}"
+                                    />
+                                     <core:ListItem
+                                        key="NE_and"
+                                        text="{i18n>matched}"
+                                    />
+                                     <core:ListItem
+                                        key="EQ_or"
+                                        text="{i18n>unmatched}"
+                                    />
+                                
+                                </ComboBox>
+                            </sfb:customControl>
+                        </sfb:ControlConfiguration>
                       
                     </sfb:controlConfiguration>
                 </sfb:SmartFilterBar>

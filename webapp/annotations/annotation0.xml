@@ -20,7 +20,7 @@
     <edmx:DataServices>
         <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="local1">
             <!-- Start of WorkplaceCreditOTCView -->
-            <!-- WorkplaceCreditOTCView - Filters-->
+               <!-- WorkplaceCreditOTCView - Filters-->
             <Annotations Target="SAP.WorkplaceCreditOTCView">
                 <Annotation Term="UI.SelectionFields">
                     <Collection>
@@ -163,6 +163,14 @@
                 </Annotation>
             </Annotations>
 
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditOTCView/documentDate">
+                <Annotation Term="Common.Label" String="Document Date" />
+            </Annotations>
+
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditOTCView/postingDate">
+                <Annotation Term="Common.Label" String="Posting Date" />
+            </Annotations>
+
             <!-- WorkplaceCreditOTCView - Text Arrangements -->
             <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditOTCView/subObjectScenario">
                 <Annotation Term="Common.Text" Path="subObjectScenarioDesc" />
@@ -213,7 +221,7 @@
                 <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextLast" />
             </Annotations>
 
-              <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditOTCView/emtsTransmissionStatus">
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditOTCView/emtsTransmissionStatus">
                 <Annotation Term="Common.Text" Path="TransmissionStatusDesc" />
                 <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextLast" />
             </Annotations>
@@ -263,7 +271,6 @@
                                     <PropertyValue Property="LocalDataProperty" PropertyPath="movementType" />
                                     <PropertyValue Property="ValueListProperty" String="movementType_movementType" />
                                 </Record>
-                               
                             </Collection>
                         </PropertyValue>
                     </Record>
@@ -301,7 +308,7 @@
                 </Annotation>
             </Annotations>
             <!-- WorkplaceCreditOTCView - Contract No -->
-              <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.GetRegulationContractNo/contractDocumentNo">
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.GetRegulationContractNo/contractDocumentNo">
                 <Annotation Term="Common.Label" String="Contract Doc No" />
             </Annotations>
 
@@ -323,7 +330,7 @@
                 </Annotation>
             </Annotations>
             <!-- WorkplaceCreditOTCView - Partner Identifier -->
-              <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.GetTradingPartnerNo/transactionPartnerOrgId">
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.GetTradingPartnerNo/transactionPartnerOrgId">
                 <Annotation Term="Common.Label" String="Partner Identifier" />
             </Annotations>
 
@@ -453,7 +460,7 @@
             </Annotations>
 
             <Annotations Target="SAP.WorkplaceCreditOTCView/impact">
-             <Annotation Term="Common.ValueListWithFixedValues" Bool="true" />
+                <Annotation Term="Common.ValueListWithFixedValues" Bool="true" />
                 <Annotation Term="Common.ValueList">
                     <Record>
                         <PropertyValue Property="Label" />
@@ -549,6 +556,9 @@
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="organizationId" />
                         </Record>
+                           <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="reconcilliationGroupID" />
+                        </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="generateOrganizationId" />
                         </Record>
@@ -607,7 +617,7 @@
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="externalObjectGUID" />
                         </Record>
-                         <Record Type="UI.DataField">
+                        <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="emtsTransmissionStatus" />
                         </Record>
                     </Collection>
@@ -615,6 +625,10 @@
             </Annotations>
 
             <!-- WorkplaceCreditEMTSView - Text Arrangements -->
+                 <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditEMTSView/reconcilliationGroupID">
+                <Annotation Term="Common.Label" String="Reconcilliation Group ID" />
+            </Annotations> 
+
             <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditEMTSView/subObjectScenario">
                 <Annotation Term="Common.Text" Path="subObjectScenarioDesc" />
                 <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextLast" />
@@ -659,7 +673,7 @@
                 <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextLast" />
             </Annotations>
 
-              <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditOTCView/emtsTransmissionStatus">
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditOTCView/emtsTransmissionStatus">
                 <Annotation Term="Common.Text" Path="TransmissionStatusDesc" />
                 <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextLast" />
             </Annotations>
@@ -711,7 +725,7 @@
                 </Annotation>
             </Annotations>
             <!-- WorkplaceCreditEMTSView/ptdNumber -->
-              <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.GetPTDNo/ptdNumber">
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.GetPTDNo/ptdNumber">
                 <Annotation Term="Common.Label" String="PTD Number" />
             </Annotations>
 
@@ -734,7 +748,7 @@
                 </Annotation>
             </Annotations>
             <!-- WorkplaceCreditEMTSView/invoice -->
-              <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.GetInvoiceNo/invoice">
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.GetInvoiceNo/invoice">
                 <Annotation Term="Common.Label" String="Invoice Number" />
             </Annotations>
 
@@ -823,7 +837,7 @@
                 </Annotation>
             </Annotations>
             <!-- WorkplaceCreditEMTSView/emtsTradingPartnerBillOfLading -->
-              <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.GetEMTSBillofLading/emtsTradingPartnerBillOfLading">
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.GetEMTSBillofLading/emtsTradingPartnerBillOfLading">
                 <Annotation Term="Common.Label" String="Bill of Lading" />
             </Annotations>
 
@@ -906,7 +920,7 @@
             </Annotations>
             <!-- WorkplaceCreditEMTSView/emtsCDSID -->
 
-              <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.GetEMTSRINCDSID/externalObjectGUID">
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.GetEMTSRINCDSID/externalObjectGUID">
                 <Annotation Term="Common.Label" String="EMTS CDS ID" />
             </Annotations>
 
@@ -1110,7 +1124,6 @@
                     </Record>
                 </Annotation>
             </Annotations>
-           
 
             <!-- WorkplaceDebitView - Table -->
             <Annotations Target="SAP.WorkplaceDebitView">
@@ -1206,8 +1219,6 @@
                     </Collection>
                 </Annotation>
             </Annotations>
-
-            
 
             <!-- WorkplaceDebitView/objectId -->
             <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.GetObjectNo/objectId">
@@ -1354,7 +1365,6 @@
                                     <PropertyValue Property="LocalDataProperty" PropertyPath="movementType" />
                                     <PropertyValue Property="ValueListProperty" String="movementType_movementType" />
                                 </Record>
-                               
                             </Collection>
                         </PropertyValue>
                     </Record>
