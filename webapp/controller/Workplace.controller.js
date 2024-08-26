@@ -84,6 +84,7 @@ sap.ui.define([
                     let oSelectedObjectID = oTable.getContextByIndex(oTable.getSelectedIndices()[0])?.getProperty("ID");
                     let oDataModel = this.getView()?.getModel();
                     const that = this;
+                    this.getView().setBusy(true);
                     oDataModel.callFunction("/postToInventory", {
                         method: "POST",
                         urlParameters: {
@@ -97,6 +98,7 @@ sap.ui.define([
                                         onClose: () => {
                                             that.unSelectRowFromTable();
                                             that.makeSmartTableRebind(sTableID);
+                                            that.getView().setBusy(false);
                                         }
                                     });
                                 } else {
@@ -104,15 +106,20 @@ sap.ui.define([
                                         styleClass: "sapUiResponsivePadding--header sapUiResponsivePadding--content sapUiResponsivePadding--footer",
                                         onClose: () => {
                                             that.unSelectRowFromTable();
+                                            that.getView().setBusy(false);
                                         }
                                     });
                                 }
                             }
                         },
                         error: function (oErrorReceived) {
-                            if (oErrorReceived.statusCode || oErrorReceived.responseText) {
-                                MessageBox.error(oErrorReceived.statusCode + " - " + oErrorReceived.responseText, {
-                                    styleClass: "sapUiResponsivePadding--header sapUiResponsivePadding--content sapUiResponsivePadding--footer"
+                            if (oErrorReceived.responseText) {
+                                MessageBox.error(oErrorReceived.responseText, {
+                                    styleClass: "sapUiResponsivePadding--header sapUiResponsivePadding--content sapUiResponsivePadding--footer",
+                                    onClose: () => {                                          
+                                        that.unSelectRowFromTable();
+                                        that.getView().setBusy(false);
+                                    }
                                 });
                             }
                         }
@@ -127,20 +134,23 @@ sap.ui.define([
                 let oDebitTable = this.getView().byId(sTableID).getTable();
                 if (oDebitTable.getSelectedIndices().length > 0) {
                     const oSelectedContext = oDebitTable.getContextByIndex(oDebitTable.getSelectedIndices()[0]);
-                    let oReverseData = {          
-                        "MaterialDoc": oSelectedContext.getProperty("fuelOnwardMaterialalDocumentNumber"),
-                        "ReverseMaterialDoc": oSelectedContext.getProperty("fuelReversalMaterialalDocumentNumber"),
-                        "ReverseMaterialDocItem": oSelectedContext.getProperty("fuelReversalMaterialentItemNumber"),
-                        "ReverseMaterialDocYear": oSelectedContext.getProperty("fuelReversalMaterialialDocumentYear")
-                    };
-                    let oParams ={};
-                    oParams.objectKey=oSelectedContext.getProperty("ID");
-                    oParams.reverse=encodeURIComponent(JSON.stringify(oReverseData));
+                    // let oReverseData = {          
+                    //     "MaterialDoc": oSelectedContext.getProperty("fuelOnwardMaterialalDocumentNumber"),
+                    //     "ReverseMaterialDoc": oSelectedContext.getProperty("fuelReversalMaterialalDocumentNumber"),
+                    //     "ReverseMaterialDocItem": oSelectedContext.getProperty("fuelReversalMaterialentItemNumber"),
+                    //     "ReverseMaterialDocYear": oSelectedContext.getProperty("fuelReversalMaterialialDocumentYear")
+                    // };
+                    // let oParams ={};
+                    let oSelectedObjectID=oSelectedContext.getProperty("ID");
+                    // oParams.reverse=JSON.stringify(oReverseData);
                     let oDataModel = this.getView()?.getModel();
                     const that = this;
+                    this.getView().setBusy(true);
                     oDataModel.callFunction("/processReverseInvPost", {
                         method: "POST",
-                        urlParameters: oParams,
+                        urlParameters: {
+                            "objectKey": oSelectedObjectID
+                        },
                         success: function (oDataReceived) {
                             if (oDataReceived.processReverseInvPost.messageType && oDataReceived.processReverseInvPost.message) {
                                 if (oDataReceived.processReverseInvPost.messageType === 'S') {
@@ -149,22 +159,28 @@ sap.ui.define([
                                         onClose: () => {
                                             that.unSelectRowFromTable();
                                             that.makeSmartTableRebind(sTableID);
+                                            that.getView().setBusy(false);
                                         }
                                     });
                                 } else {
                                     MessageBox.error(oDataReceived.processReverseInvPost.message, {
                                         styleClass: "sapUiResponsivePadding--header sapUiResponsivePadding--content sapUiResponsivePadding--footer",
-                                        onClose: () => {
+                                        onClose: () => {                                          
                                             that.unSelectRowFromTable();
+                                            that.getView().setBusy(false);
                                         }
                                     });
                                 }
                             }
                         },
                         error: function (oErrorReceived) {
-                            if (oErrorReceived.statusCode || oErrorReceived.responseText) {
-                                MessageBox.error(oErrorReceived.statusCode + " - " + oErrorReceived.responseText, {
-                                    styleClass: "sapUiResponsivePadding--header sapUiResponsivePadding--content sapUiResponsivePadding--footer"
+                            if ( oErrorReceived.responseText) {
+                                MessageBox.error( oErrorReceived.responseText, {
+                                    styleClass: "sapUiResponsivePadding--header sapUiResponsivePadding--content sapUiResponsivePadding--footer",
+                                    onClose: () => {
+                                        that.unSelectRowFromTable();
+                                        that.getView().setBusy(false);
+                                    }
                                 });
                             }
                         }
