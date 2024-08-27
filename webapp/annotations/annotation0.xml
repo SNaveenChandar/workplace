@@ -49,6 +49,7 @@
                         <PropertyPath>reconcilliationGroupID</PropertyPath>
                         <PropertyPath>dcode</PropertyPath>
                         <PropertyPath>regulationGoodsMovementDocumentNumber</PropertyPath>
+                        <PropertyPath>rfOrderGeneralDocumentNumber</PropertyPath>
                         <PropertyPath>contractDocumentNo</PropertyPath>
                         <PropertyPath>transactionPartnerOrgId</PropertyPath>
                         <PropertyPath>documentDate</PropertyPath>
@@ -176,6 +177,9 @@
                             <PropertyValue Property="Value" Path="emtsTransmissionStatus" />
                         </Record>
                         <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="rfOrderGeneralDocumentNumber" />
+                        </Record>
+                        <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="renwablePurchaseOrder" />
                         </Record>
                         <Record Type="UI.DataField">
@@ -191,6 +195,21 @@
 
             <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditOTCView/postingDate">
                 <Annotation Term="Common.Label" String="Posting Date" />
+            </Annotations>
+
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.GetFuelOrderNumber/rfOrderGeneralDocumentNumber">
+                <Annotation Term="Common.Label" String="Fuel Order No" />
+            </Annotations>
+
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditOTCView/nominationNumber">
+                <Annotation Term="Common.Label" String="Nomination Number" />
+            </Annotations>
+
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditOTCView/renwablePurchaseOrder">
+                <Annotation Term="Common.Label" String="Purchase Order" />
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditOTCView/renwablePurchaseOrderItem">
+                <Annotation Term="Common.Label" String="Purchase Order Item" />
             </Annotations>
 
             <!-- WorkplaceCreditOTCView - Text Arrangements -->
@@ -251,6 +270,24 @@
             <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditOTCView/regulationQuantity">
                 <Annotation Term="Measures.Unit">
                     <Path>regulationUnitOfMeasurement</Path>
+                </Annotation>
+            </Annotations>
+            <!-- WorkplaceCreditOTCView -rfOrderGeneralDocumentNumber -->
+            <Annotations Target="SAP.WorkplaceCreditOTCView/rfOrderGeneralDocumentNumber">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" />
+                        <PropertyValue Property="CollectionPath" String="GetFuelOrderNumber" />
+                        <PropertyValue Bool="true" Property="SearchSupported" />
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="rfOrderGeneralDocumentNumber" />
+                                    <PropertyValue Property="ValueListProperty" String="rfOrderGeneralDocumentNumber" />
+                                </Record>
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
                 </Annotation>
             </Annotations>
             <!-- WorkplaceCreditOTCView -fuelOnwardMaterialalDocumentNumber -->
@@ -590,7 +627,7 @@
                         <PropertyPath>subObjectScenario</PropertyPath>
                         <PropertyPath>objectId</PropertyPath>
                         <PropertyPath>processingStatus</PropertyPath>
-                         <PropertyPath>emtsTransactionTypeCode</PropertyPath>
+                        <PropertyPath>emtsTransactionTypeCode</PropertyPath>
                         <PropertyPath>reconcilliationGroupID</PropertyPath>
                         <PropertyPath>ptdNumber</PropertyPath>
                         <PropertyPath>invoice</PropertyPath>
@@ -601,7 +638,7 @@
                         <PropertyPath>emtsAssignmentCode</PropertyPath>
                         <PropertyPath>emtsBuyOrSellReasonCode</PropertyPath>
                         <PropertyPath>externalObjectGUID</PropertyPath>
-                         <PropertyPath>transferDate</PropertyPath>
+                        <PropertyPath>transferDate</PropertyPath>
                         <PropertyPath>submissionDate</PropertyPath>
                         <PropertyPath>vintageYear</PropertyPath>
                     </Collection>
@@ -727,7 +764,7 @@
                 <Annotation Term="Common.Label" String="Reconcilliation Group ID" />
             </Annotations>
 
-              <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditEMTSView/emtsTransactionTypeCode">
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditEMTSView/emtsTransactionTypeCode">
                 <Annotation Term="Common.Label" String="Transaction Type" />
             </Annotations>
 
@@ -820,7 +857,7 @@
                 </Annotation>
             </Annotations>
             <!-- WorkplaceCreditEMTSView/processingStatus -->
-             <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditEMTSView/processingStatus">
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditEMTSView/processingStatus">
                 <Annotation Term="Common.Label" String="Status" />
             </Annotations>
             <Annotations Target="SAP.WorkplaceCreditEMTSView/processingStatus">
