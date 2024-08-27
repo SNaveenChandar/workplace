@@ -48,12 +48,12 @@
                         <PropertyPath>sourceOrgPlant</PropertyPath>
                         <PropertyPath>reconcilliationGroupID</PropertyPath>
                         <PropertyPath>dcode</PropertyPath>
-                        <PropertyPath>documentDate</PropertyPath>
-                        <PropertyPath>vintageYear</PropertyPath>
-                        <PropertyPath>renewablesDocumentComplianceYear</PropertyPath>
                         <PropertyPath>regulationGoodsMovementDocumentNumber</PropertyPath>
                         <PropertyPath>contractDocumentNo</PropertyPath>
                         <PropertyPath>transactionPartnerOrgId</PropertyPath>
+                        <PropertyPath>documentDate</PropertyPath>
+                        <PropertyPath>vintageYear</PropertyPath>
+                        <PropertyPath>renewablesDocumentComplianceYear</PropertyPath>
                     </Collection>
                 </Annotation>
             </Annotations>
@@ -584,20 +584,20 @@
                         <PropertyPath>subObjectScenario</PropertyPath>
                         <PropertyPath>objectId</PropertyPath>
                         <PropertyPath>processingStatus</PropertyPath>
+                         <PropertyPath>emtsTransactionTypeCode</PropertyPath>
                         <PropertyPath>reconcilliationGroupID</PropertyPath>
-                        <PropertyPath>transferDate</PropertyPath>
-                        <PropertyPath>vintageYear</PropertyPath>
                         <PropertyPath>ptdNumber</PropertyPath>
                         <PropertyPath>invoice</PropertyPath>
-                        <PropertyPath>emtsTransactionTypeCode</PropertyPath>
                         <PropertyPath>emtsFuelCategoryCode</PropertyPath>
-                        <PropertyPath>submissionDate</PropertyPath>
                         <PropertyPath>emtsQapServiceTypeCode</PropertyPath>
                         <PropertyPath>emtsTradingPartnerBillOfLading</PropertyPath>
                         <PropertyPath>emtsRinStatusCode</PropertyPath>
                         <PropertyPath>emtsAssignmentCode</PropertyPath>
                         <PropertyPath>emtsBuyOrSellReasonCode</PropertyPath>
                         <PropertyPath>externalObjectGUID</PropertyPath>
+                         <PropertyPath>transferDate</PropertyPath>
+                        <PropertyPath>submissionDate</PropertyPath>
+                        <PropertyPath>vintageYear</PropertyPath>
                     </Collection>
                 </Annotation>
             </Annotations>
@@ -721,6 +721,10 @@
                 <Annotation Term="Common.Label" String="Reconcilliation Group ID" />
             </Annotations>
 
+              <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditEMTSView/emtsTransactionTypeCode">
+                <Annotation Term="Common.Label" String="Transaction Type" />
+            </Annotations>
+
             <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditEMTSView/subObjectScenario">
                 <Annotation Term="Common.Text" Path="subObjectScenarioDesc" />
                 <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextLast" />
@@ -808,6 +812,10 @@
                         </PropertyValue>
                     </Record>
                 </Annotation>
+            </Annotations>
+            <!-- WorkplaceCreditEMTSView/processingStatus -->
+             <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditEMTSView/processingStatus">
+                <Annotation Term="Common.Label" String="Status" />
             </Annotations>
             <Annotations Target="SAP.WorkplaceCreditEMTSView/processingStatus">
                 <Annotation Term="Common.ValueList">
