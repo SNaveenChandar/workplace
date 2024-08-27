@@ -88,8 +88,8 @@
                                 />
                             </sfb:customControl>
                         </sfb:ControlConfiguration>
-                         <sfb:ControlConfiguration
-                            key="reconcilliationGroupID"
+                         <!-- <sfb:ControlConfiguration
+                            key="internalComments"
                             label="{i18n>matchStatus}"
                             visibleInAdvancedArea="true"
                         >
@@ -112,7 +112,7 @@
                                 
                                 </ComboBox>
                             </sfb:customControl>
-                        </sfb:ControlConfiguration>
+                        </sfb:ControlConfiguration> -->
                     </sfb:controlConfiguration>
                 </sfb:SmartFilterBar>
                 <FlexBox

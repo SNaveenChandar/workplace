@@ -38,6 +38,7 @@
                         <PropertyPath>processingStatus</PropertyPath>
                         <PropertyPath>transactionType</PropertyPath>
                         <PropertyPath>impact</PropertyPath>
+                        <PropertyPath>reconcilliationGroupID</PropertyPath>
                     </Collection>
                 </Annotation>
             </Annotations>
@@ -229,6 +230,67 @@
             <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditOTCView/regulationQuantity">
                 <Annotation Term="Measures.Unit">
                     <Path>regulationUnitOfMeasurement</Path>
+                </Annotation>
+            </Annotations>
+             <!-- WorkplaceCreditOTCView -fuelOnwardMaterialalDocumentNumber -->
+            <Annotations Target="SAP.WorkplaceCreditOTCView/reconcilliationGroupID">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" />
+                        <PropertyValue Property="CollectionPath" String="GetReconcilliationGroupID" />
+                        <PropertyValue Bool="true" Property="SearchSupported" />
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="reconcilliationGroupID" />
+                                    <PropertyValue Property="ValueListProperty" String="reconcilliationGroupID" />
+                                </Record>
+                              
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <!-- WorkplaceCreditOTCView -fuelOnwardMaterialalDocumentNumber -->
+            <Annotations Target="SAP.WorkplaceCreditOTCView/fuelOnwardMaterialalDocumentNumber">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" />
+                        <PropertyValue Property="CollectionPath" String="GetFuelGMDocNo" />
+                        <PropertyValue Bool="true" Property="SearchSupported" />
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="fuelOnwardMaterialalDocumentNumber" />
+                                    <PropertyValue Property="ValueListProperty" String="fuelOnwardMaterialalDocumentNumber" />
+                                </Record>
+                              
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
+            </Annotations>
+            <!-- WorkplaceCreditOTCView -fuelReversalMaterialalDocumentNumber  -->
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.GetFuelReverseGMDocNo/fuelReversalMaterialalDocumentNumber">
+                <Annotation Term="Common.Label" String="Fuel Reverse GM Doc No" />
+            </Annotations> 
+
+            <Annotations Target="SAP.WorkplaceCreditOTCView/fuelReversalMaterialalDocumentNumber">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" />
+                        <PropertyValue Property="CollectionPath" String="GetFuelReverseGMDocNo" />
+                        <PropertyValue Bool="true" Property="SearchSupported" />
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="fuelReversalMaterialalDocumentNumber" />
+                                    <PropertyValue Property="ValueListProperty" String="fuelReversalMaterialalDocumentNumber" />
+                                </Record>
+                               
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
                 </Annotation>
             </Annotations>
             <!-- WorkplaceCreditOTCView -Source Plant  -->
@@ -506,6 +568,7 @@
                         <PropertyPath>emtsAssignmentCode</PropertyPath>
                         <PropertyPath>emtsBuyOrSellReasonCode</PropertyPath>
                         <PropertyPath>externalObjectGUID</PropertyPath>
+                        <PropertyPath>reconcilliationGroupID</PropertyPath>
                     </Collection>
                 </Annotation>
             </Annotations>
@@ -676,6 +739,25 @@
             <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditEMTSView/emtsTransmissionStatus">
                 <Annotation Term="Common.Text" Path="TransmissionStatusDesc" />
                 <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextLast" />
+            </Annotations>
+             <!-- WorkplaceCreditOTCView -reconcilliationGroupID -->
+            <Annotations Target="SAP.WorkplaceCreditEMTSView/reconcilliationGroupID">
+                <Annotation Term="Common.ValueList">
+                    <Record>
+                        <PropertyValue Property="Label" />
+                        <PropertyValue Property="CollectionPath" String="GetReconcilliationGroupID" />
+                        <PropertyValue Bool="true" Property="SearchSupported" />
+                        <PropertyValue Property="Parameters">
+                            <Collection>
+                                <Record Type="Common.ValueListParameterInOut">
+                                    <PropertyValue Property="LocalDataProperty" PropertyPath="reconcilliationGroupID" />
+                                    <PropertyValue Property="ValueListProperty" String="reconcilliationGroupID" />
+                                </Record>
+                              
+                            </Collection>
+                        </PropertyValue>
+                    </Record>
+                </Annotation>
             </Annotations>
             <!-- WorkplaceCreditEMTSView - Object No -->
             <Annotations Target="SAP.WorkplaceCreditEMTSView/objectId">

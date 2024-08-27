@@ -63,7 +63,7 @@
                                 />
                             </sfb:customControl>
                         </sfb:ControlConfiguration>
-                        <sfb:ControlConfiguration
+                        <!-- <sfb:ControlConfiguration
                             key="reconcilliationGroupID"
                             label="{i18n>matchStatus}"
                             visibleInAdvancedArea="true"
@@ -87,7 +87,7 @@
                                 
                                 </ComboBox>
                             </sfb:customControl>
-                        </sfb:ControlConfiguration>
+                        </sfb:ControlConfiguration> -->
                       
                     </sfb:controlConfiguration>
                 </sfb:SmartFilterBar>

@@ -371,24 +371,24 @@ sap.ui.define([
                 let oTransferDate = this.getView()?.byId("idEMTSTransferDateRangeSelection").getDOMValue();
                 let oSubmissionDate = this.getView()?.byId("idEMTSsubmissionDateRangeSelection").getDOMValue();
                 let oRINYear = this.getView()?.byId("idEMTSVintageYear").getDOMValue();
-                let sMatchUnMatch = this.getView()?.byId("idEMTSMatchUnMatch").getSelectedKey();
-                if (sMatchUnMatch !== 'All') {
-                    let sOperator = sMatchUnMatch.split("_")[0];
-                    let andOrBoolean = sMatchUnMatch.split("_")[1] === 'and' ? true : false ; 
-                    let aFilters= [new Filter({
-                        path: "reconcilliationGroupID",
-                        operator: sOperator,
-                        value1: null
-                    }),new Filter({
-                        path: "reconcilliationGroupID",
-                        operator: sOperator,
-                        value1: ''
-                    })];  
-                    oBindingParams.filters?.push(new Filter({
-                        filters: aFilters,
-                        and: andOrBoolean,
-                    }));
-                }
+                // let sMatchUnMatch = this.getView()?.byId("idEMTSMatchUnMatch").getSelectedKey();
+                // if (sMatchUnMatch !== 'All') {
+                //     let sOperator = sMatchUnMatch.split("_")[0];
+                //     let andOrBoolean = sMatchUnMatch.split("_")[1] === 'and' ? true : false ; 
+                //     let aFilters= [new Filter({
+                //         path: "reconcilliationGroupID",
+                //         operator: sOperator,
+                //         value1: null
+                //     }),new Filter({
+                //         path: "reconcilliationGroupID",
+                //         operator: sOperator,
+                //         value1: ''
+                //     })];  
+                //     oBindingParams.filters?.push(new Filter({
+                //         filters: aFilters,
+                //         and: andOrBoolean,
+                //     }));
+                // }
                 if (oRINYear && oRINYear.length > 0) {
                     let oValue1 = oRINYear.split(" - ")[0];
                     let oValue2 = oRINYear.split(" - ")[1] || oValue1;
@@ -433,24 +433,24 @@ sap.ui.define([
                 let oDocumentDate = this.getView()?.byId("idOTCDocumentRangeSelection").getDOMValue();
                 let oComplianceYear = this.getView()?.byId("idOTCComplianceYear").getDOMValue();
                 let sSubObjectScenerios = this.getView()?.byId("idRINSubObjectScenerio").getSelectedKeys();
-                let sMatchUnMatch = this.getView()?.byId("idMatchUnMatch").getSelectedKey();
-                if (sMatchUnMatch !== 'All') {
-                    let sOperator = sMatchUnMatch.split("_")[0];
-                    let andOrBoolean = sMatchUnMatch.split("_")[1] === 'and' ? true : false ; 
-                    let aFilters= [new Filter({
-                        path: "reconcilliationGroupID",
-                        operator: sOperator,
-                        value1: null
-                    }),new Filter({
-                        path: "reconcilliationGroupID",
-                        operator: sOperator,
-                        value1: ''
-                    })];  
-                    oBindingParams.filters?.push(new Filter({
-                        filters: aFilters,
-                        and: andOrBoolean,
-                    }));
-                }
+                // let sMatchUnMatch = this.getView()?.byId("idMatchUnMatch").getSelectedKey();
+                // if (sMatchUnMatch !== 'All') {
+                //     let sOperator = sMatchUnMatch.split("_")[0];
+                //     let andOrBoolean = sMatchUnMatch.split("_")[1] === 'and' ? true : false ; 
+                //     let aFilters= [new Filter({
+                //         path: "reconcilliationGroupID",
+                //         operator: sOperator,
+                //         value1: null
+                //     }),new Filter({
+                //         path: "reconcilliationGroupID",
+                //         operator: sOperator,
+                //         value1: ''
+                //     })];  
+                //     oBindingParams.filters?.push(new Filter({
+                //         filters: aFilters,
+                //         and: andOrBoolean,
+                //     }));
+                // }
                 if (oVintageYear && oVintageYear.length > 0) {
                     let oValue1 = oVintageYear.split(" - ")[0];
                     let oValue2 = oVintageYear.split(" - ")[1] || oValue1;
