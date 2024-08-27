@@ -20,25 +20,40 @@
     <edmx:DataServices>
         <Schema xmlns="http://docs.oasis-open.org/odata/ns/edm" Namespace="local1">
             <!-- Start of WorkplaceCreditOTCView -->
-               <!-- WorkplaceCreditOTCView - Filters-->
+            <!-- WorkplaceCreditOTCView - Filters-->
             <Annotations Target="SAP.WorkplaceCreditOTCView">
                 <Annotation Term="UI.SelectionFields">
                     <Collection>
-                        <PropertyPath>subObjectScenario</PropertyPath>
+                        <!-- <PropertyPath>subObjectScenario</PropertyPath>
+                        <PropertyPath>objectId</PropertyPath>
                         <PropertyPath>sourceOrgPlant</PropertyPath>
+                        <PropertyPath>regulationGoodsMovementDocumentNumber</PropertyPath>
                         <PropertyPath>movementType</PropertyPath>
+                        <PropertyPath>processingStatus</PropertyPath>
+                        <PropertyPath>transactionType</PropertyPath>
+                        <PropertyPath>impact</PropertyPath>
                         <PropertyPath>documentDate</PropertyPath>
                         <PropertyPath>contractDocumentNo</PropertyPath>
                         <PropertyPath>transactionPartnerOrgId</PropertyPath>
                         <PropertyPath>dcode</PropertyPath>
                         <PropertyPath>vintageYear</PropertyPath>
-                        <PropertyPath>objectId</PropertyPath>
-                        <PropertyPath>regulationGoodsMovementDocumentNumber</PropertyPath>
                         <PropertyPath>renewablesDocumentComplianceYear</PropertyPath>
+                        <PropertyPath>reconcilliationGroupID</PropertyPath> -->
+                        <PropertyPath>subObjectScenario</PropertyPath>
+                        <PropertyPath>objectId</PropertyPath>
                         <PropertyPath>processingStatus</PropertyPath>
                         <PropertyPath>transactionType</PropertyPath>
                         <PropertyPath>impact</PropertyPath>
+                        <PropertyPath>movementType</PropertyPath>
+                        <PropertyPath>sourceOrgPlant</PropertyPath>
                         <PropertyPath>reconcilliationGroupID</PropertyPath>
+                        <PropertyPath>dcode</PropertyPath>
+                        <PropertyPath>documentDate</PropertyPath>
+                        <PropertyPath>vintageYear</PropertyPath>
+                        <PropertyPath>renewablesDocumentComplianceYear</PropertyPath>
+                        <PropertyPath>regulationGoodsMovementDocumentNumber</PropertyPath>
+                        <PropertyPath>contractDocumentNo</PropertyPath>
+                        <PropertyPath>transactionPartnerOrgId</PropertyPath>
                     </Collection>
                 </Annotation>
             </Annotations>
@@ -232,7 +247,7 @@
                     <Path>regulationUnitOfMeasurement</Path>
                 </Annotation>
             </Annotations>
-             <!-- WorkplaceCreditOTCView -fuelOnwardMaterialalDocumentNumber -->
+            <!-- WorkplaceCreditOTCView -fuelOnwardMaterialalDocumentNumber -->
             <Annotations Target="SAP.WorkplaceCreditOTCView/reconcilliationGroupID">
                 <Annotation Term="Common.ValueList">
                     <Record>
@@ -245,7 +260,6 @@
                                     <PropertyValue Property="LocalDataProperty" PropertyPath="reconcilliationGroupID" />
                                     <PropertyValue Property="ValueListProperty" String="reconcilliationGroupID" />
                                 </Record>
-                              
                             </Collection>
                         </PropertyValue>
                     </Record>
@@ -264,7 +278,6 @@
                                     <PropertyValue Property="LocalDataProperty" PropertyPath="fuelOnwardMaterialalDocumentNumber" />
                                     <PropertyValue Property="ValueListProperty" String="fuelOnwardMaterialalDocumentNumber" />
                                 </Record>
-                              
                             </Collection>
                         </PropertyValue>
                     </Record>
@@ -273,7 +286,7 @@
             <!-- WorkplaceCreditOTCView -fuelReversalMaterialalDocumentNumber  -->
             <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.GetFuelReverseGMDocNo/fuelReversalMaterialalDocumentNumber">
                 <Annotation Term="Common.Label" String="Fuel Reverse GM Doc No" />
-            </Annotations> 
+            </Annotations>
 
             <Annotations Target="SAP.WorkplaceCreditOTCView/fuelReversalMaterialalDocumentNumber">
                 <Annotation Term="Common.ValueList">
@@ -287,7 +300,6 @@
                                     <PropertyValue Property="LocalDataProperty" PropertyPath="fuelReversalMaterialalDocumentNumber" />
                                     <PropertyValue Property="ValueListProperty" String="fuelReversalMaterialalDocumentNumber" />
                                 </Record>
-                               
                             </Collection>
                         </PropertyValue>
                     </Record>
@@ -552,14 +564,32 @@
             <Annotations Target="SAP.WorkplaceCreditEMTSView">
                 <Annotation Term="UI.SelectionFields">
                     <Collection>
+                        <!-- <PropertyPath>subObjectScenario</PropertyPath>
+                        <PropertyPath>objectId</PropertyPath>
+                        <PropertyPath>processingStatus</PropertyPath>
+                        <PropertyPath>transferDate</PropertyPath>
+                        <PropertyPath>vintageYear</PropertyPath>
+                        <PropertyPath>ptdNumber</PropertyPath>
+                        <PropertyPath>invoice</PropertyPath>
+                        <PropertyPath>reconcilliationGroupID</PropertyPath>
+                        <PropertyPath>emtsTransactionTypeCode</PropertyPath>              
+                        <PropertyPath>emtsFuelCategoryCode</PropertyPath>
+                        <PropertyPath>submissionDate</PropertyPath>
+                        <PropertyPath>emtsQapServiceTypeCode</PropertyPath>
+                        <PropertyPath>emtsTradingPartnerBillOfLading</PropertyPath>
+                        <PropertyPath>emtsRinStatusCode</PropertyPath>
+                        <PropertyPath>emtsAssignmentCode</PropertyPath>
+                        <PropertyPath>emtsBuyOrSellReasonCode</PropertyPath>
+                        <PropertyPath>externalObjectGUID</PropertyPath> -->
                         <PropertyPath>subObjectScenario</PropertyPath>
                         <PropertyPath>objectId</PropertyPath>
+                        <PropertyPath>processingStatus</PropertyPath>
+                        <PropertyPath>reconcilliationGroupID</PropertyPath>
                         <PropertyPath>transferDate</PropertyPath>
                         <PropertyPath>vintageYear</PropertyPath>
                         <PropertyPath>ptdNumber</PropertyPath>
                         <PropertyPath>invoice</PropertyPath>
                         <PropertyPath>emtsTransactionTypeCode</PropertyPath>
-                        <PropertyPath>processingStatus</PropertyPath>
                         <PropertyPath>emtsFuelCategoryCode</PropertyPath>
                         <PropertyPath>submissionDate</PropertyPath>
                         <PropertyPath>emtsQapServiceTypeCode</PropertyPath>
@@ -568,7 +598,6 @@
                         <PropertyPath>emtsAssignmentCode</PropertyPath>
                         <PropertyPath>emtsBuyOrSellReasonCode</PropertyPath>
                         <PropertyPath>externalObjectGUID</PropertyPath>
-                        <PropertyPath>reconcilliationGroupID</PropertyPath>
                     </Collection>
                 </Annotation>
             </Annotations>
@@ -619,7 +648,7 @@
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="organizationId" />
                         </Record>
-                           <Record Type="UI.DataField">
+                        <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="reconcilliationGroupID" />
                         </Record>
                         <Record Type="UI.DataField">
@@ -688,9 +717,9 @@
             </Annotations>
 
             <!-- WorkplaceCreditEMTSView - Text Arrangements -->
-                 <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditEMTSView/reconcilliationGroupID">
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditEMTSView/reconcilliationGroupID">
                 <Annotation Term="Common.Label" String="Reconcilliation Group ID" />
-            </Annotations> 
+            </Annotations>
 
             <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditEMTSView/subObjectScenario">
                 <Annotation Term="Common.Text" Path="subObjectScenarioDesc" />
@@ -740,7 +769,7 @@
                 <Annotation Term="Common.Text" Path="TransmissionStatusDesc" />
                 <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextLast" />
             </Annotations>
-             <!-- WorkplaceCreditOTCView -reconcilliationGroupID -->
+            <!-- WorkplaceCreditOTCView -reconcilliationGroupID -->
             <Annotations Target="SAP.WorkplaceCreditEMTSView/reconcilliationGroupID">
                 <Annotation Term="Common.ValueList">
                     <Record>
@@ -753,7 +782,6 @@
                                     <PropertyValue Property="LocalDataProperty" PropertyPath="reconcilliationGroupID" />
                                     <PropertyValue Property="ValueListProperty" String="reconcilliationGroupID" />
                                 </Record>
-                              
                             </Collection>
                         </PropertyValue>
                     </Record>
@@ -1129,18 +1157,17 @@
                     <Collection>
                         <PropertyPath>subObjectScenario</PropertyPath>
                         <PropertyPath>objectId</PropertyPath>
+                        <PropertyPath>processingStatus</PropertyPath>
+                        <PropertyPath>transactionType</PropertyPath>
+                        <PropertyPath>impact</PropertyPath>
+                        <PropertyPath>movementType</PropertyPath>
                         <PropertyPath>fuelCategory</PropertyPath>
+                        <PropertyPath>rfs2ObligationType</PropertyPath>
                         <PropertyPath>fuelLogisticsPlant</PropertyPath>
                         <PropertyPath>regulationLogisticsPlant</PropertyPath>
                         <PropertyPath>fuelOnwardMaterialalDocumentNumber</PropertyPath>
                         <PropertyPath>regulationGoodsMovementDocumentNumber</PropertyPath>
-                        <PropertyPath>movementType</PropertyPath>
-                        <!-- <PropertyPath>documentDate</PropertyPath> -->
                         <PropertyPath>regulationLogisticsMaterialNumber</PropertyPath>
-                        <PropertyPath>processingStatus</PropertyPath>
-                        <PropertyPath>transactionType</PropertyPath>
-                        <PropertyPath>impact</PropertyPath>
-                        <PropertyPath>rfs2ObligationType</PropertyPath>
                     </Collection>
                 </Annotation>
             </Annotations>
