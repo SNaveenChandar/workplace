@@ -798,6 +798,11 @@
                 <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextLast" />
             </Annotations>
 
+             <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditEMTSView/emtsBuyOrSellReasonCode">
+                <Annotation Term="Common.Text" Path="EmtsBuyORSellReasonCodeDesc" />
+                <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextLast" />
+            </Annotations>
+
             <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditEMTSView/rinPriceAmount">
                 <Annotation Term="Measures.Unit">
                     <Path>rinPriceCurrency</Path>
