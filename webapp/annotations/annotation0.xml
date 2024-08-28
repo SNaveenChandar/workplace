@@ -800,7 +800,7 @@
                 <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextLast" />
             </Annotations>
             <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditEMTSView/emtsFuelCategoryCode">
-                <Annotation Term="Common.Text" Path="emtsQapServiceTypeCodeDesc" />
+                <Annotation Term="Common.Text" Path="emtsFuelCategoryCodeDesc" />
                 <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextLast" />
             </Annotations>
             <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditEMTSView/emtsTransactionTypeCode">
