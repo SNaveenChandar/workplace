@@ -213,10 +213,10 @@
             </Annotations>
 
             <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditOTCView/renwablePurchaseOrder">
-                <Annotation Term="Common.Label" String="Purchase Order" />
+                <Annotation Term="Common.Label" String="Order Number" />
             </Annotations>
             <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditOTCView/renwablePurchaseOrderItem">
-                <Annotation Term="Common.Label" String="Purchase Order Item" />
+                <Annotation Term="Common.Label" String="Order Item Number" />
             </Annotations>
 
             <!-- WorkplaceCreditOTCView - Text Arrangements -->
