@@ -84,6 +84,7 @@ sap.ui.define([
                     let oSelectedObjectID = oTable.getContextByIndex(oTable.getSelectedIndices()[0])?.getProperty("ID");
                     let sRegulationQuantity = oTable.getContextByIndex(oTable.getSelectedIndices()[0])?.getProperty("regulationQuantity");
                     if(sRegulationQuantity <= 0){
+                        that.unSelectRowFromTable();
                         MessageBox.error(this.getI18nText("zeroRegulationQty"));
                         return;
                     }
