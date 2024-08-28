@@ -71,7 +71,7 @@
 				path: 'Logs>createdAt',
 				type: 'sap.ui.model.type.DateTime',
 				formatOptions: {
-					pattern: 'MM-dd-yyyy HH:mm:ss a',
+					pattern: 'MM-dd-yyyy HH:mm:ss:SSS a',
 					UTC: true
 				}
 			}" wrapping="true" />		

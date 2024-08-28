@@ -48,6 +48,7 @@ sap.ui.define([
                     }
                     this.oDisplayLog._searchField.setVisible(false);
                     let oModel = this.getOwnerComponent().getModel();
+                    this.getView().setBusy(true);
                     oModel.read("/GetLogs", {
                         filters: [
                             new Filter("object", FilterOperator.EQ, oSelectedObjectID),
@@ -55,13 +56,16 @@ sap.ui.define([
                         ],
                         success: function (oData) {
                             this.getView().getModel("Logs").setSizeLimit(oData.results.length);
+                            oData.results.sort((a, b) => a.createdAt.getTime() - b.createdAt.getTime());
                             this.getView().getModel("Logs").setData(oData.results);
                             this.oDisplayLog.setModel(this.getView().getModel("Logs"));
+                            this.getView().setBusy(false);
                             this.oDisplayLog.open();
                         }.bind(this),
                         error: function () {
+                            this.getView().setBusy(false);
                             MessageBox.error(this.getI18nText("unableFetchLogs"));
-                        }
+                        }.bind(this)
                     });
                 } else {
                     MessageBox.error(this.getI18nText("selectAtleastOneRow"));
