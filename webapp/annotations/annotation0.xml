@@ -99,6 +99,9 @@
                             <PropertyValue Property="Value" Path="movementType" />
                         </Record>
                         <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="fuelQuantity" />
+                        </Record>
+                        <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="regulationQuantity" />
                         </Record>
                         <Record Type="UI.DataField">
@@ -152,6 +155,9 @@
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="regulationLogisticsStorageLocation" />
                         </Record>
+                         <Record Type="UI.DataField">
+                            <PropertyValue Property="Value" Path="fuelLogisticsMaterialNumber" />
+                        </Record>
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="regulationLogisticsMaterialNumber" />
                         </Record>
@@ -185,6 +191,7 @@
                         <Record Type="UI.DataField">
                             <PropertyValue Property="Value" Path="renwablePurchaseOrderItem" />
                         </Record>
+                        
                     </Collection>
                 </Annotation>
             </Annotations>
@@ -213,6 +220,11 @@
             </Annotations>
 
             <!-- WorkplaceCreditOTCView - Text Arrangements -->
+             <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditOTCView/fuelLogisticsMaterialNumber">
+                <Annotation Term="Common.Text" Path="fuelLogisticsMaterialNumberDesc" />
+                <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextLast" />
+            </Annotations> 
+
             <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditOTCView/subObjectScenario">
                 <Annotation Term="Common.Text" Path="subObjectScenarioDesc" />
                 <Annotation Term="UI.TextArrangement" EnumMember="UI.TextArrangementType/TextLast" />
@@ -270,6 +282,11 @@
             <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditOTCView/regulationQuantity">
                 <Annotation Term="Measures.Unit">
                     <Path>regulationUnitOfMeasurement</Path>
+                </Annotation>
+            </Annotations>
+            <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditOTCView/fuelQuantity">
+                <Annotation Term="Measures.Unit">
+                    <Path>fuelUnitOfMeasurement</Path>
                 </Annotation>
             </Annotations>
             <!-- WorkplaceCreditOTCView -rfOrderGeneralDocumentNumber -->
