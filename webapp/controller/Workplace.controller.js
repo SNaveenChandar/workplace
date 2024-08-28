@@ -82,6 +82,11 @@ sap.ui.define([
                 let oTable = this.getView()?.byId(sTableID).getTable();
                 if (oTable.getSelectedIndices().length > 0) {
                     let oSelectedObjectID = oTable.getContextByIndex(oTable.getSelectedIndices()[0])?.getProperty("ID");
+                    let sRegulationQuantity = oTable.getContextByIndex(oTable.getSelectedIndices()[0])?.getProperty("regulationQuantity");
+                    if(sRegulationQuantity <= 0){
+                        MessageBox.error(this.getI18nText("zeroRegulationQty"));
+                        return;
+                    }
                     let oDataModel = this.getView()?.getModel();
                     const that = this;
                     this.getView().setBusy(true);
