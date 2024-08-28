@@ -148,6 +148,12 @@ sap.ui.define([
                     // };
                     // let oParams ={};
                     let oSelectedObjectID=oSelectedContext.getProperty("ID");
+                    let sRegulationQuantity = oSelectedContext.getProperty("regulationQuantity");
+                    if(sRegulationQuantity <= 0){
+                        this.unSelectRowFromTable();
+                        MessageBox.error(this.getI18nText("zeroRegulationQty"));
+                        return;
+                    }
                     // oParams.reverse=JSON.stringify(oReverseData);
                     let oDataModel = this.getView()?.getModel();
                     const that = this;
