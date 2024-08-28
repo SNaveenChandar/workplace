@@ -196,7 +196,7 @@
                 beforeRebindTable="onOTCBeforeRebindTable"
                 enableAutoBinding="true"
                 requestAtLeastFields="TransmissionStatusDesc"
-                ignoreFromPersonalisation="subObjectScenarioDesc,regulationTypeDesc,objectTypeDesc,TransmissionStatusDesc,objectStatusDesc,transactionTypeDesc,dcodeDesc
+                ignoreFromPersonalisation="fuelLogisticsMaterialNumberDesc,subObjectScenarioDesc,regulationTypeDesc,objectTypeDesc,TransmissionStatusDesc,objectStatusDesc,transactionTypeDesc,dcodeDesc
                 ,reasonCodeDesc,regulationCategoryDesc,objectCategoryDesc,fuelCategoryDesc,businessPartnerDesc,qapCertifiedDesc,destinationOrgMaterialNumberDes,sourceOrgMaterialNumberDesc,regulationLogisticsMaterialNumberDesc"
             >
                 <smartTable:customToolbar>

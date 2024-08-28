@@ -286,7 +286,7 @@
             </Annotations>
             <Annotations xmlns="http://docs.oasis-open.org/odata/ns/edm" Target="SAP.WorkplaceCreditOTCView/fuelQuantity">
                 <Annotation Term="Measures.Unit">
-                    <Path>fuelUnitOfMeasurement</Path>
+                    <Path>fuelUnitofMeasurement</Path>
                 </Annotation>
             </Annotations>
             <!-- WorkplaceCreditOTCView -rfOrderGeneralDocumentNumber -->
