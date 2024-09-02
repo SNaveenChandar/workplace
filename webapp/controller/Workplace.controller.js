@@ -667,16 +667,21 @@ sap.ui.define([
                 this.getView().byId("idSave").setVisible(false);
             },
             onEditInternalComment:function (oEvent) {
-                debugger
                 let oSelectedItem=oEvent.getSource().getParent();         
                 let sCommentInSelectItem=oSelectedItem.getText();
                 let oList = oSelectedItem.getParent();
                 oList.setSelectedItem(oSelectedItem);
                 oSelectedItem.setHighlight("Information");
-                this.getView().byId("idInternalCommentInput").setValue(sCommentInSelectItem);
-
-                
+                this.getView().byId("idInternalCommentInput").setValue(sCommentInSelectItem); 
+            },
+            onTabSwitch:function(oEvent){  
+                if(oEvent.getParameter("selectedItem").getKey() === "1"){
+                    this.onCancel();
+                }else{
+                    this.getView().byId("idEdit").setVisible(false);
+                    this.getView().byId("idCancel").setVisible(false);
+                    this.getView().byId("idSave").setVisible(false);
+                }
             }
-
         });
     });

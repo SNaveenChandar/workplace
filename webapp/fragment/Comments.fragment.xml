@@ -7,7 +7,6 @@
     xmlns:layout="sap.ui.layout"
 >
     <Dialog
-        id="wizardDialog"
         showHeader="false"
         verticalScrolling="false"
         contentHeight="85%"
@@ -41,7 +40,7 @@
                             type="Success"
                             visible="false"
                             icon="sap-icon://save"
-                            press="toggleAreaPriority"
+                            
                         />
                         <Button
                             id="idCancel"
@@ -62,17 +61,18 @@
             <f:content>
                 <IconTabBar
                     id="idIconTabBar"
-                    select=".onFilterSelect"
+                    select="onTabSwitch"
                     class="sapUiNoContentPadding"
                     expanded="true"
                     expandable="false"
+                    selectedKey="1"
                 >
                     <items>
                         <!-- icon="sap-icon://edit-outside" -->
                         <IconTabFilter
                             design="Horizontal"
                             text="Review/Edit"
-                            key="Ok"
+                            key="1"
                             class="sapUiNoContentPadding"
                         >
                             <VBox class="sapUiSmallMargin">
@@ -180,7 +180,7 @@
                                 post="onPost"
                                 showIcon="false"
                                 placeholder="{i18n>commentPlaceholder}"
-                                class="sapUiSmallMarginTopBottom"
+                                class="sapUiSmallMarginTopBottom sapUiSmallMarginBegin"
                             />
                         </IconTabFilter>
 
@@ -223,7 +223,8 @@
                                 showIcon="false"
                                 post="onPost"
                                 placeholder="{i18n>commentPlaceholder}"
-                                class="sapUiSmallMarginTopBottom"
+                                class="sapUiSmallMarginTopBottom sapUiSmallMarginBegin"
+
                             />
                         </IconTabFilter>
                     </items>
