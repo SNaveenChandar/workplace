@@ -1,0 +1,232 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:u="sap.ui.unified"
+    xmlns:layout="sap.ui.layout"
+>
+    <Dialog
+        id="wizardDialog"
+        showHeader="false"
+        verticalScrolling="false"
+        contentHeight="85%"
+        contentWidth="90%"
+        draggable="true"
+        resizable="true"
+    >
+        <f:DynamicPage
+            stickySubheaderProvider="CreateProductWizard"
+            toggleHeaderOnTitleClick="false"
+            class="sapUiNoContentPadding"
+            showFooter="true"
+        >
+            <f:title>
+                <f:DynamicPageTitle>
+                    <f:heading>
+                        <Title text="Comments" />
+                    </f:heading>
+
+                    <f:actions>
+                        <Button
+                        id="idEdit"
+                            text="Edit"
+                            type="Emphasized"
+                            icon="sap-icon://edit"
+                            press="onEdit"
+                        />
+                        <Button
+                            id="idSave"
+                            text="Save"
+                            type="Success"
+                            visible="false"
+                             icon="sap-icon://save" 
+                            press="toggleAreaPriority"
+                        />
+                         <Button
+                         id="idCancel"
+                            text="Cancel"
+                            type="Negative"
+                            visible="false"
+                            press="onCancel"
+                        />
+                        <Button
+                            text="Close"
+                            type="Reject"
+                            press="onCommentsClose"
+                        />
+                    </f:actions>
+                </f:DynamicPageTitle>
+            </f:title>
+
+            <f:content>
+                <IconTabBar
+                    id="idIconTabBar"
+                    select=".onFilterSelect"
+                    class="sapUiNoContentPadding"
+                    expanded="true"
+                    expandable="false"
+                >
+                    <items>
+                        <IconTabFilter
+                            icon="sap-icon://begin"
+                            iconColor="Positive"
+                            design="Horizontal"
+                            text=""
+                            key="Ok"
+                            class="sapUiNoContentPadding"
+                        >
+                            <VBox class="sapUiSmallMargin">
+                                <form:SimpleForm
+                                    id="idDisplayForm"
+                                    editable="false"
+                                    layout="ResponsiveGridLayout"
+                                    title=""
+                                    labelSpanXL="3"
+                                    labelSpanL="3"
+                                    labelSpanM="3"
+                                    labelSpanS="12"
+                                    adjustLabelSpan="false"
+                                    emptySpanXL="4"
+                                    emptySpanL="4"
+                                    emptySpanM="4"
+                                    emptySpanS="0"
+                                    columnsXL="1"
+                                    columnsL="1"
+                                    columnsM="1"
+                                    singleContainerFullSize="false"
+                                >
+                                    <form:content>
+                                        <Label text="{i18n>PTDNo}" />
+                                        <Text text="{ptdNumber}" />
+                                        <Label text="{i18n>CDXID}" />
+                                        <Text text="{emtsCDSID}" />
+                                        <Label text="{i18n>BOL}" />
+                                        <Text text="{emtsTradingPartnerBillOfLading}" />
+                                    </form:content>
+                                </form:SimpleForm>
+                                <form:SimpleForm
+                                    id="idEditForm"
+                                    visible="false"
+                                    editable="true"
+                                    layout="ResponsiveGridLayout"
+                                    title=""
+                                    labelSpanXL="3"
+                                    labelSpanL="3"
+                                    labelSpanM="3"
+                                    labelSpanS="12"
+                                    adjustLabelSpan="false"
+                                    emptySpanXL="4"
+                                    emptySpanL="4"
+                                    emptySpanM="4"
+                                    emptySpanS="0"
+                                    columnsXL="1"
+                                    columnsL="1"
+                                    columnsM="1"
+                                    singleContainerFullSize="false"
+                                >
+                                    <form:content>
+                                        <Label text="{i18n>PTDNo}" />
+                                        <Input value="{ptdNumber}"/>
+                                        <Label text="{i18n>CDXID}" />
+                                        <Input value="{emtsCDSID}"/>
+                                        <Label text="{i18n>BOL}" />
+                                        <Input value="{emtsTradingPartnerBillOfLading}"/>
+                                    </form:content>
+                                </form:SimpleForm>
+                            </VBox>
+                        </IconTabFilter>
+                        <IconTabSeparator
+                            icon="sap-icon://open-command-field"
+                        />
+                        <IconTabFilter
+                            icon="sap-icon://compare"
+                            iconColor="Critical"
+                            design="Horizontal"
+                            text="Internal Comments"
+                            key="Internal"
+                            class="sapUiNoContentPadding"
+                        >
+                            <Panel
+                                expanded="true"
+                                stickyHeader="true"
+                                height="375px"
+                                width="auto"
+                                class="sapUiNoContentPadding"
+                            >
+                                <content>
+                                    <List
+                                        showSeparators="Inner"
+                                        growing="true"
+                                        growingThreshold="5"
+                                        growingDirection="Downwards"
+                                        growingTriggerText="Load Comments..."
+                                        items="{comments>/internal}"
+                                    >
+                                        <FeedListItem
+                                            sender="{comments>sender}"
+                                            text="{comments>text}"
+                                        />
+                                    </List>
+                                </content>
+                            </Panel>
+                            <FeedInput
+                                post="onPost"
+                                class="sapUiSmallMarginTopBottom"
+                            />
+                        </IconTabFilter>
+                        <IconTabSeparator
+                            icon="sap-icon://open-command-field"
+                        />
+                        <IconTabFilter
+                            icon="sap-icon://inventory"
+                            iconColor="Negative"
+                            design="Horizontal"
+                            text="External Comments"
+                            key="Overweight"
+                            class="sapUiNoContentPadding"
+                        >
+                            <Panel
+                                expanded="true"
+                                stickyHeader="true"
+                                height="375px"
+                                width="auto"
+                                class="sapUiNoContentPadding"
+                            >
+                                <content>
+                                    <List
+                                        showSeparators="Inner"
+                                        growing="true"
+                                        growingThreshold="5"
+                                        growingDirection="Downwards"
+                                        growingTriggerText="Load Comments..."
+                                        items="{comments>/external}"
+                                    >
+                                        <FeedListItem
+                                            sender="{comments>sender}"
+                                            text="{comments>text}"
+                                        />
+                                    </List>
+                                </content>
+                            </Panel>
+
+                            <FeedInput
+                                post="onPost"
+                                class="sapUiSmallMarginTopBottom"
+                            />
+                        </IconTabFilter>
+                    </items>
+                    <content />
+                </IconTabBar>
+            </f:content>
+
+            <!-- <f:footer>
+                <OverflowToolbar>
+                    <ToolbarSpacer />
+
+                   
+                </OverflowToolbar>
+            </f:footer> -->
+        </f:DynamicPage>
+    </Dialog>
+</core:FragmentDefinition>

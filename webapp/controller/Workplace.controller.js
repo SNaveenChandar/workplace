@@ -22,6 +22,72 @@ sap.ui.define([
                 const oLogModel = new JSONModel();
                 this.getView()?.setModel(oLogModel, "Logs");
 
+                const oComments = new JSONModel({
+                    "internal": [{
+                        "sender": "Sender 1",
+                        "text": "Internal Comment 1"
+                    },
+                    {
+                        "sender": "Sender 2",
+                        "text": "Internal Comment 2"
+                    },
+                    {
+                        "sender": "Sender 3",
+                        "text": "Internal Comment 3"
+                    },
+                    {
+                        "sender": "Sender 1",
+                        "text": "Internal Comment 4"
+                    }, {
+                        "sender": "Sender 2",
+                        "text": "Internal Comment 5"
+                    },
+                    {
+                        "sender": "Sender 3",
+                        "text": "Internal Comment 6"
+                    },
+                    {
+                        "sender": "Sender 2",
+                        "text": "Internal Comment 7"
+                    },
+                    {
+                        "sender": "Sender 3",
+                        "text": "Internal Comment 8"
+                    }],
+                    "external": [{
+                        "sender": "Sender 1",
+                        "text": "External Comment 1"
+                    },
+                    {
+                        "sender": "Sender 2",
+                        "text": "External Comment 2"
+                    },
+                    {
+                        "sender": "Sender 3",
+                        "text": "External Comment 3"
+                    },
+                    {
+                        "sender": "Sender 1",
+                        "text": "External Comment 4"
+                    }, {
+                        "sender": "Sender 2",
+                        "text": "External Comment 5"
+                    },
+                    {
+                        "sender": "Sender 3",
+                        "text": "External Comment 6"
+                    },
+                    {
+                        "sender": "Sender 2",
+                        "text": "External Comment 7"
+                    },
+                    {
+                        "sender": "Sender 3",
+                        "text": "External Comment 8"
+                    }]
+                });
+                this.getView()?.setModel(oComments, "comments");
+
                 this.getUserInfo();
             },
             getI18nText: function (sProperty) {
@@ -87,7 +153,7 @@ sap.ui.define([
                 if (oTable.getSelectedIndices().length > 0) {
                     let oSelectedObjectID = oTable.getContextByIndex(oTable.getSelectedIndices()[0])?.getProperty("ID");
                     let sRegulationQuantity = oTable.getContextByIndex(oTable.getSelectedIndices()[0])?.getProperty("regulationQuantity");
-                    if(sRegulationQuantity <= 0){
+                    if (sRegulationQuantity <= 0) {
                         this.unSelectRowFromTable();
                         MessageBox.error(this.getI18nText("zeroRegulationQty"));
                         return;
@@ -126,7 +192,7 @@ sap.ui.define([
                             if (oErrorReceived.responseText) {
                                 MessageBox.error(oErrorReceived.responseText, {
                                     styleClass: "sapUiResponsivePadding--header sapUiResponsivePadding--content sapUiResponsivePadding--footer",
-                                    onClose: () => {                                          
+                                    onClose: () => {
                                         that.unSelectRowFromTable();
                                         that.getView().setBusy(false);
                                     }
@@ -151,9 +217,9 @@ sap.ui.define([
                     //     "ReverseMaterialDocYear": oSelectedContext.getProperty("fuelReversalMaterialialDocumentYear")
                     // };
                     // let oParams ={};
-                    let oSelectedObjectID=oSelectedContext.getProperty("ID");
+                    let oSelectedObjectID = oSelectedContext.getProperty("ID");
                     let sRegulationQuantity = oSelectedContext.getProperty("regulationQuantity");
-                    if(sRegulationQuantity <= 0){
+                    if (sRegulationQuantity <= 0) {
                         this.unSelectRowFromTable();
                         MessageBox.error(this.getI18nText("zeroRegulationQty"));
                         return;
@@ -181,7 +247,7 @@ sap.ui.define([
                                 } else {
                                     MessageBox.error(oDataReceived.processReverseInvPost.message, {
                                         styleClass: "sapUiResponsivePadding--header sapUiResponsivePadding--content sapUiResponsivePadding--footer",
-                                        onClose: () => {                                          
+                                        onClose: () => {
                                             that.unSelectRowFromTable();
                                             that.getView().setBusy(false);
                                         }
@@ -190,8 +256,8 @@ sap.ui.define([
                             }
                         },
                         error: function (oErrorReceived) {
-                            if ( oErrorReceived.responseText) {
-                                MessageBox.error( oErrorReceived.responseText, {
+                            if (oErrorReceived.responseText) {
+                                MessageBox.error(oErrorReceived.responseText, {
                                     styleClass: "sapUiResponsivePadding--header sapUiResponsivePadding--content sapUiResponsivePadding--footer",
                                     onClose: () => {
                                         that.unSelectRowFromTable();
@@ -546,6 +612,52 @@ sap.ui.define([
                 var appPath = appId.replaceAll(".", "/");
                 var appModulePath = jQuery.sap.getModulePath(appPath);
                 return appModulePath;
+            },
+            onOpenComments: function () {
+                let oEMTSTable = this.getView().byId("idEMTSTable");
+                if (oEMTSTable.getSelectedIndices().length === 0) {
+                    MessageBox.error(this.getI18nText("selectAtleastOneRow"));
+                    return;
+                }
+                var oView = this.getView();
+                // create Dialog
+                if (!this._pDialog) {
+                    this._pDialog = Fragment.load({
+                        id: oView.getId(),
+                        name: "zfsrenewwrkplc.fragment.Comments",
+                        controller: this
+                    }).then(function (oDialog) {
+                        oView.addDependent(oDialog);
+                        let nSelectedIndex = oEMTSTable.getSelectedIndices()[0];
+                        let sSelectedObjectContext = oEMTSTable.getContextByIndex(nSelectedIndex);
+                        let sSelectedPath = sSelectedObjectContext.getPath();
+                        oDialog.bindElement(sSelectedPath);
+                        return oDialog;
+                    }.bind(this));
+                }
+                this._pDialog.then(function (oDialog) {
+                    oDialog.open();
+                });
+            },
+            onCommentsClose: function (oEvent) {
+                this.onCancel();
+                this.unSelectRowFromTable();
+                oEvent.getSource().getParent().getParent().getParent().close();
+            },
+            onEdit: function () {
+                this.getView().byId("idDisplayForm").setVisible(false);
+                this.getView().byId("idEdit").setVisible(false);
+                this.getView().byId("idEditForm").setVisible(true);
+                this.getView().byId("idCancel").setVisible(true);
+                this.getView().byId("idSave").setVisible(true);
+            },
+            onCancel: function () {
+                this.getView().byId("idDisplayForm").setVisible(true);
+                this.getView().byId("idEdit").setVisible(true);
+                this.getView().byId("idEditForm").setVisible(false);
+                this.getView().byId("idCancel").setVisible(false);
+                this.getView().byId("idSave").setVisible(false);
             }
+
         });
     });
