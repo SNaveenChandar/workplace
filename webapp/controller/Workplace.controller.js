@@ -25,34 +25,42 @@ sap.ui.define([
                 const oComments = new JSONModel({
                     "internal": [{
                         "sender": "Sender 1",
-                        "text": "Internal Comment 1"
+                        "text": "Internal Comment 1",
+                        "Date":new Date().toLocaleDateString() +" at "+ new Date().toLocaleTimeString()
                     },
                     {
                         "sender": "Sender 2",
-                        "text": "Internal Comment 2"
+                        "text": "Internal Comment 2",
+                        "Date":new Date().toLocaleDateString() +" at "+ new Date().toLocaleTimeString()
                     },
                     {
                         "sender": "Sender 3",
-                        "text": "Internal Comment 3"
+                        "text": "Internal Comment 3",
+                        "Date":new Date().toLocaleDateString() +" at "+ new Date().toLocaleTimeString()
                     },
                     {
                         "sender": "Sender 1",
-                        "text": "Internal Comment 4"
+                        "text": "Internal Comment 4",
+                        "Date":new Date().toLocaleDateString() +" at "+ new Date().toLocaleTimeString()
                     }, {
                         "sender": "Sender 2",
-                        "text": "Internal Comment 5"
+                        "text": "Internal Comment 5",
+                        "Date":new Date().toLocaleDateString() +" at "+ new Date().toLocaleTimeString()
                     },
                     {
                         "sender": "Sender 3",
-                        "text": "Internal Comment 6"
+                        "text": "Internal Comment 6",
+                        "Date": new Date().toLocaleDateString() +" at "+ new Date().toLocaleTimeString()
                     },
                     {
                         "sender": "Sender 2",
-                        "text": "Internal Comment 7"
+                        "text": "Internal Comment 7",
+                        "Date":new Date().toLocaleDateString() +" at "+ new Date().toLocaleTimeString()
                     },
                     {
                         "sender": "Sender 3",
-                        "text": "Internal Comment 8"
+                        "text": "Internal Comment 8",
+                        "Date":new Date().toLocaleDateString() +" at "+ new Date().toLocaleTimeString()
                     }],
                     "external": [{
                         "sender": "Sender 1",
@@ -615,10 +623,10 @@ sap.ui.define([
             },
             onOpenComments: function () {
                 let oEMTSTable = this.getView().byId("idEMTSTable");
-                if (oEMTSTable.getSelectedIndices().length === 0) {
-                    MessageBox.error(this.getI18nText("selectAtleastOneRow"));
-                    return;
-                }
+                // if (oEMTSTable.getSelectedIndices().length === 0) {
+                //     MessageBox.error(this.getI18nText("selectAtleastOneRow"));
+                //     return;
+                // }
                 var oView = this.getView();
                 // create Dialog
                 if (!this._pDialog) {
@@ -628,14 +636,14 @@ sap.ui.define([
                         controller: this
                     }).then(function (oDialog) {
                         oView.addDependent(oDialog);
-                        let nSelectedIndex = oEMTSTable.getSelectedIndices()[0];
-                        let sSelectedObjectContext = oEMTSTable.getContextByIndex(nSelectedIndex);
-                        let sSelectedPath = sSelectedObjectContext.getPath();
-                        oDialog.bindElement(sSelectedPath);
                         return oDialog;
                     }.bind(this));
                 }
                 this._pDialog.then(function (oDialog) {
+                    let nSelectedIndex = oEMTSTable.getSelectedIndices()[0];
+                    let sSelectedObjectContext = oEMTSTable.getContextByIndex(nSelectedIndex);
+                    let sSelectedPath = sSelectedObjectContext.getPath();
+                    oDialog.bindElement(sSelectedPath);
                     oDialog.open();
                 });
             },
@@ -657,6 +665,17 @@ sap.ui.define([
                 this.getView().byId("idEditForm").setVisible(false);
                 this.getView().byId("idCancel").setVisible(false);
                 this.getView().byId("idSave").setVisible(false);
+            },
+            onEditInternalComment:function (oEvent) {
+                debugger
+                let oSelectedItem=oEvent.getSource().getParent();         
+                let sCommentInSelectItem=oSelectedItem.getText();
+                let oList = oSelectedItem.getParent();
+                oList.setSelectedItem(oSelectedItem);
+                oSelectedItem.setHighlight("Information");
+                this.getView().byId("idInternalCommentInput").setValue(sCommentInSelectItem);
+
+                
             }
 
         });

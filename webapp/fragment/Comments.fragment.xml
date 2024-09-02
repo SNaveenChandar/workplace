@@ -24,12 +24,12 @@
             <f:title>
                 <f:DynamicPageTitle>
                     <f:heading>
-                        <Title text="Comments" />
+                        <Title text="Object No: {objectId} - Comments" />
                     </f:heading>
 
                     <f:actions>
                         <Button
-                        id="idEdit"
+                            id="idEdit"
                             text="Edit"
                             type="Emphasized"
                             icon="sap-icon://edit"
@@ -40,11 +40,11 @@
                             text="Save"
                             type="Success"
                             visible="false"
-                             icon="sap-icon://save" 
+                            icon="sap-icon://save"
                             press="toggleAreaPriority"
                         />
-                         <Button
-                         id="idCancel"
+                        <Button
+                            id="idCancel"
                             text="Cancel"
                             type="Negative"
                             visible="false"
@@ -68,11 +68,10 @@
                     expandable="false"
                 >
                     <items>
+                        <!-- icon="sap-icon://edit-outside" -->
                         <IconTabFilter
-                            icon="sap-icon://begin"
-                            iconColor="Positive"
                             design="Horizontal"
-                            text=""
+                            text="Review/Edit"
                             key="Ok"
                             class="sapUiNoContentPadding"
                         >
@@ -102,7 +101,9 @@
                                         <Label text="{i18n>CDXID}" />
                                         <Text text="{emtsCDSID}" />
                                         <Label text="{i18n>BOL}" />
-                                        <Text text="{emtsTradingPartnerBillOfLading}" />
+                                        <Text
+                                            text="{emtsTradingPartnerBillOfLading}"
+                                        />
                                     </form:content>
                                 </form:SimpleForm>
                                 <form:SimpleForm
@@ -127,24 +128,21 @@
                                 >
                                     <form:content>
                                         <Label text="{i18n>PTDNo}" />
-                                        <Input value="{ptdNumber}"/>
+                                        <Input value="{ptdNumber}" />
                                         <Label text="{i18n>CDXID}" />
-                                        <Input value="{emtsCDSID}"/>
+                                        <Input value="{emtsCDSID}" />
                                         <Label text="{i18n>BOL}" />
-                                        <Input value="{emtsTradingPartnerBillOfLading}"/>
+                                        <Input
+                                            value="{emtsTradingPartnerBillOfLading}"
+                                        />
                                     </form:content>
                                 </form:SimpleForm>
                             </VBox>
                         </IconTabFilter>
-                        <IconTabSeparator
-                            icon="sap-icon://open-command-field"
-                        />
+
                         <IconTabFilter
-                            icon="sap-icon://compare"
-                            iconColor="Critical"
                             design="Horizontal"
-                            text="Internal Comments"
-                            key="Internal"
+                            text="{i18n>internalComments}"
                             class="sapUiNoContentPadding"
                         >
                             <Panel
@@ -166,24 +164,29 @@
                                         <FeedListItem
                                             sender="{comments>sender}"
                                             text="{comments>text}"
-                                        />
+                                            timestamp="{comments>Date}"
+                                        >
+                                            <FeedListItemAction
+                                                text="Edit"
+                                                icon="sap-icon://edit"
+                                                press="onEditInternalComment"
+                                            />
+                                        </FeedListItem>
                                     </List>
                                 </content>
                             </Panel>
                             <FeedInput
+                                id="idInternalCommentInput"
                                 post="onPost"
+                                showIcon="false"
+                                placeholder="{i18n>commentPlaceholder}"
                                 class="sapUiSmallMarginTopBottom"
                             />
                         </IconTabFilter>
-                        <IconTabSeparator
-                            icon="sap-icon://open-command-field"
-                        />
+
                         <IconTabFilter
-                            icon="sap-icon://inventory"
-                            iconColor="Negative"
                             design="Horizontal"
-                            text="External Comments"
-                            key="Overweight"
+                            text="{i18n>externalComments}"
                             class="sapUiNoContentPadding"
                         >
                             <Panel
@@ -205,13 +208,21 @@
                                         <FeedListItem
                                             sender="{comments>sender}"
                                             text="{comments>text}"
-                                        />
+                                        >
+                                            <FeedListItemAction
+                                                text="Edit"
+                                                icon="sap-icon://edit"
+                                                press="onEditExternalComment"
+                                            />
+                                        </FeedListItem>
                                     </List>
                                 </content>
                             </Panel>
 
                             <FeedInput
+                                showIcon="false"
                                 post="onPost"
+                                placeholder="{i18n>commentPlaceholder}"
                                 class="sapUiSmallMarginTopBottom"
                             />
                         </IconTabFilter>
@@ -219,14 +230,6 @@
                     <content />
                 </IconTabBar>
             </f:content>
-
-            <!-- <f:footer>
-                <OverflowToolbar>
-                    <ToolbarSpacer />
-
-                   
-                </OverflowToolbar>
-            </f:footer> -->
         </f:DynamicPage>
     </Dialog>
 </core:FragmentDefinition>
