@@ -53,6 +53,7 @@
                 text="{i18n>save}"
                 type="Success"
                 icon="sap-icon://save"
+                press="onSaveEMTSChanges"
             />
         </beginButton>
         <endButton>

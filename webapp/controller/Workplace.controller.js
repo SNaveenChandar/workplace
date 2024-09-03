@@ -682,11 +682,6 @@ sap.ui.define([
             onEditInternalComment: function (oEvent) {
                 let oSelectedItem = oEvent.getSource().getParent();
                 let sCommentInSelectItem = oSelectedItem.getText();
-                // let oList = oSelectedItem.getParent();
-                // oList.setSelectedItem(oSelectedItem);
-                // oSelectedItem.setHighlight("Information");
-                // this.getView().byId("idInternalCommentInput").setValue(sCommentInSelectItem); 
-
                 if (!this.oUpdateCommentDialog) {
                     this.oUpdateCommentDialog = new sap.m.Dialog({
                         title: "Update Comment",
@@ -713,6 +708,28 @@ sap.ui.define([
                 this.oUpdateCommentDialog.getContent()[0].setValue(sCommentInSelectItem);
                 this.oUpdateCommentDialog.addStyleClass("sapUiContentPadding");
                 this.oUpdateCommentDialog.open();
+            },
+            onSaveEMTSChanges: function (oEvent) {
+                let oDialog = oEvent.getSource().getParent();
+                let oVBox = oDialog.getContent()[0]
+                let oEditForm = oVBox.getItems()[0]
+                let oEditedObject = oEditForm.getBindingContext().getObject();
+                let sPath = oEditForm.getBindingContext().getPath();
+                let oModel = this.getOwnerComponent().getModel();
+                oEditedObject.objectId= oEditedObject.objectKey.toString();
+                delete oEditedObject.__metadata;
+                // oModel.update(sPath, oEditedObject, {
+                //     method: "PATCH",
+                //     success: function (data) {
+                //         debugger
+                //     },
+                //     error: function (oErrorReceived) {
+                //         let sErrorMessage=JSON.parse(oErrorReceived.responseText).error.message.value;
+                //         if(sErrorMessage){
+                //             MessageBox.error(sErrorMessage);
+                //         }
+                //     }
+                // });
             }
         });
     });
