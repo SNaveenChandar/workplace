@@ -585,6 +585,7 @@ sap.ui.define([
                         return oDialog;
                     }.bind(this));
                 }
+                this.getView().setBusy(true);
                 this._oCommentDialog.then(async function (oDialog) {
                     let nSelectedIndex = oEMTSTable.getSelectedIndices()[0];
                     let sSelectedObjectContext = oEMTSTable.getContextByIndex(nSelectedIndex);
@@ -592,6 +593,7 @@ sap.ui.define([
                     this.getView().byId("idCommentTitle").setText(`Object No: ${sSelectedObjectNo} - Comments`);
                     let aCommentsData = await this.getComments(sSelectedObjectNo);
                     this.getView().getModel("comments").setData(aCommentsData);
+                    this.getView().setBusy(false);
                     oDialog.open();
                 }.bind(this));
             },
