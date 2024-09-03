@@ -65,7 +65,7 @@
                                         growingThreshold="5"
                                         growingDirection="Downwards"
                                         growingTriggerText="Load Comments..."
-                                        items="{comments>/internal}"
+                                        items="{comments>/internalComments}"
                                     >
                                         <FeedListItem
                                             sender="{comments>sender}"
@@ -109,7 +109,7 @@
                                         growingThreshold="5"
                                         growingDirection="Downwards"
                                         growingTriggerText="Load Comments..."
-                                        items="{comments>/external}"
+                                        items="{comments>/externalComments}"
                                     >
                                         <FeedListItem
                                             sender="{comments>sender}"

@@ -22,78 +22,7 @@ sap.ui.define([
                 const oLogModel = new JSONModel();
                 this.getView()?.setModel(oLogModel, "Logs");
 
-                const oComments = new JSONModel({
-                    "internal": [{
-                        "sender": "Sender 1",
-                        "text": "Internal Comment 1",
-                        "Date": new Date().toLocaleDateString() + " at " + new Date().toLocaleTimeString()
-                    },
-                    {
-                        "sender": "Sender 2",
-                        "text": "Internal Comment 2",
-                        "Date": new Date().toLocaleDateString() + " at " + new Date().toLocaleTimeString()
-                    },
-                    {
-                        "sender": "Sender 3",
-                        "text": "Internal Comment 3",
-                        "Date": new Date().toLocaleDateString() + " at " + new Date().toLocaleTimeString()
-                    },
-                    {
-                        "sender": "Sender 1",
-                        "text": "Internal Comment 4",
-                        "Date": new Date().toLocaleDateString() + " at " + new Date().toLocaleTimeString()
-                    }, {
-                        "sender": "Sender 2",
-                        "text": "Internal Comment 5",
-                        "Date": new Date().toLocaleDateString() + " at " + new Date().toLocaleTimeString()
-                    },
-                    {
-                        "sender": "Sender 3",
-                        "text": "Internal Comment 6",
-                        "Date": new Date().toLocaleDateString() + " at " + new Date().toLocaleTimeString()
-                    },
-                    {
-                        "sender": "Sender 2",
-                        "text": "Internal Comment 7",
-                        "Date": new Date().toLocaleDateString() + " at " + new Date().toLocaleTimeString()
-                    },
-                    {
-                        "sender": "Sender 3",
-                        "text": "Internal Comment 8",
-                        "Date": new Date().toLocaleDateString() + " at " + new Date().toLocaleTimeString()
-                    }],
-                    "external": [{
-                        "sender": "Sender 1",
-                        "text": "External Comment 1"
-                    },
-                    {
-                        "sender": "Sender 2",
-                        "text": "External Comment 2"
-                    },
-                    {
-                        "sender": "Sender 3",
-                        "text": "External Comment 3"
-                    },
-                    {
-                        "sender": "Sender 1",
-                        "text": "External Comment 4"
-                    }, {
-                        "sender": "Sender 2",
-                        "text": "External Comment 5"
-                    },
-                    {
-                        "sender": "Sender 3",
-                        "text": "External Comment 6"
-                    },
-                    {
-                        "sender": "Sender 2",
-                        "text": "External Comment 7"
-                    },
-                    {
-                        "sender": "Sender 3",
-                        "text": "External Comment 8"
-                    }]
-                });
+                const oComments = new JSONModel();
                 this.getView()?.setModel(oComments, "comments");
 
                 this.getUserInfo();
@@ -621,6 +550,24 @@ sap.ui.define([
                 var appModulePath = jQuery.sap.getModulePath(appPath);
                 return appModulePath;
             },
+            getComments:function(sObjectId){
+                let oDataModel = this.getView()?.getModel();
+                return new Promise((function(resolve,reject){
+                    oDataModel.callFunction("/GetComments", {
+                        method: "POST",
+                        urlParameters: {
+                            "objectId": sObjectId
+                        },
+                        success: function (oDataReceived) {
+                            resolve (oDataReceived.GetComments);
+                        },
+                        error: function (oErrorReceived) {
+                           MessageBox.error(this.getI18nText("failedComments"));
+                           reject()
+                        }
+                    });
+                }))      
+            },
             onOpenComments: function () {
                 let oEMTSTable = this.getView().byId("idEMTSTable");
                 if (oEMTSTable.getSelectedIndices().length === 0) {
@@ -638,11 +585,13 @@ sap.ui.define([
                         return oDialog;
                     }.bind(this));
                 }
-                this._oCommentDialog.then(function (oDialog) {
+                this._oCommentDialog.then(async function (oDialog) {
                     let nSelectedIndex = oEMTSTable.getSelectedIndices()[0];
                     let sSelectedObjectContext = oEMTSTable.getContextByIndex(nSelectedIndex);
                     let sSelectedObjectNo = sSelectedObjectContext.getProperty("objectId");
                     this.getView().byId("idCommentTitle").setText(`Object No: ${sSelectedObjectNo} - Comments`);
+                    let aCommentsData = await this.getComments(sSelectedObjectNo);
+                    this.getView().getModel("comments").setData(aCommentsData);
                     oDialog.open();
                 }.bind(this));
             },
