@@ -70,7 +70,7 @@
                                         <FeedListItem
                                             sender="{comments>sender}"
                                             text="{comments>text}"
-                                            timestamp="{comments>Date}"
+                                            timestamp="{comments>date}"
                                         >
                                             <FeedListItemAction
                                                 text="Edit"
@@ -114,6 +114,7 @@
                                         <FeedListItem
                                             sender="{comments>sender}"
                                             text="{comments>text}"
+                                            timestamp="{comments>date}"
                                         >
                                             <FeedListItemAction
                                                 text="Edit"
