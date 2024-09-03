@@ -623,14 +623,13 @@ sap.ui.define([
             },
             onOpenComments: function () {
                 let oEMTSTable = this.getView().byId("idEMTSTable");
-                // if (oEMTSTable.getSelectedIndices().length === 0) {
-                //     MessageBox.error(this.getI18nText("selectAtleastOneRow"));
-                //     return;
-                // }
+                if (oEMTSTable.getSelectedIndices().length === 0) {
+                    MessageBox.error(this.getI18nText("selectAtleastOneRow"));
+                    return;
+                }
                 var oView = this.getView();
-                // create Dialog
-                if (!this._pDialog) {
-                    this._pDialog = Fragment.load({
+                if (!this._oCommentDialog) {
+                    this._oCommentDialog = Fragment.load({
                         id: oView.getId(),
                         name: "zfsrenewwrkplc.fragment.Comments",
                         controller: this
@@ -639,7 +638,32 @@ sap.ui.define([
                         return oDialog;
                     }.bind(this));
                 }
-                this._pDialog.then(function (oDialog) {
+                this._oCommentDialog.then(function (oDialog) {
+                    let nSelectedIndex = oEMTSTable.getSelectedIndices()[0];
+                    let sSelectedObjectContext = oEMTSTable.getContextByIndex(nSelectedIndex);
+                    let sSelectedObjectNo = sSelectedObjectContext.getProperty("objectId");
+                    this.getView().byId("idCommentTitle").setText(`Object No: ${sSelectedObjectNo} - Comments`);
+                    oDialog.open();
+                }.bind(this));
+            },
+            onModifyEMTS: function () {
+                let oEMTSTable = this.getView().byId("idEMTSTable");
+                if (oEMTSTable.getSelectedIndices().length === 0) {
+                    MessageBox.error(this.getI18nText("selectAtleastOneRow"));
+                    return;
+                }
+                var oView = this.getView();
+                if (!this._oModifyEMTSDialog) {
+                    this._oModifyEMTSDialog = Fragment.load({
+                        id: oView.getId(),
+                        name: "zfsrenewwrkplc.fragment.ModifyEMTS",
+                        controller: this
+                    }).then(function (oDialog) {
+                        oView.addDependent(oDialog);
+                        return oDialog;
+                    }.bind(this));
+                }
+                this._oModifyEMTSDialog.then(function (oDialog) {
                     let nSelectedIndex = oEMTSTable.getSelectedIndices()[0];
                     let sSelectedObjectContext = oEMTSTable.getContextByIndex(nSelectedIndex);
                     let sSelectedPath = sSelectedObjectContext.getPath();
@@ -648,23 +672,12 @@ sap.ui.define([
                 });
             },
             onCommentsClose: function (oEvent) {
-                this.onCancel();
                 this.unSelectRowFromTable();
                 oEvent.getSource().getParent().getParent().getParent().close();
             },
-            onEdit: function () {
-                this.getView().byId("idDisplayForm").setVisible(false);
-                this.getView().byId("idEdit").setVisible(false);
-                this.getView().byId("idEditForm").setVisible(true);
-                this.getView().byId("idCancel").setVisible(true);
-                this.getView().byId("idSave").setVisible(true);
-            },
-            onCancel: function () {
-                this.getView().byId("idDisplayForm").setVisible(true);
-                this.getView().byId("idEdit").setVisible(true);
-                this.getView().byId("idEditForm").setVisible(false);
-                this.getView().byId("idCancel").setVisible(false);
-                this.getView().byId("idSave").setVisible(false);
+            onModifyEMTSClose: function (oEvent) {
+                this.unSelectRowFromTable();
+                oEvent.getSource().getParent().close();
             },
             onEditInternalComment: function (oEvent) {
                 let oSelectedItem = oEvent.getSource().getParent();
@@ -700,15 +713,6 @@ sap.ui.define([
                 this.oUpdateCommentDialog.getContent()[0].setValue(sCommentInSelectItem);
                 this.oUpdateCommentDialog.addStyleClass("sapUiContentPadding");
                 this.oUpdateCommentDialog.open();
-            },
-            onTabSwitch: function (oEvent) {
-                if (oEvent.getParameter("selectedItem").getKey() === "1") {
-                    this.onCancel();
-                } else {
-                    this.getView().byId("idEdit").setVisible(false);
-                    this.getView().byId("idCancel").setVisible(false);
-                    this.getView().byId("idSave").setVisible(false);
-                }
             }
         });
     });

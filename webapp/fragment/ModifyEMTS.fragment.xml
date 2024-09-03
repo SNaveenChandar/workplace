@@ -1,0 +1,66 @@
+<core:FragmentDefinition
+    xmlns="sap.m"
+    xmlns:core="sap.ui.core"
+    xmlns:f="sap.f"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:u="sap.ui.unified"
+    xmlns:layout="sap.ui.layout"
+>
+    <Dialog
+        verticalScrolling="false"
+        contentHeight="25%"
+        contentWidth="50%"
+        draggable="true"
+        resizable="true"
+        title="{i18n>editEMTS}{objectId}"
+        class="sapUiContentPadding"
+    >
+        <content>
+            <VBox class="sapUiContentPadding">
+                <form:SimpleForm
+                    id="idEditForm"
+                    editable="true"
+                    layout="ResponsiveGridLayout"
+                    title=""
+                    labelSpanXL="3"
+                    labelSpanL="3"
+                    labelSpanM="3"
+                    labelSpanS="12"
+                    adjustLabelSpan="false"
+                    emptySpanXL="4"
+                    emptySpanL="4"
+                    emptySpanM="4"
+                    emptySpanS="0"
+                    columnsXL="1"
+                    columnsL="1"
+                    columnsM="1"
+                    singleContainerFullSize="false"
+                >
+                    <form:content>
+                        <Label text="{i18n>PTDNo}" />
+                        <Input value="{ptdNumber}" />
+                        <Label text="{i18n>CDXID}" />
+                        <Input value="{emtsCDSID}" />
+                        <Label text="{i18n>BOL}" />
+                        <Input value="{emtsTradingPartnerBillOfLading}" />
+                    </form:content>
+                </form:SimpleForm>
+            </VBox>
+        </content>
+        <beginButton>
+            <Button
+                id="idSave"
+                text="{i18n>save}"
+                type="Success"
+                icon="sap-icon://save"
+            />
+        </beginButton>
+        <endButton>
+            <Button
+                text="{i18n>close}"
+                type="Reject"
+                press="onModifyEMTSClose"
+            />
+        </endButton>
+    </Dialog>
+</core:FragmentDefinition>

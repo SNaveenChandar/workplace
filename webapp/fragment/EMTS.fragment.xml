@@ -179,6 +179,12 @@
                         <ToolbarSpacer />
                         <ToolbarSeparator />
                         <Button
+                            id="idEMTSModify"
+                            text="{i18n>modify}"
+                            type="Emphasized"
+                            press="onModifyEMTS"
+                        />
+                        <Button
                             id="idEMTSComments"
                             text="{i18n>comments}"
                             type="Emphasized"

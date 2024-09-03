@@ -23,32 +23,10 @@
             <f:title>
                 <f:DynamicPageTitle>
                     <f:heading>
-                        <Title text="Object No: {objectId} - Comments" />
+                        <Title id="idCommentTitle"/>
                     </f:heading>
 
                     <f:actions>
-                        <Button
-                            id="idEdit"
-                            text="Edit"
-                            type="Emphasized"
-                            icon="sap-icon://edit"
-                            press="onEdit"
-                        />
-                        <Button
-                            id="idSave"
-                            text="Save"
-                            type="Success"
-                            visible="false"
-                            icon="sap-icon://save"
-                            
-                        />
-                        <Button
-                            id="idCancel"
-                            text="Cancel"
-                            type="Negative"
-                            visible="false"
-                            press="onCancel"
-                        />
                         <Button
                             text="Close"
                             type="Reject"
@@ -68,78 +46,6 @@
                     selectedKey="1"
                 >
                     <items>
-                        <!-- icon="sap-icon://edit-outside" -->
-                        <IconTabFilter
-                            design="Horizontal"
-                            text="Review/Edit"
-                            key="1"
-                            class="sapUiNoContentPadding"
-                        >
-                            <VBox class="sapUiSmallMargin">
-                                <form:SimpleForm
-                                    id="idDisplayForm"
-                                    editable="false"
-                                    layout="ResponsiveGridLayout"
-                                    title=""
-                                    labelSpanXL="3"
-                                    labelSpanL="3"
-                                    labelSpanM="3"
-                                    labelSpanS="12"
-                                    adjustLabelSpan="false"
-                                    emptySpanXL="4"
-                                    emptySpanL="4"
-                                    emptySpanM="4"
-                                    emptySpanS="0"
-                                    columnsXL="1"
-                                    columnsL="1"
-                                    columnsM="1"
-                                    singleContainerFullSize="false"
-                                >
-                                    <form:content>
-                                        <Label text="{i18n>PTDNo}" />
-                                        <Text text="{ptdNumber}" />
-                                        <Label text="{i18n>CDXID}" />
-                                        <Text text="{emtsCDSID}" />
-                                        <Label text="{i18n>BOL}" />
-                                        <Text
-                                            text="{emtsTradingPartnerBillOfLading}"
-                                        />
-                                    </form:content>
-                                </form:SimpleForm>
-                                <form:SimpleForm
-                                    id="idEditForm"
-                                    visible="false"
-                                    editable="true"
-                                    layout="ResponsiveGridLayout"
-                                    title=""
-                                    labelSpanXL="3"
-                                    labelSpanL="3"
-                                    labelSpanM="3"
-                                    labelSpanS="12"
-                                    adjustLabelSpan="false"
-                                    emptySpanXL="4"
-                                    emptySpanL="4"
-                                    emptySpanM="4"
-                                    emptySpanS="0"
-                                    columnsXL="1"
-                                    columnsL="1"
-                                    columnsM="1"
-                                    singleContainerFullSize="false"
-                                >
-                                    <form:content>
-                                        <Label text="{i18n>PTDNo}" />
-                                        <Input value="{ptdNumber}" />
-                                        <Label text="{i18n>CDXID}" />
-                                        <Input value="{emtsCDSID}" />
-                                        <Label text="{i18n>BOL}" />
-                                        <Input
-                                            value="{emtsTradingPartnerBillOfLading}"
-                                        />
-                                    </form:content>
-                                </form:SimpleForm>
-                            </VBox>
-                        </IconTabFilter>
-
                         <IconTabFilter
                             design="Horizontal"
                             text="{i18n>internalComments}"
