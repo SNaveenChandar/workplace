@@ -26,41 +26,41 @@ sap.ui.define([
                     "internal": [{
                         "sender": "Sender 1",
                         "text": "Internal Comment 1",
-                        "Date":new Date().toLocaleDateString() +" at "+ new Date().toLocaleTimeString()
+                        "Date": new Date().toLocaleDateString() + " at " + new Date().toLocaleTimeString()
                     },
                     {
                         "sender": "Sender 2",
                         "text": "Internal Comment 2",
-                        "Date":new Date().toLocaleDateString() +" at "+ new Date().toLocaleTimeString()
+                        "Date": new Date().toLocaleDateString() + " at " + new Date().toLocaleTimeString()
                     },
                     {
                         "sender": "Sender 3",
                         "text": "Internal Comment 3",
-                        "Date":new Date().toLocaleDateString() +" at "+ new Date().toLocaleTimeString()
+                        "Date": new Date().toLocaleDateString() + " at " + new Date().toLocaleTimeString()
                     },
                     {
                         "sender": "Sender 1",
                         "text": "Internal Comment 4",
-                        "Date":new Date().toLocaleDateString() +" at "+ new Date().toLocaleTimeString()
+                        "Date": new Date().toLocaleDateString() + " at " + new Date().toLocaleTimeString()
                     }, {
                         "sender": "Sender 2",
                         "text": "Internal Comment 5",
-                        "Date":new Date().toLocaleDateString() +" at "+ new Date().toLocaleTimeString()
+                        "Date": new Date().toLocaleDateString() + " at " + new Date().toLocaleTimeString()
                     },
                     {
                         "sender": "Sender 3",
                         "text": "Internal Comment 6",
-                        "Date": new Date().toLocaleDateString() +" at "+ new Date().toLocaleTimeString()
+                        "Date": new Date().toLocaleDateString() + " at " + new Date().toLocaleTimeString()
                     },
                     {
                         "sender": "Sender 2",
                         "text": "Internal Comment 7",
-                        "Date":new Date().toLocaleDateString() +" at "+ new Date().toLocaleTimeString()
+                        "Date": new Date().toLocaleDateString() + " at " + new Date().toLocaleTimeString()
                     },
                     {
                         "sender": "Sender 3",
                         "text": "Internal Comment 8",
-                        "Date":new Date().toLocaleDateString() +" at "+ new Date().toLocaleTimeString()
+                        "Date": new Date().toLocaleDateString() + " at " + new Date().toLocaleTimeString()
                     }],
                     "external": [{
                         "sender": "Sender 1",
@@ -666,18 +666,45 @@ sap.ui.define([
                 this.getView().byId("idCancel").setVisible(false);
                 this.getView().byId("idSave").setVisible(false);
             },
-            onEditInternalComment:function (oEvent) {
-                let oSelectedItem=oEvent.getSource().getParent();         
-                let sCommentInSelectItem=oSelectedItem.getText();
-                let oList = oSelectedItem.getParent();
-                oList.setSelectedItem(oSelectedItem);
-                oSelectedItem.setHighlight("Information");
-                this.getView().byId("idInternalCommentInput").setValue(sCommentInSelectItem); 
+            onEditInternalComment: function (oEvent) {
+                let oSelectedItem = oEvent.getSource().getParent();
+                let sCommentInSelectItem = oSelectedItem.getText();
+                // let oList = oSelectedItem.getParent();
+                // oList.setSelectedItem(oSelectedItem);
+                // oSelectedItem.setHighlight("Information");
+                // this.getView().byId("idInternalCommentInput").setValue(sCommentInSelectItem); 
+
+                if (!this.oUpdateCommentDialog) {
+                    this.oUpdateCommentDialog = new sap.m.Dialog({
+                        title: "Update Comment",
+                        contentWidth: "30%",
+                        contentHeight: "20%",
+                        draggable: true,
+                        resizable: true,
+                        content: [new sap.m.TextArea({ width: "100%", rows: 5, growing: true })],
+                        beginButton: new sap.m.Button({
+                            type: "Emphasized",
+                            text: "Update",
+                            press: function () {
+                                this.oUpdateCommentDialog.close();
+                            }.bind(this)
+                        }),
+                        endButton: new sap.m.Button({
+                            text: "close",
+                            press: function () {
+                                this.oUpdateCommentDialog.close();
+                            }.bind(this)
+                        })
+                    });
+                }
+                this.oUpdateCommentDialog.getContent()[0].setValue(sCommentInSelectItem);
+                this.oUpdateCommentDialog.addStyleClass("sapUiContentPadding");
+                this.oUpdateCommentDialog.open();
             },
-            onTabSwitch:function(oEvent){  
-                if(oEvent.getParameter("selectedItem").getKey() === "1"){
+            onTabSwitch: function (oEvent) {
+                if (oEvent.getParameter("selectedItem").getKey() === "1") {
                     this.onCancel();
-                }else{
+                } else {
                     this.getView().byId("idEdit").setVisible(false);
                     this.getView().byId("idCancel").setVisible(false);
                     this.getView().byId("idSave").setVisible(false);
