@@ -622,7 +622,7 @@ sap.ui.define([
                         error: function (oErrorReceived) {
                            MessageBox.error(this.getI18nText("failedComments"));
                            reject()
-                        }
+                        }.bind(this)
                     });
                 }))      
             },
