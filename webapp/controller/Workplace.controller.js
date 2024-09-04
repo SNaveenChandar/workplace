@@ -766,7 +766,6 @@ sap.ui.define([
                 });
             },
             onSaveCommentChanges:function(oDialog,sCommentId,sActionName){
-                debugger
                 let oPayLoad={}
                 oPayLoad.objectId = this.getView().byId("idCommentTitle").getText().split(": ")[1].split("-")[0].trim();
                 oPayLoad.commentId = sCommentId;
