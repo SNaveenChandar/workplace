@@ -688,9 +688,11 @@ sap.ui.define([
                 this.unSelectRowFromTable();
                 oEvent.getSource().getParent().close();
             },
-            onEditInternalComment: function (oEvent) {
+            onEditComment: function (oEvent,sActionName) {
                 let oSelectedItem = oEvent.getSource().getParent();
                 let sCommentInSelectItem = oSelectedItem.getText();
+                this.sCommentId = oSelectedItem.getBindingContext("comments").getProperty("commentId");
+                this.sActionName = sActionName;
                 if (!this.oUpdateCommentDialog) {
                     this.oUpdateCommentDialog = new sap.m.Dialog({
                         title: "Update Comment",
@@ -703,7 +705,7 @@ sap.ui.define([
                             type: "Emphasized",
                             text: "Update",
                             press: function () {
-                                this.oUpdateCommentDialog.close();
+                                this.onSaveCommentChanges(this.oUpdateCommentDialog,this.sCommentId,this.sActionName);
                             }.bind(this)
                         }),
                         endButton: new sap.m.Button({
@@ -739,6 +741,54 @@ sap.ui.define([
                 //         }
                 //     }
                 // });
+            },
+            onPostComment:function(sID,sActionName,sListID){
+                let oComment = this.getView().byId(sID).getValue();
+                let oPayLoad={}
+                oPayLoad.objectId = this.getView().byId("idCommentTitle").getText().split(": ")[1].split("-")[0].trim();
+                oPayLoad.commentId = crypto.randomUUID();
+                oPayLoad.sender = this.getView().getModel("userInfo").getProperty("/firstname") || "Local Testing";
+                oPayLoad.text = oComment;
+                let oDataModel = this.getOwnerComponent().getModel();
+                this.getView().byId(sListID).setBusy(true);
+                oDataModel.callFunction(`/${sActionName}`, {
+                    method: "POST",
+                    urlParameters: oPayLoad,
+                    success: function (oDataReceived) {
+                        if(oDataReceived[sActionName]){
+                            this.getView().getModel("comments").setData(oDataReceived[sActionName]);
+                            this.getView().byId(sListID).setBusy(false);
+                        }  
+                    }.bind(this),
+                    error: function () {
+                       this.getView().byId(sListID).setBusy(false);
+                    }
+                });
+            },
+            onSaveCommentChanges:function(oDialog,sCommentId,sActionName){
+                debugger
+                let oPayLoad={}
+                oPayLoad.objectId = this.getView().byId("idCommentTitle").getText().split(": ")[1].split("-")[0].trim();
+                oPayLoad.commentId = sCommentId;
+                oPayLoad.sender = this.getView().getModel("userInfo").getProperty("/firstname") || "Local Testing";
+                oPayLoad.text = oDialog.getContent()[0].getValue();
+                let oDataModel = this.getOwnerComponent().getModel();
+                oDialog.setBusy(true);
+                oDataModel.callFunction(`/${sActionName}`, {
+                    method: "POST",
+                    urlParameters: oPayLoad,
+                    success: function (oDataReceived) {
+                        if(oDataReceived[sActionName]){
+                            this.getView().getModel("comments").setData(oDataReceived[sActionName]);
+                            oDialog.setBusy(false);
+                            oDialog.close();
+                        }  
+                    }.bind(this),
+                    error: function () {
+                        oDialog.setBusy(false);
+                        oDialog.close();
+                    }
+                });
             }
         });
     });

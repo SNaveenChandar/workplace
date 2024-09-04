@@ -60,6 +60,7 @@
                             >
                                 <content>
                                     <List
+                                        id="idInternalCommentList"
                                         showSeparators="Inner"
                                         growing="true"
                                         growingThreshold="5"
@@ -75,7 +76,7 @@
                                             <FeedListItemAction
                                                 text="Edit"
                                                 icon="sap-icon://edit"
-                                                press="onEditInternalComment"
+                                                press="onEditComment($event,'EditInternalComment')"
                                             />
                                         </FeedListItem>
                                     </List>
@@ -83,10 +84,11 @@
                             </Panel>
                             <FeedInput
                                 id="idInternalCommentInput"
-                                post="onPost"
+                                post="onPostComment('idInternalCommentInput','AddInternalComment','idInternalCommentList')"
                                 showIcon="false"
                                 placeholder="{i18n>commentPlaceholder}"
                                 class="sapUiSmallMarginTopBottom sapUiSmallMarginBegin"
+                                
                             />
                         </IconTabFilter>
 
@@ -104,6 +106,7 @@
                             >
                                 <content>
                                     <List
+                                        id="idExternalCommentList"
                                         showSeparators="Inner"
                                         growing="true"
                                         growingThreshold="5"
@@ -119,7 +122,7 @@
                                             <FeedListItemAction
                                                 text="Edit"
                                                 icon="sap-icon://edit"
-                                                press="onEditExternalComment"
+                                                press="onEditComment($event,'EditExternalComment')"
                                             />
                                         </FeedListItem>
                                     </List>
@@ -127,8 +130,9 @@
                             </Panel>
 
                             <FeedInput
+                                id="idExternalCommentInput"
                                 showIcon="false"
-                                post="onPost"
+                                post="onPostComment('idExternalCommentInput','AddExternalComment','idExternalCommentList')"
                                 placeholder="{i18n>commentPlaceholder}"
                                 class="sapUiSmallMarginTopBottom sapUiSmallMarginBegin"
 
