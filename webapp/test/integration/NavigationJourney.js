@@ -25,6 +25,7 @@ sap.ui.define([
 		Then.onTheWorkPlacePage.iShouldSeeEMTSPage();
 		When.onTheWorkPlacePage.iPressGoButton();
 		Then.onTheWorkPlacePage.iShouldSeeEMTSRelatedData();
+		
 
 		//Cleanup
 		Then.iTeardownMyApp();

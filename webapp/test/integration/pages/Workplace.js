@@ -103,6 +103,26 @@ sap.ui.define([
                         },
                         errorMessage: "Did not find the EMTS Data"
                     });
+                },
+                iShouldSeeModifyButtonInEMTSPage: function () {
+                    return this.waitFor({
+                        id: "idEMTSModify",
+                        viewName: sViewName,
+                        success: function () {	
+							Opa5.assert.ok(true,"Modify Button is available");
+                        },
+                        errorMessage: "Did not find the Modify Button in EMTS View"
+                    });
+                },
+                iShouldSeeCommentsButtonInEMTSPage: function () {
+                    return this.waitFor({
+                        id: "idEMTSComments",
+                        viewName: sViewName,
+                        success: function (oControl) {
+							Opa5.assert.ok(true,"Comments Button is available");
+                        },
+                        errorMessage: "Did not find the  Comments Button in EMTS View"
+                    });
                 }
 				
 			}
