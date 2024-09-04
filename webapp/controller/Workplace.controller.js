@@ -747,7 +747,7 @@ sap.ui.define([
                 let oPayLoad={}
                 oPayLoad.objectId = this.getView().byId("idCommentTitle").getText().split(": ")[1].split("-")[0].trim();
                 oPayLoad.commentId = crypto.randomUUID();
-                oPayLoad.sender = this.getView().getModel("userInfo").getProperty("/firstname") || "Local Testing";
+                oPayLoad.sender = `${this.getView().getModel("userInfo").getProperty("/firstname")}  ${this.getView().getModel("userInfo").getProperty("/lastname")}` || "Local Testing";
                 oPayLoad.text = oComment;
                 let oDataModel = this.getOwnerComponent().getModel();
                 this.getView().byId(sListID).setBusy(true);
