@@ -178,6 +178,12 @@
                             press="onReverseInventory('idDebitSmartTable')"
                         />
                         <Button
+                            id="idCancel"
+                            text="{i18n>cancel}"
+                            type="Emphasized"
+                            press="onCancel('idDebitSmartTable')"
+                        />
+                        <Button
                             id="idDisplayLogs"
                             text="{i18n>displayLogs}"
                             type="Emphasized"

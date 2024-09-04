@@ -147,13 +147,6 @@ sap.ui.define([
                 let oDebitTable = this.getView().byId(sTableID).getTable();
                 if (oDebitTable.getSelectedIndices().length > 0) {
                     const oSelectedContext = oDebitTable.getContextByIndex(oDebitTable.getSelectedIndices()[0]);
-                    // let oReverseData = {          
-                    //     "MaterialDoc": oSelectedContext.getProperty("fuelOnwardMaterialalDocumentNumber"),
-                    //     "ReverseMaterialDoc": oSelectedContext.getProperty("fuelReversalMaterialalDocumentNumber"),
-                    //     "ReverseMaterialDocItem": oSelectedContext.getProperty("fuelReversalMaterialentItemNumber"),
-                    //     "ReverseMaterialDocYear": oSelectedContext.getProperty("fuelReversalMaterialialDocumentYear")
-                    // };
-                    // let oParams ={};
                     let oSelectedObjectID = oSelectedContext.getProperty("ID");
                     let sRegulationQuantity = oSelectedContext.getProperty("regulationQuantity");
                     if (sRegulationQuantity <= 0) {
@@ -161,7 +154,72 @@ sap.ui.define([
                         MessageBox.error(this.getI18nText("zeroRegulationQty"));
                         return;
                     }
-                    // oParams.reverse=JSON.stringify(oReverseData);
+                    let oDataModel = this.getView()?.getModel();
+                    const that = this;
+                    this.getView().setBusy(true);
+                    oDataModel.callFunction("/processReverseInvPost", {
+                        method: "POST",
+                        urlParameters: {
+                            "objectKey": oSelectedObjectID
+                        },
+                        success: function (oDataReceived) {
+                            if (oDataReceived.processReverseInvPost.messageType && oDataReceived.processReverseInvPost.message) {
+                                if (oDataReceived.processReverseInvPost.messageType === 'S') {
+                                    MessageBox.success(oDataReceived.processReverseInvPost.message, {
+                                        styleClass: "sapUiResponsivePadding--header sapUiResponsivePadding--content sapUiResponsivePadding--footer",
+                                        onClose: () => {
+                                            that.unSelectRowFromTable();
+                                            that.makeSmartTableRebind(sTableID);
+                                            that.getView().setBusy(false);
+                                        }
+                                    });
+                                } else {
+                                    MessageBox.error(oDataReceived.processReverseInvPost.message, {
+                                        styleClass: "sapUiResponsivePadding--header sapUiResponsivePadding--content sapUiResponsivePadding--footer",
+                                        onClose: () => {
+                                            that.unSelectRowFromTable();
+                                            that.getView().setBusy(false);
+                                        }
+                                    });
+                                }
+                            }
+                        },
+                        error: function (oErrorReceived) {
+                            if (oErrorReceived.responseText) {
+                                MessageBox.error(oErrorReceived.responseText, {
+                                    styleClass: "sapUiResponsivePadding--header sapUiResponsivePadding--content sapUiResponsivePadding--footer",
+                                    onClose: () => {
+                                        that.unSelectRowFromTable();
+                                        that.getView().setBusy(false);
+                                    }
+                                });
+                            }
+                        }
+                    });
+
+                } else {
+                    // const sWarningText = this.oResourceBundle.getText("warningText") || "Please select atleast one row to see the logs";
+                    MessageBox.error(this.getI18nText("noRow"));
+                }
+            },
+            onCancel: function (sTableID) {
+                let oDebitTable = this.getView().byId(sTableID).getTable();
+                if (oDebitTable.getSelectedIndices().length > 0) {
+                    const oSelectedContext = oDebitTable.getContextByIndex(oDebitTable.getSelectedIndices()[0]);
+                    let oSelectedObjectID = oSelectedContext.getProperty("ID");
+                    let sRegulationQuantity = oSelectedContext.getProperty("regulationQuantity");
+                    let sSubObjectScenario = oSelectedContext.getProperty("subObjectScenario");
+                    if (sRegulationQuantity <= 0) {
+                        this.unSelectRowFromTable();
+                        MessageBox.error(this.getI18nText("zeroRegulationQty"));
+                        return;
+                    }
+                    if (sSubObjectScenario !== 'RFS2_MADJ_RVO') {
+                        this.unSelectRowFromTable();
+                        MessageBox.error(this.getI18nText("cancelNotPossible"));
+                        return;
+                    }
+                    
                     let oDataModel = this.getView()?.getModel();
                     const that = this;
                     this.getView().setBusy(true);
