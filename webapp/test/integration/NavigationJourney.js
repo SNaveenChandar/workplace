@@ -21,6 +21,11 @@ sap.ui.define([
 		When.onTheWorkPlacePage.iPressGoButton();
 		Then.onTheWorkPlacePage.iShouldSeeRINOTRelatedData();
 
+		When.onTheWorkPlacePage.iSelectEMTSNode();
+		Then.onTheWorkPlacePage.iShouldSeeEMTSPage();
+		When.onTheWorkPlacePage.iPressGoButton();
+		Then.onTheWorkPlacePage.iShouldSeeEMTSRelatedData();
+
 		//Cleanup
 		Then.iTeardownMyApp();
 	});
