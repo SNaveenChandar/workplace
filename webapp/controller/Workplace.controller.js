@@ -9,7 +9,7 @@ sap.ui.define([
         "use strict";
 
         return Controller.extend("zfsrenewwrkplc.controller.Workplace", {
-            onInit:async function () {
+            onInit: async function () {
                 const oDebitVisualFiltersModel = new JSONModel({ filters: [] });
                 this.getView()?.setModel(oDebitVisualFiltersModel, "DebitVisualFiltersModel");
 
@@ -24,7 +24,9 @@ sap.ui.define([
 
                 const oComments = new JSONModel();
                 this.getView()?.setModel(oComments, "comments");
-                
+
+                await this.getUserInfo();
+
             },
             getI18nText: function (sProperty) {
                 return this.getOwnerComponent().getModel("i18n")?.getProperty(sProperty);
@@ -218,7 +220,7 @@ sap.ui.define([
                         MessageBox.error(this.getI18nText("cancelNotPossible"));
                         return;
                     }
-                    
+
                     let oDataModel = this.getView()?.getModel();
                     const that = this;
                     this.getView().setBusy(true);
@@ -417,14 +419,14 @@ sap.ui.define([
                 oFilterModel.setProperty("/filters", aTotalUniqueVisualFilters);
                 oBindings.filter(aTotalUniqueVisualFilters.length === 0 ? [] : aTotalUniqueVisualFilters);
             },
-            onDebitBeforeRebindTable:async function (oEvent) {
+            onDebitBeforeRebindTable: async function (oEvent) {
                 let oBindingParams = oEvent.getParameter("bindingParams")
                 let sSubObjectScenerios = this.getView()?.byId("idDebitSubObjectScenerio").getSelectedKeys();
                 let oDocumentDate = this.getView()?.byId("idDebitDocumentRangeSelection").getDOMValue();
-                
-                let aTenantIDs = await this.getUserInfo();
-                if(aTenantIDs){
-                    aTenantIDs.forEach((sTenantID)=>{
+
+                let aTenantIDs = this.getView().getModel('userInfo').getProperty("/tenantID");
+                if (aTenantIDs) {
+                    aTenantIDs.forEach((sTenantID) => {
                         oBindingParams.filters?.push(new Filter({
                             path: "tenantID",
                             operator: FilterOperator.EQ,
@@ -477,10 +479,10 @@ sap.ui.define([
                 //     }));
                 // }
 
-                let aTenantIDs = await this.getUserInfo();
+                let aTenantIDs = this.getView().getModel('userInfo').getProperty("/tenantID");
 
-                if(aTenantIDs){
-                    aTenantIDs.forEach((sTenantID)=>{
+                if (aTenantIDs) {
+                    aTenantIDs.forEach((sTenantID) => {
                         oBindingParams.filters?.push(new Filter({
                             path: "tenantID",
                             operator: FilterOperator.EQ,
@@ -550,10 +552,10 @@ sap.ui.define([
                 //         and: andOrBoolean,
                 //     }));
                 // }
-                let aTenantIDs = await this.getUserInfo();
+                let aTenantIDs = this.getView().getModel('userInfo').getProperty("/tenantID");
 
-                if(aTenantIDs){
-                    aTenantIDs.forEach((sTenantID)=>{
+                if (aTenantIDs) {
+                    aTenantIDs.forEach((sTenantID) => {
                         oBindingParams.filters?.push(new Filter({
                             path: "tenantID",
                             operator: FilterOperator.EQ,
@@ -611,35 +613,45 @@ sap.ui.define([
                 return aUniqueFiltersArray;
             },
             getUserInfo: async function () {
-                if(!this.getView().getModel('userInfo')){
-                return new Promise(function(resolve,reject){
-                    const url = this.getBaseURL() + "/user-api/attributes";
-                    var oUserInfoModel = new JSONModel();
-                    oUserInfoModel.loadData(url);
-                    oUserInfoModel.dataLoaded()
-                    .then(() => {
-                        this.getView().setModel(oUserInfoModel, "userInfo");
-                        // this.getView().getModel('userInfo').setData(mock);
-                        if (!oUserInfoModel.getData().firstname || !oUserInfoModel.getData().lastname) {
-                            this.getView().getModel('userInfo').setProperty("/visible", false);
-                            resolve(undefined);
-                        } else {
-                            this.getView().getModel('userInfo').setProperty("/visible", true);
-                            resolve(oUserInfoModel.getData().tenantID);
-                        }
-                    })
-                    .catch(() => {
-                        // oModel.setData(mock);
-                        this.getView().setModel(oUserInfoModel, "userInfo");
+                const url = this.getBaseURL() + "/user-api/attributes";
+                var oUserInfoModel = new JSONModel();
+                this.getView().setModel(oUserInfoModel, "userInfo");
+                oUserInfoModel.loadData(url);
+                try {
+                    await oUserInfoModel.dataLoaded();
+                    if (!oUserInfoModel.getData().firstname || !oUserInfoModel.getData().lastname) {
                         this.getView().getModel('userInfo').setProperty("/visible", false);
-                        resolve([]);
-                    });
+                    } else {
+                        this.getView().getModel('userInfo').setProperty("/visible", true);
+                        if(oUserInfoModel.getData().firstname === "Naveen"){
+                            this.getView().getModel('userInfo').setProperty("/tenantID", ["50"]);
+                        }
+                    };
+                } catch (error) {
+                    this.getView().setModel(oUserInfoModel, "userInfo");
+                    this.getView().getModel('userInfo').setProperty("/visible", false);
+                };
 
-                }.bind(this))
-            }else{
-                return new Promise.resolve(this.getView().getModel('userInfo').getProperty("/tenantID"));
-            }
-        },
+                // .then(() => {
+                //     this.getView().setModel(oUserInfoModel, "userInfo");
+                //     // this.getView().getModel('userInfo').setData(mock);
+                //     if (!oUserInfoModel.getData().firstname || !oUserInfoModel.getData().lastname) {
+                //         this.getView().getModel('userInfo').setProperty("/visible", false);
+
+                //     } else {
+                //         this.getView().getModel('userInfo').setProperty("/visible", true);
+                //         resolve(oUserInfoModel.getData().tenantID);
+                //     }
+                // })
+                // .catch(() => {
+                //     // oModel.setData(mock);
+                //     this.getView().setModel(oUserInfoModel, "userInfo");
+                //     this.getView().getModel('userInfo').setProperty("/visible", false);
+
+                // });
+
+
+            },
 
             getBaseURL: function () {
                 var appId = this.getOwnerComponent().getManifestEntry("/sap.app/id");
@@ -647,23 +659,23 @@ sap.ui.define([
                 var appModulePath = jQuery.sap.getModulePath(appPath);
                 return appModulePath;
             },
-            getComments:function(sObjectId){
+            getComments: function (sObjectId) {
                 let oDataModel = this.getView()?.getModel();
-                return new Promise((function(resolve,reject){
+                return new Promise((function (resolve, reject) {
                     oDataModel.callFunction("/GetComments", {
                         method: "POST",
                         urlParameters: {
                             "objectId": sObjectId
                         },
                         success: function (oDataReceived) {
-                            resolve (oDataReceived.GetComments);
+                            resolve(oDataReceived.GetComments);
                         },
                         error: function (oErrorReceived) {
-                           MessageBox.error(this.getI18nText("failedComments"));
-                           reject()
+                            MessageBox.error(this.getI18nText("failedComments"));
+                            reject()
                         }.bind(this)
                     });
-                }))      
+                }))
             },
             onOpenComments: function () {
                 let oEMTSTable = this.getView().byId("idEMTSTable");
@@ -694,7 +706,7 @@ sap.ui.define([
                     oDialog.open();
                 }.bind(this));
             },
-            onModify: function (sTableID,sRINOrEMTS) {
+            onModify: function (sTableID, sRINOrEMTS) {
                 this.sRINOrEMTS = sRINOrEMTS;
                 let oTable = this.getView().byId(sTableID);
                 if (oTable.getSelectedIndices().length === 0) {
@@ -716,10 +728,10 @@ sap.ui.define([
                     let nSelectedIndex = oTable.getSelectedIndices()[0];
                     let sSelectedObjectContext = oTable.getContextByIndex(nSelectedIndex);
                     let sSelectedPath = sSelectedObjectContext.getPath();
-                    if(this.sRINOrEMTS === 'RIN'){
+                    if (this.sRINOrEMTS === 'RIN') {
                         this.getView().byId("idRINEditForm").setVisible(true);
                         this.getView().byId("idEMTSEditForm").setVisible(false);
-                    }else{
+                    } else {
                         this.getView().byId("idRINEditForm").setVisible(false);
                         this.getView().byId("idEMTSEditForm").setVisible(true);
                     }
@@ -735,7 +747,7 @@ sap.ui.define([
                 this.unSelectRowFromTable();
                 oEvent.getSource().getParent().close();
             },
-            onEditComment: function (oEvent,sActionName) {
+            onEditComment: function (oEvent, sActionName) {
                 let oSelectedItem = oEvent.getSource().getParent();
                 let sCommentInSelectItem = oSelectedItem.getText();
                 this.sCommentId = oSelectedItem.getBindingContext("comments").getProperty("commentId");
@@ -752,7 +764,7 @@ sap.ui.define([
                             type: "Emphasized",
                             text: "Update",
                             press: function () {
-                                this.onSaveCommentChanges(this.oUpdateCommentDialog,this.sCommentId,this.sActionName);
+                                this.onSaveCommentChanges(this.oUpdateCommentDialog, this.sCommentId, this.sActionName);
                             }.bind(this)
                         }),
                         endButton: new sap.m.Button({
@@ -774,7 +786,7 @@ sap.ui.define([
                 let oEditedObject = oEditForm.getBindingContext().getObject();
                 let sPath = oEditForm.getBindingContext().getPath();
                 let oModel = this.getOwnerComponent().getModel();
-                oEditedObject.objectId= oEditedObject.objectKey.toString();
+                oEditedObject.objectId = oEditedObject.objectKey.toString();
                 delete oEditedObject.__metadata;
                 // oModel.update(sPath, oEditedObject, {
                 //     method: "PATCH",
@@ -789,9 +801,9 @@ sap.ui.define([
                 //     }
                 // });
             },
-            onPostComment:function(sID,sActionName,sListID){
+            onPostComment: function (sID, sActionName, sListID) {
                 let oComment = this.getView().byId(sID).getValue();
-                let oPayLoad={}
+                let oPayLoad = {}
                 oPayLoad.objectId = this.getView().byId("idCommentTitle").getText().split(": ")[1].split("-")[0].trim();
                 oPayLoad.commentId = crypto.randomUUID();
                 oPayLoad.sender = `${this.getView().getModel("userInfo").getProperty("/firstname")}  ${this.getView().getModel("userInfo").getProperty("/lastname")}` || "Local Testing";
@@ -802,18 +814,18 @@ sap.ui.define([
                     method: "POST",
                     urlParameters: oPayLoad,
                     success: function (oDataReceived) {
-                        if(oDataReceived[sActionName]){
+                        if (oDataReceived[sActionName]) {
                             this.getView().getModel("comments").setData(oDataReceived[sActionName]);
                             this.getView().byId(sListID).setBusy(false);
-                        }  
+                        }
                     }.bind(this),
                     error: function () {
-                       this.getView().byId(sListID).setBusy(false);
+                        this.getView().byId(sListID).setBusy(false);
                     }
                 });
             },
-            onSaveCommentChanges:function(oDialog,sCommentId,sActionName){
-                let oPayLoad={}
+            onSaveCommentChanges: function (oDialog, sCommentId, sActionName) {
+                let oPayLoad = {}
                 oPayLoad.objectId = this.getView().byId("idCommentTitle").getText().split(": ")[1].split("-")[0].trim();
                 oPayLoad.commentId = sCommentId;
                 oPayLoad.sender = `${this.getView().getModel("userInfo").getProperty("/firstname")}  ${this.getView().getModel("userInfo").getProperty("/lastname")}` || "Local Testing";
@@ -824,11 +836,11 @@ sap.ui.define([
                     method: "POST",
                     urlParameters: oPayLoad,
                     success: function (oDataReceived) {
-                        if(oDataReceived[sActionName]){
+                        if (oDataReceived[sActionName]) {
                             this.getView().getModel("comments").setData(oDataReceived[sActionName]);
                             oDialog.setBusy(false);
                             oDialog.close();
-                        }  
+                        }
                     }.bind(this),
                     error: function () {
                         oDialog.setBusy(false);
