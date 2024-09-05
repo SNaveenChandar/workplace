@@ -9,7 +9,7 @@ sap.ui.define([
         "use strict";
 
         return Controller.extend("zfsrenewwrkplc.controller.Workplace", {
-            onInit: function () {
+            onInit:async function () {
                 const oDebitVisualFiltersModel = new JSONModel({ filters: [] });
                 this.getView()?.setModel(oDebitVisualFiltersModel, "DebitVisualFiltersModel");
 
@@ -24,8 +24,9 @@ sap.ui.define([
 
                 const oComments = new JSONModel();
                 this.getView()?.setModel(oComments, "comments");
-
-                this.getUserInfo();
+                
+                await this.getUserInfo();
+                
             },
             getI18nText: function (sProperty) {
                 return this.getOwnerComponent().getModel("i18n")?.getProperty(sProperty);
@@ -422,7 +423,7 @@ sap.ui.define([
                 let oBindingParams = oEvent.getParameter("bindingParams")
                 let sSubObjectScenerios = this.getView()?.byId("idDebitSubObjectScenerio").getSelectedKeys();
                 let oDocumentDate = this.getView()?.byId("idDebitDocumentRangeSelection").getDOMValue();
-                let aTenantIDs=this.getView().getModel('userInfo').getProperty("/tenantID");
+                let aTenantIDs = this.getView().getModel('userInfo').getProperty("/tenantID");
                 if(aTenantIDs){
                     aTenantIDs.forEach((sTenantID)=>{
                         oBindingParams.filters?.push(new Filter({
@@ -476,7 +477,7 @@ sap.ui.define([
                 //         and: andOrBoolean,
                 //     }));
                 // }
-                let aTenantIDs=this.getView().getModel('userInfo').getProperty("/tenantID");
+                let aTenantIDs = this.getView().getModel('userInfo').getProperty("/tenantID");
                 if(aTenantIDs){
                     aTenantIDs.forEach((sTenantID)=>{
                         oBindingParams.filters?.push(new Filter({
@@ -548,7 +549,7 @@ sap.ui.define([
                 //         and: andOrBoolean,
                 //     }));
                 // }
-                let aTenantIDs=this.getView().getModel('userInfo').getProperty("/tenantID");
+                let aTenantIDs = this.getView().getModel('userInfo').getProperty("/tenantID");
                 if(aTenantIDs){
                     aTenantIDs.forEach((sTenantID)=>{
                         oBindingParams.filters?.push(new Filter({
@@ -608,19 +609,18 @@ sap.ui.define([
                 return aUniqueFiltersArray;
             },
             getUserInfo: function () {
-                const url = this.getBaseURL() + "/user-api/attributes";
-                var oUserInfoModel = new JSONModel();
-                // var mock = {
-                //     firstname: "FirstName",
-                //     lastname: "LastName"
-                // }; 
-                oUserInfoModel.loadData(url);
-                oUserInfoModel.dataLoaded()
+               
+                return new Promise(function(resolve,reject){
+                    const url = this.getBaseURL() + "/user-api/attributes";
+                    var oUserInfoModel = new JSONModel();
+                    oUserInfoModel.loadData(url);
+                    oUserInfoModel.dataLoaded()
                     .then(() => {
                         this.getView().setModel(oUserInfoModel, "userInfo")
                         // this.getView().getModel('userInfo').setData(mock);
                         if (!oUserInfoModel.getData().firstname || !oUserInfoModel.getData().lastname) {
                             this.getView().getModel('userInfo').setProperty("/visible", false);
+                            resolve();
                         } else {
                             this.getView().getModel('userInfo').setProperty("/visible", true);
                         }
@@ -629,7 +629,11 @@ sap.ui.define([
                         // oModel.setData(mock);
                         this.getView().setModel(oUserInfoModel, "userInfo");
                         this.getView().getModel('userInfo').setProperty("/visible", false);
+                        reject();
                     });
+
+                }.bind(this))
+               
             },
 
             getBaseURL: function () {
@@ -685,7 +689,8 @@ sap.ui.define([
                     oDialog.open();
                 }.bind(this));
             },
-            onModify: function (sTableID) {
+            onModify: function (sTableID,sRINOrEMTS) {
+                this.sRINOrEMTS = sRINOrEMTS;
                 let oTable = this.getView().byId(sTableID);
                 if (oTable.getSelectedIndices().length === 0) {
                     MessageBox.error(this.getI18nText("selectAtleastOneRow"));
@@ -706,9 +711,16 @@ sap.ui.define([
                     let nSelectedIndex = oTable.getSelectedIndices()[0];
                     let sSelectedObjectContext = oTable.getContextByIndex(nSelectedIndex);
                     let sSelectedPath = sSelectedObjectContext.getPath();
+                    if(this.sRINOrEMTS === 'RIN'){
+                        this.getView().byId("idRINEditForm").setVisible(true);
+                        this.getView().byId("idEMTSEditForm").setVisible(false);
+                    }else{
+                        this.getView().byId("idRINEditForm").setVisible(false);
+                        this.getView().byId("idEMTSEditForm").setVisible(true);
+                    }
                     oDialog.bindElement(sSelectedPath);
                     oDialog.open();
-                });
+                }.bind(this));
             },
             onCommentsClose: function (oEvent) {
                 this.unSelectRowFromTable();

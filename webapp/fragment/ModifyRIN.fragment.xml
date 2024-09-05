@@ -19,6 +19,7 @@
             <VBox class="sapUiContentPadding">
                 <form:SimpleForm
                     id="idEMTSEditForm"
+                    visible="false"
                     editable="true"
                     layout="ResponsiveGridLayout"
                     title=""
@@ -46,6 +47,7 @@
                     </form:content>
                 </form:SimpleForm>
                 <form:SimpleForm
+                    visible="false"
                     id="idRINEditForm"
                     editable="true"
                     layout="ResponsiveGridLayout"
