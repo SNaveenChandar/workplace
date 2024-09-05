@@ -43,7 +43,7 @@ sap.ui.define([
                         this.getModel('userInfo').setProperty("/visible", false);
                         this.getModel('userInfo').setProperty("/tenantID", ["50"]);
                     } else {
-                        this.getView().getModel('userInfo').setProperty("/visible", true);
+                        this.getModel('userInfo').setProperty("/visible", true);
                         if(oUserInfoModel.getData().firstname === "Naveen"){
                             this.getModel('userInfo').setProperty("/tenantID", ["50"]);
                         }
@@ -54,9 +54,7 @@ sap.ui.define([
                 };
             },
             getBaseURL: function () {
-                var appId = this.getOwnerComponent().getManifestEntry("/sap.app/id");
-                var appPath = appId.replaceAll(".", "/");
-                var appModulePath = jQuery.sap.getModulePath(appPath);
+                var appModulePath = window.location.pathname.split("/").slice(0, -1).join("/") + "/";
                 return appModulePath;
             }
         })
