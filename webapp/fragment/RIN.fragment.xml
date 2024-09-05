@@ -203,6 +203,12 @@
                     <OverflowToolbar>
                         <ToolbarSpacer />
                         <ToolbarSeparator />
+                        <!-- <Button
+                            id="idOTCModify"
+                            text="{i18n>modify}"
+                            type="Emphasized"
+                            press="onModify('idOTCTable','idRINEditForm')"
+                        /> -->
                         <Button
                             id="idOTCPostInventory"
                             text="{i18n>postInventory}"

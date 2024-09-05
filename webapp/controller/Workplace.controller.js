@@ -685,26 +685,26 @@ sap.ui.define([
                     oDialog.open();
                 }.bind(this));
             },
-            onModifyEMTS: function () {
-                let oEMTSTable = this.getView().byId("idEMTSTable");
-                if (oEMTSTable.getSelectedIndices().length === 0) {
+            onModify: function (sTableID) {
+                let oTable = this.getView().byId(sTableID);
+                if (oTable.getSelectedIndices().length === 0) {
                     MessageBox.error(this.getI18nText("selectAtleastOneRow"));
                     return;
                 }
                 var oView = this.getView();
-                if (!this._oModifyEMTSDialog) {
-                    this._oModifyEMTSDialog = Fragment.load({
+                if (!this._oModifyDialog) {
+                    this._oModifyDialog = Fragment.load({
                         id: oView.getId(),
-                        name: "zfsrenewwrkplc.fragment.ModifyEMTS",
+                        name: "zfsrenewwrkplc.fragment.ModifyRIN",
                         controller: this
                     }).then(function (oDialog) {
                         oView.addDependent(oDialog);
                         return oDialog;
                     }.bind(this));
                 }
-                this._oModifyEMTSDialog.then(function (oDialog) {
-                    let nSelectedIndex = oEMTSTable.getSelectedIndices()[0];
-                    let sSelectedObjectContext = oEMTSTable.getContextByIndex(nSelectedIndex);
+                this._oModifyDialog.then(function (oDialog) {
+                    let nSelectedIndex = oTable.getSelectedIndices()[0];
+                    let sSelectedObjectContext = oTable.getContextByIndex(nSelectedIndex);
                     let sSelectedPath = sSelectedObjectContext.getPath();
                     oDialog.bindElement(sSelectedPath);
                     oDialog.open();

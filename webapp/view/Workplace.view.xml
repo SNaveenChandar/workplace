@@ -92,14 +92,6 @@
                         icon="sap-icon://arrow-left"
                         key="idOTCDynamicPage"
                     >
-                        <!-- <tnt:NavigationListItem
-                            key="idMADJDynamicPage"
-                            text="{i18n>RINMADJ}"
-                        /> 
-                         <tnt:NavigationListItem
-                            key="idRINRFDynamicPage"
-                            text="{i18n>RINRF}"
-                        /> -->
                         <tnt:NavigationListItem
                             key="idOTCDynamicPage"
                             text="{i18n>rin}"
@@ -123,17 +115,9 @@
                         type="XML"
                         fragmentName="zfsrenewwrkplc.fragment.Debit"
                     />
-                     <core:Fragment
-                        type="XML"
-                        fragmentName="zfsrenewwrkplc.fragment.RINManualAdjustment"
-                    />
                     <core:Fragment
                         type="XML"
-                        fragmentName="zfsrenewwrkplc.fragment.RINRFCredit"
-                    />
-                    <core:Fragment
-                        type="XML"
-                        fragmentName="zfsrenewwrkplc.fragment.RINRFOTC"
+                        fragmentName="zfsrenewwrkplc.fragment.RIN"
                     />
                     <core:Fragment
                         type="XML"

@@ -18,7 +18,7 @@
         <content>
             <VBox class="sapUiContentPadding">
                 <form:SimpleForm
-                    id="idEditForm"
+                    id="idEMTSEditForm"
                     editable="true"
                     layout="ResponsiveGridLayout"
                     title=""
@@ -43,6 +43,32 @@
                         <Input value="{emtsCDSID}" />
                         <Label text="{i18n>BOL}" />
                         <Input value="{emtsTradingPartnerBillOfLading}" />
+                    </form:content>
+                </form:SimpleForm>
+                <form:SimpleForm
+                    id="idRINEditForm"
+                    editable="true"
+                    layout="ResponsiveGridLayout"
+                    title=""
+                    labelSpanXL="3"
+                    labelSpanL="3"
+                    labelSpanM="3"
+                    labelSpanS="12"
+                    adjustLabelSpan="false"
+                    emptySpanXL="4"
+                    emptySpanL="4"
+                    emptySpanM="4"
+                    emptySpanS="0"
+                    columnsXL="1"
+                    columnsL="1"
+                    columnsM="1"
+                    singleContainerFullSize="false"
+                >
+                    <form:content>
+                        <Label text="{i18n>PTDNo}" />
+                        <Input value="{ptdNumber}" />
+                        <Label text="{i18n>BOL}" />
+                        <Input value="{billofLading}" />
                     </form:content>
                 </form:SimpleForm>
             </VBox>
