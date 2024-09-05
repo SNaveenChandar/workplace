@@ -25,7 +25,7 @@ sap.ui.define([
                 const oComments = new JSONModel();
                 this.getView()?.setModel(oComments, "comments");
 
-                await this.getUserInfo();
+                // await this.getUserInfo();
 
             },
             getI18nText: function (sProperty) {
@@ -424,7 +424,7 @@ sap.ui.define([
                 let sSubObjectScenerios = this.getView()?.byId("idDebitSubObjectScenerio").getSelectedKeys();
                 let oDocumentDate = this.getView()?.byId("idDebitDocumentRangeSelection").getDOMValue();
 
-                let aTenantIDs = this.getView().getModel('userInfo').getProperty("/tenantID");
+                let aTenantIDs = this.getOwnerComponent().getModel('userInfo').getProperty("/tenantID");
                 if (aTenantIDs) {
                     aTenantIDs.forEach((sTenantID) => {
                         oBindingParams.filters?.push(new Filter({
@@ -479,7 +479,7 @@ sap.ui.define([
                 //     }));
                 // }
 
-                let aTenantIDs = this.getView().getModel('userInfo').getProperty("/tenantID");
+                let aTenantIDs = this.getOwnerComponent().getModel('userInfo').getProperty("/tenantID");
 
                 if (aTenantIDs) {
                     aTenantIDs.forEach((sTenantID) => {
@@ -552,7 +552,7 @@ sap.ui.define([
                 //         and: andOrBoolean,
                 //     }));
                 // }
-                let aTenantIDs = this.getView().getModel('userInfo').getProperty("/tenantID");
+                let aTenantIDs = this.getOwnerComponent().getModel('userInfo').getProperty("/tenantID");
 
                 if (aTenantIDs) {
                     aTenantIDs.forEach((sTenantID) => {

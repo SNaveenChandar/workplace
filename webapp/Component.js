@@ -5,9 +5,10 @@
 sap.ui.define([
         "sap/ui/core/UIComponent",
         "sap/ui/Device",
-        "zfsrenewwrkplc/model/models"
+        "zfsrenewwrkplc/model/models",
+        "sap/ui/model/json/JSONModel"
     ],
-    function (UIComponent, Device, models) {
+    function (UIComponent, Device, models,JSONModel) {
         "use strict";
 
         return UIComponent.extend("zfsrenewwrkplc.Component", {
@@ -20,7 +21,7 @@ sap.ui.define([
              * @public
              * @override
              */
-            init: function () {
+            init: async function () {
                 // call the base component's init function
                 UIComponent.prototype.init.apply(this, arguments);
 
@@ -29,7 +30,35 @@ sap.ui.define([
 
                 // set the device model
                 this.setModel(models.createDeviceModel(), "device");
+                await this.getUserInfo();
+            },
+            getUserInfo: async function () {
+                const url = "./user-api/attributes";
+                var oUserInfoModel = new JSONModel();
+                this.setModel(oUserInfoModel, "userInfo");
+                oUserInfoModel.loadData(url);
+                try {
+                    await oUserInfoModel.dataLoaded();
+                    if (!oUserInfoModel.getData().firstname || !oUserInfoModel.getData().lastname) {
+                        this.getModel('userInfo').setProperty("/visible", false);
+                        this.getModel('userInfo').setProperty("/tenantID", ["50"]);
+                    } else {
+                        this.getView().getModel('userInfo').setProperty("/visible", true);
+                        if(oUserInfoModel.getData().firstname === "Naveen"){
+                            this.getModel('userInfo').setProperty("/tenantID", ["50"]);
+                        }
+                    };
+                } catch (error) {
+                    this.setModel(oUserInfoModel, "userInfo");
+                    this.getModel('userInfo').setProperty("/visible", false);
+                };
+            },
+            getBaseURL: function () {
+                var appId = this.getOwnerComponent().getManifestEntry("/sap.app/id");
+                var appPath = appId.replaceAll(".", "/");
+                var appModulePath = jQuery.sap.getModulePath(appPath);
+                return appModulePath;
             }
-        });
+        })
     }
 );
