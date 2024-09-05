@@ -25,8 +25,6 @@ sap.ui.define([
                 const oComments = new JSONModel();
                 this.getView()?.setModel(oComments, "comments");
                 
-                await this.getUserInfo();
-                
             },
             getI18nText: function (sProperty) {
                 return this.getOwnerComponent().getModel("i18n")?.getProperty(sProperty);
@@ -419,11 +417,12 @@ sap.ui.define([
                 oFilterModel.setProperty("/filters", aTotalUniqueVisualFilters);
                 oBindings.filter(aTotalUniqueVisualFilters.length === 0 ? [] : aTotalUniqueVisualFilters);
             },
-            onDebitBeforeRebindTable: function (oEvent) {
+            onDebitBeforeRebindTable:async function (oEvent) {
                 let oBindingParams = oEvent.getParameter("bindingParams")
                 let sSubObjectScenerios = this.getView()?.byId("idDebitSubObjectScenerio").getSelectedKeys();
                 let oDocumentDate = this.getView()?.byId("idDebitDocumentRangeSelection").getDOMValue();
-                let aTenantIDs = this.getView().getModel('userInfo').getProperty("/tenantID");
+                
+                let aTenantIDs = await this.getUserInfo();
                 if(aTenantIDs){
                     aTenantIDs.forEach((sTenantID)=>{
                         oBindingParams.filters?.push(new Filter({
@@ -454,7 +453,7 @@ sap.ui.define([
                 }
 
             },
-            onEMTSBeforeRebindTable: function (oEvent) {
+            onEMTSBeforeRebindTable: async function (oEvent) {
                 let oBindingParams = oEvent.getParameter("bindingParams")
                 let oTransferDate = this.getView()?.byId("idEMTSTransferDateRangeSelection").getDOMValue();
                 let oSubmissionDate = this.getView()?.byId("idEMTSsubmissionDateRangeSelection").getDOMValue();
@@ -477,7 +476,9 @@ sap.ui.define([
                 //         and: andOrBoolean,
                 //     }));
                 // }
-                let aTenantIDs = this.getView().getModel('userInfo').getProperty("/tenantID");
+
+                let aTenantIDs = await this.getUserInfo();
+
                 if(aTenantIDs){
                     aTenantIDs.forEach((sTenantID)=>{
                         oBindingParams.filters?.push(new Filter({
@@ -525,7 +526,7 @@ sap.ui.define([
             onRINRFBeforeRebindTable: function (oEvent) {
                 let oBindingParams = oEvent.getParameter("bindingParams")
             },
-            onOTCBeforeRebindTable: function (oEvent) {
+            onOTCBeforeRebindTable: async function (oEvent) {
                 let oBindingParams = oEvent.getParameter("bindingParams")
                 let oVintageYear = this.getView()?.byId("idOTCVintageYear").getDOMValue();
                 let oDocumentDate = this.getView()?.byId("idOTCDocumentRangeSelection").getDOMValue();
@@ -549,7 +550,8 @@ sap.ui.define([
                 //         and: andOrBoolean,
                 //     }));
                 // }
-                let aTenantIDs = this.getView().getModel('userInfo').getProperty("/tenantID");
+                let aTenantIDs = await this.getUserInfo();
+
                 if(aTenantIDs){
                     aTenantIDs.forEach((sTenantID)=>{
                         oBindingParams.filters?.push(new Filter({
@@ -608,33 +610,36 @@ sap.ui.define([
                 const aUniqueFiltersArray = Array.from(uniqueFiltersSet).map(filterString => JSON.parse(filterString));
                 return aUniqueFiltersArray;
             },
-            getUserInfo: function () {
-               
+            getUserInfo: async function () {
+                if(!this.getView().getModel('userInfo')){
                 return new Promise(function(resolve,reject){
                     const url = this.getBaseURL() + "/user-api/attributes";
                     var oUserInfoModel = new JSONModel();
                     oUserInfoModel.loadData(url);
                     oUserInfoModel.dataLoaded()
                     .then(() => {
-                        this.getView().setModel(oUserInfoModel, "userInfo")
+                        this.getView().setModel(oUserInfoModel, "userInfo");
                         // this.getView().getModel('userInfo').setData(mock);
                         if (!oUserInfoModel.getData().firstname || !oUserInfoModel.getData().lastname) {
                             this.getView().getModel('userInfo').setProperty("/visible", false);
-                            resolve();
+                            resolve(undefined);
                         } else {
                             this.getView().getModel('userInfo').setProperty("/visible", true);
+                            resolve(oUserInfoModel.getData().tenantID);
                         }
                     })
                     .catch(() => {
                         // oModel.setData(mock);
                         this.getView().setModel(oUserInfoModel, "userInfo");
                         this.getView().getModel('userInfo').setProperty("/visible", false);
-                        reject();
+                        resolve([]);
                     });
 
                 }.bind(this))
-               
-            },
+            }else{
+                return new Promise.resolve(this.getView().getModel('userInfo').getProperty("/tenantID"));
+            }
+        },
 
             getBaseURL: function () {
                 var appId = this.getOwnerComponent().getManifestEntry("/sap.app/id");
