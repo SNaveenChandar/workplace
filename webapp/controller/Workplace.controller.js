@@ -25,8 +25,6 @@ sap.ui.define([
                 const oComments = new JSONModel();
                 this.getView()?.setModel(oComments, "comments");
 
-                // await this.getUserInfo();
-
             },
             getI18nText: function (sProperty) {
                 return this.getOwnerComponent().getModel("i18n")?.getProperty(sProperty);
@@ -612,53 +610,7 @@ sap.ui.define([
                 const aUniqueFiltersArray = Array.from(uniqueFiltersSet).map(filterString => JSON.parse(filterString));
                 return aUniqueFiltersArray;
             },
-            getUserInfo: async function () {
-                const url = this.getBaseURL() + "/user-api/attributes";
-                var oUserInfoModel = new JSONModel();
-                this.getView().setModel(oUserInfoModel, "userInfo");
-                oUserInfoModel.loadData(url);
-                try {
-                    await oUserInfoModel.dataLoaded();
-                    if (!oUserInfoModel.getData().firstname || !oUserInfoModel.getData().lastname) {
-                        this.getView().getModel('userInfo').setProperty("/visible", false);
-                    } else {
-                        this.getView().getModel('userInfo').setProperty("/visible", true);
-                        if(oUserInfoModel.getData().firstname === "Naveen"){
-                            this.getView().getModel('userInfo').setProperty("/tenantID", ["50"]);
-                        }
-                    };
-                } catch (error) {
-                    this.getView().setModel(oUserInfoModel, "userInfo");
-                    this.getView().getModel('userInfo').setProperty("/visible", false);
-                };
-
-                // .then(() => {
-                //     this.getView().setModel(oUserInfoModel, "userInfo");
-                //     // this.getView().getModel('userInfo').setData(mock);
-                //     if (!oUserInfoModel.getData().firstname || !oUserInfoModel.getData().lastname) {
-                //         this.getView().getModel('userInfo').setProperty("/visible", false);
-
-                //     } else {
-                //         this.getView().getModel('userInfo').setProperty("/visible", true);
-                //         resolve(oUserInfoModel.getData().tenantID);
-                //     }
-                // })
-                // .catch(() => {
-                //     // oModel.setData(mock);
-                //     this.getView().setModel(oUserInfoModel, "userInfo");
-                //     this.getView().getModel('userInfo').setProperty("/visible", false);
-
-                // });
-
-
-            },
-
-            getBaseURL: function () {
-                var appId = this.getOwnerComponent().getManifestEntry("/sap.app/id");
-                var appPath = appId.replaceAll(".", "/");
-                var appModulePath = jQuery.sap.getModulePath(appPath);
-                return appModulePath;
-            },
+            
             getComments: function (sObjectId) {
                 let oDataModel = this.getView()?.getModel();
                 return new Promise((function (resolve, reject) {
