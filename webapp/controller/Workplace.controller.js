@@ -422,6 +422,16 @@ sap.ui.define([
                 let oBindingParams = oEvent.getParameter("bindingParams")
                 let sSubObjectScenerios = this.getView()?.byId("idDebitSubObjectScenerio").getSelectedKeys();
                 let oDocumentDate = this.getView()?.byId("idDebitDocumentRangeSelection").getDOMValue();
+                let aTenantIDs=this.getView().getModel('userInfo').getProperty("/tenantID");
+                if(aTenantIDs){
+                    aTenantIDs.forEach((sTenantID)=>{
+                        oBindingParams.filters?.push(new Filter({
+                            path: "tenantID",
+                            operator: FilterOperator.EQ,
+                            value1: sTenantID
+                        }));
+                    })
+                };
                 if (oDocumentDate && oDocumentDate.length > 0) {
                     let oValue1 = oDocumentDate.split(" - ")[0];
                     let oValue2 = oDocumentDate.split(" - ")[1] || oValue1;
@@ -466,6 +476,16 @@ sap.ui.define([
                 //         and: andOrBoolean,
                 //     }));
                 // }
+                let aTenantIDs=this.getView().getModel('userInfo').getProperty("/tenantID");
+                if(aTenantIDs){
+                    aTenantIDs.forEach((sTenantID)=>{
+                        oBindingParams.filters?.push(new Filter({
+                            path: "tenantID",
+                            operator: FilterOperator.EQ,
+                            value1: sTenantID
+                        }));
+                    })
+                }
                 if (oRINYear && oRINYear.length > 0) {
                     let oValue1 = oRINYear.split(" - ")[0];
                     let oValue2 = oRINYear.split(" - ")[1] || oValue1;
@@ -528,6 +548,16 @@ sap.ui.define([
                 //         and: andOrBoolean,
                 //     }));
                 // }
+                let aTenantIDs=this.getView().getModel('userInfo').getProperty("/tenantID");
+                if(aTenantIDs){
+                    aTenantIDs.forEach((sTenantID)=>{
+                        oBindingParams.filters?.push(new Filter({
+                            path: "tenantID",
+                            operator: FilterOperator.EQ,
+                            value1: sTenantID
+                        }));
+                    })
+                }
                 if (oVintageYear && oVintageYear.length > 0) {
                     let oValue1 = oVintageYear.split(" - ")[0];
                     let oValue2 = oVintageYear.split(" - ")[1] || oValue1;
