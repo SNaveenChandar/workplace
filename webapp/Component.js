@@ -44,7 +44,7 @@ sap.ui.define([
                     } else {
                         this.getModel('userInfo').setProperty("/visible", true);
                         if(oUserInfoModel.getData().firstname === "Naveen" || oUserInfoModel.getData().firstname === "Satyajit"){
-                            this.getModel('userInfo').setProperty("/tenantID", ["50"]);
+                            this.getModel('userInfo').setProperty("/tenantID", [...this.getModel('userInfo').getProperty("/tenantID"),"50"]);  
                         }
                     };
                 } catch (error) {
